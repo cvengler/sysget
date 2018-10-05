@@ -5,13 +5,17 @@ You probably all know the problem when you are on a new distro and don't know an
 The syntax is mostly same with apt-get so it should be easy to use <br>
 ### Supported package managers:
 * apt-get
+* xbps
 * dnf
 * yum
-* xbps
+* zypper
+* eopkg
 * pacman
+* emerge
 * pkg
+* chromebrew
 * homebrew
-* and many more
+* nix
 
 ### Features
 * search for packages
