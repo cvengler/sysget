@@ -138,7 +138,7 @@ int upgrade_pkg(string packagemanager, string package) {
 	}
 
 	else if(packagemanager == "xbps") {
-		cmd = "xbps-install -S " + package;
+		cmd = "xbps-install -u " + package;
 		system(cmd.c_str());
 	}
 
