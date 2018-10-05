@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "utils.h"
 #include "search.h"
 #include "install.h"
@@ -31,13 +32,13 @@ int main(int argc, char *argv[]) {
 		cin >> input;
 
 		//Create config files
-		string package_manager_list[] = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix" };
+		vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix" };	//Thanks dwbrite
 
 		//Convert the input into an int
 		int input_int = stoi(input);
 
 		//Check if input is valid
-		if(input_int >= 13 || input_int <= 0) {
+		if(input_int >= package_manager_list.size() || input_int <= 0) {
 			cout << "Invalid input" << endl;
 			exit(1);
 		}
