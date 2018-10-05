@@ -31,70 +31,20 @@ int main(int argc, char *argv[]) {
 		cin >> input;
 
 		//Create config files
-		if(input == "1") {
-			create_conf("/usr/local/share/sysget/config.txt", "apt-get\n");
-			exit(0);
-		}
+		string package_manager_list[] = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix" };
 
-		else if(input == "2") {
-			create_conf("/usr/local/share/sysget/config.txt", "xbps\n");
-			exit(0);
-		}
+		//Convert the input into an int
+		int input_int = stoi(input);
 
-		else if(input == "3") {
-			create_conf("/usr/local/share/sysget/config.txt", "dnf\n");
-			exit(0);
-		}
-
-		else if(input == "4") {
-			create_conf("/usr/local/share/sysget/config.txt", "yum\n");
-			exit(0);
-		}
-
-		else if(input == "5") {
-			create_conf("/usr/local/share/sysget/config.txt", "zypper\n");
-			exit(0);
-		}
-
-		else if(input == "6") {
-			create_conf("/usr/local/share/sysget/config.txt", "eopkg\n");
-			exit(0);
-		}
-
-		else if(input == "7") {
-			create_conf("/usr/local/share/sysget/config.txt", "pacman\n");
-			exit(0);
-		}
-
-		else if(input == "8") {
-			create_conf("/usr/local/share/sysget/config.txt", "emerge\n");
-			exit(0);
-		}
-
-		else if(input == "9") {
-			create_conf("/usr/local/share/sysget/config.txt", "pkg\n");
-			exit(0);
-		}
-
-		else if(input == "10") {
-			create_conf("/usr/local/share/sysget/config.txt", "chromebrew\n");
-			exit(0);
-		}
-
-		else if(input == "11") {
-			create_conf("/usr/local/share/sysget/config.txt", "homebrew\n");
-			exit(0);
-		}
-
-		else if(input == "12") {
-			create_conf("/usr/local/share/sysget/config.txt", "nix\n");
-			exit(0);
-		}
-
-		else {
+		//Check if input is valid
+		if(input_int >= 13 || input_int <= 0) {
 			cout << "Invalid input" << endl;
 			exit(1);
 		}
+
+		//We need to reduce the input with 1 because arrays start at 0
+		create_conf("/usr/local/share/sysget/config.txt", package_manager_list[input_int - 1] + "\n");
+		exit(0);
 	}
 
 	pm = read_conf("/usr/local/share/sysget/config.txt");
