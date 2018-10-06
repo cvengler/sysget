@@ -1,0 +1,12 @@
+[package]
+authors = ["Emil Engler <emilstud2015@gmail.com>"]
+name = "sysget"
+version = "2.0.0"
+license = "GPL-3.0-or-later"
+
+[dependencies]
+failure = "0.1.2"
+shlex = "0.1.1"
+strum = "0.11.0"
+strum_macros = "0.11.0"
+common_failures = "0.1.1"

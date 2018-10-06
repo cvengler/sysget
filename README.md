@@ -1,8 +1,12 @@
 # sysget
-### A front-end for every package manager<br>
-sysget is a bridge that let you use one syntax to every package manager on every operating system.<br>
-You probably all know the problem when you are on a new distro and don't know anything about the package manager. With sysget you just need to remember one syntax for every package manager<br>
-The syntax is mostly same with apt-get so it should be easy to use <br>
+### A front-end for every package manager
+
+sysget is a bridge that let you use one syntax to every package manager on every operating system.
+
+You probably all know the problem when you are on a new distro and don't know anything about the package manager. With sysget you just need to remember one syntax for every package manager
+
+The syntax is mostly same with apt-get so it should be easy to use
+
 ### Supported package managers:
 * apt-get
 * xbps
@@ -28,8 +32,10 @@ The syntax is mostly same with apt-get so it should be easy to use <br>
 * upgrade single package
 
 ### How to install
-Start install.sh if you want to compile it on your own <br>
-or copy the binary to /usr/local/bin/sysget
+
+```
+cargo build --release && install -Dm755 target/release/sysget /usr/local/bin/sysget
+```
 
 ### Example
 To install a package
