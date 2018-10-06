@@ -16,6 +16,7 @@ The syntax is mostly same with apt-get so it should be easy to use <br>
 * chromebrew
 * homebrew
 * nix
+* snap
 
 ### Features
 * search for packages
