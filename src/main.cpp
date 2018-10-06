@@ -53,8 +53,14 @@ int main(int argc, char *argv[]) {
 	//If read_conf detects something invalid, the return will be ERROR
 	if(pm == "ERROR") {
 		cout << "Broken config" << endl;
-		system("rm /usr/local/share/sysget/config.txt");
-		exit(1);
+		if(remove("/usr/local/share/sysget/config.txt") != 0) {
+			cout << "Error while deleting broken config file, are you root ?" << endl;
+			exit(1);
+		}
+		
+		else {
+			exit(1);
+		}
 	}
 
 	//If user enters no operation
@@ -118,6 +124,24 @@ int main(int argc, char *argv[]) {
 		clean(pm);
 	}
 
+	else if(string(argv[1]) == "set") {
+		if(argc < 3) {
+			cout << "Error, no package manager provided" << endl;
+			exit(1);
+		}
+
+		if(remove("/usr/local/share/sysget/config.txt") != 0) {
+			cout << "Error while deleting the config file, are you root ?" << endl;
+			exit(1);
+		}
+
+		else {
+			create_conf("/usr/local/share/sysget/config.txt", string(argv[2]) + "\n");
+			cout << "Package manager changed to " << string(argv[2]) << endl;
+		}
+
+	}
+
 	//Help
 	else if(string(argv[1]) == "help") {
 		cout << "Help of sysget" << endl;
@@ -131,6 +155,7 @@ int main(int argc, char *argv[]) {
 		cout << "upgrade\t\t\tdo a system upgrade" << endl;
 		cout << "upgrade [package]\tupgrade a specific package" << endl;
 		cout << "clean\t\t\tclean the download cache" << endl;
+		cout << "set [NEW MANAGER]\tset a new package manager" << endl;
 		cout << endl;
 	}
 
