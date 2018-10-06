@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 	//First check if the config file exists
 	string pm;
 
-	if(file_exists("/usr/local/share/sysget/config.txt") == false) {
+	if(!file_exists("/usr/local/share/sysget/config.txt")) {
 		cout << "Please choose a package manager: " << endl << endl;
 		cout << "1. apt-get (Debian)" << endl;
 		cout << "2. xbps (Void)" << endl;
@@ -26,19 +26,20 @@ int main(int argc, char *argv[]) {
 		cout << "9. pkg (FreeBSD)" << endl;
 		cout << "10. chromebrew (ChromeOS)" << endl;
 		cout << "11. homebrew (Mac OS)" << endl;
-		cout << "12. nix (Nix OS)" << endl << endl;
+		cout << "12. nix (Nix OS)" << endl;
+		cout << "13. snap (Independent)" << endl << endl;
 
 		string input;
 		cin >> input;
 
 		//Create config files
-		vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix" };	//Thanks dwbrite
+		vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap" };	//Thanks dwbrite
 
 		//Convert the input into an int
 		int input_int = stoi(input);
 
 		//Check if input is valid
-		if(input_int >= package_manager_list.size() || input_int <= 0) {
+		if(input_int > package_manager_list.size() || input_int <= 0) {
 			cout << "Invalid input" << endl;
 			exit(1);
 		}
@@ -112,7 +113,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	//Clean wiĺl clean the download cache
+	//Clean will clean the download cache
 	else if(string(argv[1]) == "clean") {
 		clean(pm);
 	}

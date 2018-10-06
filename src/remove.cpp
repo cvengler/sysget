@@ -77,6 +77,11 @@ int remove(string packagemanager, string package) {
 		cmd = "nix-env -e " + package;
 		system(cmd.c_str());
 	}
+
+	else if(packagemanager == "snap") {
+		cmd = "snap remove " + package;
+		system(cmd.c_str());
+	}
 }
 
 int autoremove(string packagemanager) {
@@ -140,5 +145,10 @@ int autoremove(string packagemanager) {
 	else if(packagemanager == "nix") {
 		cmd = "nix-collect-garbage -d";
 		system(cmd.c_str());
+	}
+
+	else if(packagemanager == "snap") {
+		cout << "A snap doesn't have orphans" << endl;
+		exit(0);
 	}
 }

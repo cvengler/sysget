@@ -77,4 +77,9 @@ int search(string packagemanager, string query) {
 		cmd = "nix search " + query;
 		system(cmd.c_str());
 	}
+
+	else if(packagemanager == "snap") {
+		cmd = "snap find " + query;
+		system(cmd.c_str());
+	}
 }

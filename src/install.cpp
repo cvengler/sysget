@@ -77,4 +77,9 @@ int install(string packagemanager, string package) {
 		cmd = "nix-env -i " + package;
 		system(cmd.c_str());
 	}
+
+	else if(packagemanager == "snap") {
+		cmd = "snap install "+ package;
+		system(cmd.c_str());
+	}
 }

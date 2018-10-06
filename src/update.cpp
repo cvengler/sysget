@@ -62,6 +62,11 @@ int update(string packagemanager) {
 		cmd = "nix-channel --update nixpkgs";
 		system(cmd.c_str());
 	}
+
+	else if(packagemanager == "snap") {
+		cout << "snapd does not support this, you may want to upgrade ?" << endl;
+		exit(1);
+	}
 }
 
 //Upgrades all packages
@@ -124,6 +129,11 @@ int upgrade(string packagemanager) {
 
 	else if(packagemanager == "nix") {
 		cmd = "nix-env -u '*'";
+		system(cmd.c_str());
+	}
+
+	else if(packagemanager == "snap") {
+		cmd = "snap refresh";
 		system(cmd.c_str());
 	}
 }
@@ -189,6 +199,11 @@ int upgrade_pkg(string packagemanager, string package) {
 
 	else if(packagemanager == "nix") {
 		cmd = "nix-env -u " + package;
+		system(cmd.c_str());
+	}
+
+	else if(packagemanager == "snap") {
+		cmd = "snap refresh " + package;
 		system(cmd.c_str());
 	}
 }

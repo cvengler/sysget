@@ -63,6 +63,10 @@ string read_conf(string filename) {
 				return "nix";
 			}
 
+			else if(line == "snap") {
+				return "snap";
+			}
+
 			else {
 				return "ERROR";
 			}

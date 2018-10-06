@@ -60,4 +60,9 @@ int clean(string packagemanager) {
 	else if(packagemanager == "nix") {
 		exit(1);
 	}
+
+	else if(packagemanager == "snap") {
+		cout << "snapd does this automatically after some time" << endl;
+		exit(0);
+	}
 }
