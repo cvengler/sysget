@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 		cout << "1. apt-get (Debian)" << endl;
 		cout << "2. xbps (Void)" << endl;
 		cout << "3. dnf (Fedora)" << endl;
-		cout << "4. yum (Legacy fedora)" << endl;
+		cout << "4. yum (Enterprise Linux/Legacy Fedora)" << endl;
 		cout << "5. zypper (OpenSUSE)" << endl;
 		cout << "6. eopkg (Solus)" << endl;
 		cout << "7. pacman (Arch)" << endl;
