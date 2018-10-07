@@ -80,6 +80,7 @@ string read_conf(string filename) {
 }
 
 int create_conf(string filename, string packagemanager) {
+	system("mkdir -p /usr/local/share/sysget");
 	ofstream file(filename);
 	if(file.is_open()) {
 		file << packagemanager;

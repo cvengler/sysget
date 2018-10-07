@@ -124,6 +124,7 @@ int main(int argc, char *argv[]) {
 		clean(pm);
 	}
 
+	//Set will change the package manager
 	else if(string(argv[1]) == "set") {
 		if(argc < 3) {
 			cout << "Error, no package manager provided" << endl;
