@@ -19,73 +19,63 @@ cout << "12. nix (Nix OS)" << endl << endl;
 int install(string packagemanager, string package) {
 	string cmd;
 	if(packagemanager == "apt-get") {
-		cmd = "apt-get install " + package;
-		system(cmd.c_str());
+		cmd = "apt-get install ";
 	}
 
 	else if(packagemanager == "xbps") {
-		cmd = "xbps-install " + package;
-		system(cmd.c_str());
+		cmd = "xbps-install ";
 	}
 
 	else if(packagemanager == "dnf") {
-		cmd = "dnf install " + package;
-		system(cmd.c_str());
+		cmd = "dnf install ";
 	}
 
 	else if(packagemanager == "yum") {
-		cmd = "yum install " + package;
-		system(cmd.c_str());
+		cmd = "yum install ";
 	}
 
 	else if(packagemanager == "zypper") {
-		cmd = "zypper install " + package;
-		system(cmd.c_str());
+		cmd = "zypper install ";
 	}
 
 	else if(packagemanager == "eopkg") {
-		cmd = "eopkg install " + package;
-		system(cmd.c_str());
+		cmd = "eopkg install ";
 	}
 
 	else if(packagemanager == "pacman") {
-		cmd = "pacman -S " + package;
-		system(cmd.c_str());
+		cmd = "pacman -S ";
 	}
 
 	else if(packagemanager == "emerge") {
-		cmd = "emerge " + package;
-		system(cmd.c_str());
+		cmd = "emerge ";
 	}
 
 	else if(packagemanager == "pkg") {
-		cmd = "pkg install " + package;
-		system(cmd.c_str());
+		cmd = "pkg install ";
 	}
 
 	else if(packagemanager == "chromebrew") {
-		cmd = "crew install " + package;
-		system(cmd.c_str());
+		cmd = "crew install ";
 	}
 
 	else if(packagemanager == "homebrew") {
-		cmd = "brew install " + package;
-		system(cmd.c_str());
+		cmd = "brew install ";
 	}
 
 	else if(packagemanager == "nix") {
-		cmd = "nix-env -i " + package;
-		system(cmd.c_str());
+		cmd = "nix-env -i ";
 	}
 
 	else if(packagemanager == "snap") {
-		cmd = "snap install " + package;
-		system(cmd.c_str());
+		cmd = "snap install ";
 	}
 
 	else if(packagemanager == "npm") {
-		cmd = "npm install -g " + package;
-		system(cmd.c_str());
+		cmd = "npm install -g ";
+		
 	}
+
+	cmd += package;
+	system(cmd.c_str());
 	return 0;
 }
