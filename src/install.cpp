@@ -79,7 +79,12 @@ int install(string packagemanager, string package) {
 	}
 
 	else if(packagemanager == "snap") {
-		cmd = "snap install "+ package;
+		cmd = "snap install " + package;
+		system(cmd.c_str());
+	}
+
+	else if(packagemanager == "npm") {
+		cmd = "npm install -g " + package;
 		system(cmd.c_str());
 	}
 	return 0;

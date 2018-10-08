@@ -82,5 +82,11 @@ int search(string packagemanager, string query) {
 		cmd = "snap find " + query;
 		system(cmd.c_str());
 	}
+
+	else if(packagemanager == "npm") {
+		cmd = "npm search " + query;
+		system(cmd.c_str());
+	}
+	
 	return 0;
 }

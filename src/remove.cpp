@@ -82,6 +82,11 @@ int remove(string packagemanager, string package) {
 		cmd = "snap remove " + package;
 		system(cmd.c_str());
 	}
+
+	else if(packagemanager == "npm") {
+		cmd = "npm uninstall -g " + package;
+		system(cmd.c_str());
+	}
 	return 0;
 }
 
@@ -152,5 +157,11 @@ int autoremove(string packagemanager) {
 		cout << "A snap doesn't have orphans" << endl;
 		exit(0);
 	}
+
+	else if(packagemanager == "npm") {
+		cmd = "npm prune";
+		system(cmd.c_str());
+	}
+	
 	return 0;
 }

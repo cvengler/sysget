@@ -67,6 +67,12 @@ int update(string packagemanager) {
 		cout << "snapd does not support this, you may want to upgrade ?" << endl;
 		exit(1);
 	}
+
+	else if(packagemanager == "npm") {
+		cout << "npm does not support this, you may want to upgrade ?" << endl;
+		exit(1);
+	}
+
 	return 0;
 }
 
@@ -137,6 +143,12 @@ int upgrade(string packagemanager) {
 		cmd = "snap refresh";
 		system(cmd.c_str());
 	}
+
+	else if(packagemanager == "npm") {
+		cmd = "npm update -g";
+		system(cmd.c_str());
+	}
+
 	return 0;
 }
 
@@ -208,5 +220,11 @@ int upgrade_pkg(string packagemanager, string package) {
 		cmd = "snap refresh " + package;
 		system(cmd.c_str());
 	}
+
+	else if(packagemanager == "npm") {
+		cmd = "npm update -g " + package;
+		system(cmd.c_str());
+	}
+	
 	return 0;
 }

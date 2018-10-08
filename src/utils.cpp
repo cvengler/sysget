@@ -64,6 +64,10 @@ string read_conf(string filename) {
 				packageManager = "snap";
 			}
 
+			else if(line == "npm") {
+				packageManager = "npm";
+			}
+
 			else {
 				packageManager = "ERROR";
 			}

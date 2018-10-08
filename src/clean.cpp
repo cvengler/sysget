@@ -65,5 +65,10 @@ int clean(string packagemanager) {
 		cout << "snapd does this automatically after some time" << endl;
 		exit(0);
 	}
+
+	else if(packagemanager == "npm") {
+		cmd = "npm cache clean --force";
+		system(cmd.c_str());
+	}
 	return 0;
 }

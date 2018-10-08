@@ -27,13 +27,14 @@ int main(int argc, char *argv[]) {
 		cout << "10. chromebrew (ChromeOS)" << endl;
 		cout << "11. homebrew (Mac OS)" << endl;
 		cout << "12. nix (Nix OS)" << endl;
-		cout << "13. snap (Independent)" << endl << endl;
+		cout << "13. snap (Independent)" << endl;
+		cout << "14. npm (Javascript, Global)" << endl << endl;
 
 		string input;
 		cin >> input;
 
 		//Create config files
-		vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap" };	//Thanks dwbrite
+		vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm" };	//Thanks dwbrite
 
 		//Convert the input into an int
 		int input_int = stoi(input);
