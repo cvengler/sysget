@@ -1,6 +1,6 @@
-#include "utils.h"
+#include "utils.hpp"
 
-int clear() {
+void clear() {
 	system("clear");
 }
 
@@ -11,64 +11,65 @@ bool file_exists(const char *filename) {
 
 string read_conf(string filename) {
 	string line;
+	string packageManager;
 	ifstream file(filename);
 
 	if(file.is_open()) {
 		while(getline(file, line)) {
 			if(line == "apt" || line == "apt-get") {
-				return "apt-get";
+				packageManager = "apt-get";
 			}
 
 			else if(line == "xbps") {
-				return "xbps";
+				packageManager = "xbps";
 			}
 
 			else if(line == "dnf") {
-				return "dnf";
+				packageManager = "dnf";
 			}
 
 			else if(line == "yum") {
-				return "yum";
+				packageManager = "yum";
 			}
 
 			else if(line == "zypper") {
-				return "zypper";
+				packageManager = "zypper";
 			}
 
 			else if(line == "eopkg") {
-				return "eopkg";
+				packageManager = "eopkg";
 			}
 
 			else if(line == "pacman") {
-				return "pacman";
+				packageManager = "pacman";
 			}
 
 			else if(line == "emerge") {
-				return "emerge";
+				packageManager = "emerge";
 			}
 
 			else if(line == "pkg") {
-				return "pkg";
+				packageManager = "pkg";
 			}
 
 			else if(line == "chromebrew") {
-				return "chromebrew";
+				packageManager = "chromebrew";
 			}
 
 			else if(line == "homebrew") {
-				return "homebrew";
+				packageManager = "homebrew";
 			}
 
 			else if(line == "nix") {
-				return "nix";
+				packageManager = "nix";
 			}
 
 			else if(line == "snap") {
-				return "snap";
+				packageManager = "snap";
 			}
 
 			else {
-				return "ERROR";
+				packageManager = "ERROR";
 			}
 		}
 	}
@@ -77,6 +78,8 @@ string read_conf(string filename) {
 		cout << "Unable to open config file" << endl;
 		exit(1);
 	}
+
+	return packageManager;
 }
 
 int create_conf(string filename, string packagemanager) {
@@ -89,4 +92,5 @@ int create_conf(string filename, string packagemanager) {
 		cout << "Unable to create config, are you root ?" << endl;
 		exit(1);
 	}
+	return 0;
 }

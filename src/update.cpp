@@ -1,4 +1,4 @@
-#include "update.h"
+#include "update.hpp"
 
 //Updates the database
 int update(string packagemanager) {
@@ -67,6 +67,7 @@ int update(string packagemanager) {
 		cout << "snapd does not support this, you may want to upgrade ?" << endl;
 		exit(1);
 	}
+	return 0;
 }
 
 //Upgrades all packages
@@ -136,6 +137,7 @@ int upgrade(string packagemanager) {
 		cmd = "snap refresh";
 		system(cmd.c_str());
 	}
+	return 0;
 }
 
 //Upgrades only one package
@@ -206,4 +208,5 @@ int upgrade_pkg(string packagemanager, string package) {
 		cmd = "snap refresh " + package;
 		system(cmd.c_str());
 	}
+	return 0;
 }

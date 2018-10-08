@@ -1,4 +1,4 @@
-#include "remove.h"
+#include "remove.hpp"
 
 /* Order
 cout << "Please choose a package manager: " << endl << endl;
@@ -82,6 +82,7 @@ int remove(string packagemanager, string package) {
 		cmd = "snap remove " + package;
 		system(cmd.c_str());
 	}
+	return 0;
 }
 
 int autoremove(string packagemanager) {
@@ -151,4 +152,5 @@ int autoremove(string packagemanager) {
 		cout << "A snap doesn't have orphans" << endl;
 		exit(0);
 	}
+	return 0;
 }

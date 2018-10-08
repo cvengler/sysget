@@ -1,4 +1,4 @@
-#include "install.h"
+#include "install.hpp"
 
 /* Order
 cout << "Please choose a package manager: " << endl << endl;
@@ -82,4 +82,5 @@ int install(string packagemanager, string package) {
 		cmd = "snap install "+ package;
 		system(cmd.c_str());
 	}
+	return 0;
 }

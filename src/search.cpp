@@ -1,4 +1,4 @@
-#include "search.h"
+#include "search.hpp"
 
 /* Order
 cout << "Please choose a package manager: " << endl << endl;
@@ -82,4 +82,5 @@ int search(string packagemanager, string query) {
 		cmd = "snap find " + query;
 		system(cmd.c_str());
 	}
+	return 0;
 }
