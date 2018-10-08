@@ -1,4 +1,5 @@
 # sysget
+<img src="https://api.travis-ci.org/emilengler/sysget.svg?branch=master"></img>
 ### A front-end for every package manager<br>
 sysget is a bridge that lets you use one syntax to every package manager on every unix-based operating system.<br>
 You probably all know the problem when you are on a new distro and don't know anything about the package manager. With sysget you just need to remember one syntax for every package manager.<br>
