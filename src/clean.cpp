@@ -1,4 +1,4 @@
-#include "clean.h"
+#include "clean.hpp"
 
 int clean(string packagemanager) {
 	string cmd;
@@ -65,4 +65,5 @@ int clean(string packagemanager) {
 		cout << "snapd does this automatically after some time" << endl;
 		exit(0);
 	}
+	return 0;
 }

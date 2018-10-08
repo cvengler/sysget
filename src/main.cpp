@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
-#include "utils.h"
-#include "search.h"
-#include "install.h"
-#include "remove.h"
-#include "update.h"
-#include "clean.h"
+#include "utils.hpp"
+#include "search.hpp"
+#include "install.hpp"
+#include "remove.hpp"
+#include "update.hpp"
+#include "clean.hpp"
 
 using namespace std;
 
@@ -164,5 +164,5 @@ int main(int argc, char *argv[]) {
 		cout << "Unknown operation, try sysget help" << endl;
 		exit(1);
 	}
-
+	return 0;
 }
