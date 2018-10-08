@@ -159,8 +159,8 @@ int autoremove(string packagemanager) {
 	}
 
 	else if(packagemanager == "npm") {
-		cmd = "npm prune";
-		system(cmd.c_str());
+		cout << "npm does not support this" << endl;
+		exit(1);
 	}
 	
 	return 0;
