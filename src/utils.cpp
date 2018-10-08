@@ -1,9 +1,5 @@
 #include "utils.hpp"
 
-void clear() {
-	system("clear");
-}
-
 bool file_exists(const char *filename) {
 	ifstream file(filename);
 	return (bool)file;
