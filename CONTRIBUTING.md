@@ -1,6 +1,5 @@
 # Contributing
 Thanks for Contributing
-Please checkout the contrib/ folder
 
 If you want to contribute:
 1. Fork the project

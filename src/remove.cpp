@@ -141,7 +141,7 @@ int autoremove(string packagemanager) {
 	else if(packagemanager == "npm") {
 		cmd = "npm prune";
 	}
-	
+
 	system(cmd.c_str());
 
 	return 0;
