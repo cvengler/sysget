@@ -7,13 +7,15 @@
 #include "update.hpp"
 #include "clean.hpp"
 
+#define CONFIG_PATH "/usr/local/share/sysget/config.txt"
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
 	//First check if the config file exists
 	string pm;
 
-	if(!file_exists("/usr/local/share/sysget/config.txt")) {
+	if(!file_exists(CONFIG_PATH)) {
 		cout << "Please choose a package manager: " << endl << endl;
 		cout << "1. apt-get (Debian)" << endl;
 		cout << "2. xbps (Void)" << endl;
@@ -45,15 +47,15 @@ int main(int argc, char *argv[]) {
 		}
 
 		//We need to reduce the input with 1 because arrays start at 0
-		create_conf("/usr/local/share/sysget/config.txt", package_manager_list[input_int - 1] + "\n");
+		create_conf(CONFIG_PATH, package_manager_list[input_int - 1] + "\n");
 		exit(0);
 	}
 
-	pm = read_conf("/usr/local/share/sysget/config.txt");
+	pm = read_conf(CONFIG_PATH);
 	//If read_conf detects something invalid, the return will be ERROR
 	if(pm == "ERROR") {
 		cout << "Broken config" << endl;
-		if(remove("/usr/local/share/sysget/config.txt") != 0) {
+		if(remove(CONFIG_PATH) != 0) {
 			cout << "Error while deleting broken config file, are you root ?" << endl;
 			exit(1);
 		}
@@ -131,13 +133,13 @@ int main(int argc, char *argv[]) {
 			exit(1);
 		}
 
-		if(remove("/usr/local/share/sysget/config.txt") != 0) {
+		if(remove(CONFIG_PATH) != 0) {
 			cout << "Error while deleting the config file, are you root ?" << endl;
 			exit(1);
 		}
 
 		else {
-			create_conf("/usr/local/share/sysget/config.txt", string(argv[2]) + "\n");
+			create_conf(CONFIG_PATH, string(argv[2]) + "\n");
 			cout << "Package manager changed to " << string(argv[2]) << endl;
 		}
 
