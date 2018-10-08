@@ -19,74 +19,64 @@ cout << "12. nix (Nix OS)" << endl << endl;
 int remove(string packagemanager, string package) {
 	string cmd;
 	if(packagemanager == "apt-get") {
-		cmd = "apt-get remove " + package;
-		system(cmd.c_str());
+		cmd = "apt-get remove ";
 	}
 
 	else if(packagemanager == "xbps") {
-		cmd = "xbps-remove " + package;
-		system(cmd.c_str());
+		cmd = "xbps-remove ";
 	}
 
 	else if(packagemanager == "dnf") {
-		cmd = "dnf erase " + package;
-		system(cmd.c_str());
+		cmd = "dnf erase ";
 	}
 
 	else if(packagemanager == "yum") {
-		cmd = "yum remove " + package;
-		system(cmd.c_str());
+		cmd = "yum remove ";
 	}
 
 	else if(packagemanager == "zypper") {
-		cmd = "zypper remove " + package;
-		system(cmd.c_str());
+		cmd = "zypper remove ";
 	}
 
 	else if(packagemanager == "eopkg") {
-		cmd = "eopkg remove " + package;
-		system(cmd.c_str());
+		cmd = "eopkg remove ";
 	}
 
 	else if(packagemanager == "pacman") {
-		cmd = "pacman -Rs " + package;
-		system(cmd.c_str());
+		cmd = "pacman -Rs ";
 	}
 
 	else if(packagemanager == "emerge") {
-		cmd = "emerge -C " + package;
-		system(cmd.c_str());
+		cmd = "emerge -C ";
 	}
 
 	else if(packagemanager == "pkg") {
-		cmd = "pkg delete " + package;
-		system(cmd.c_str());
+		cmd = "pkg delete ";
 	}
 
 	else if(packagemanager == "chromebrew") {
-		cmd = "crew remove " + package;
-		system(cmd.c_str());
+		cmd = "crew remove ";
 	}
 
 	else if(packagemanager == "homebrew") {
-		cmd = "brew uninstall " + package;
-		system(cmd.c_str());
+		cmd = "brew uninstall ";
 	}
 
 	else if(packagemanager == "nix") {
-		cmd = "nix-env -e " + package;
-		system(cmd.c_str());
+		cmd = "nix-env -e ";
 	}
 
 	else if(packagemanager == "snap") {
-		cmd = "snap remove " + package;
-		system(cmd.c_str());
+		cmd = "snap remove ";
 	}
 
 	else if(packagemanager == "npm") {
-		cmd = "npm uninstall -g " + package;
-		system(cmd.c_str());
+		cmd = "npm uninstall -g ";
 	}
+	
+	cmd += package;
+	system(cmd.c_str());
+
 	return 0;
 }
 
@@ -95,47 +85,38 @@ int autoremove(string packagemanager) {
 	string cmd;
 	if(packagemanager == "apt-get") {
 		cmd = "apt-get autoremove";
-		system(cmd.c_str());
 	}
 
 	else if(packagemanager == "xbps") {
 		cmd = "xbps-remove -o";
-		system(cmd.c_str());
 	}
 
 	else if(packagemanager == "dnf") {
 		cmd = "dnf autoremove";
-		system(cmd.c_str());
 	}
 
 	else if(packagemanager == "yum") {
 		cmd = "yum autoremove";
-		system(cmd.c_str());
 	}
 
 	else if(packagemanager == "zypper") {
 		cmd = "zypper rm -u";
-		system(cmd.c_str());
 	}
 
 	else if(packagemanager == "eopkg") {
 		cmd = "eopkg remove-orphans";
-		system(cmd.c_str());
 	}
 
 	else if(packagemanager == "pacman") {
 		cmd = "pacman -Rns $(pacman -Qtdq)";
-		system(cmd.c_str());
 	}
 
 	else if(packagemanager == "emerge") {
 		cmd = "emerge --depclean -a";
-		system(cmd.c_str());
 	}
 
 	else if(packagemanager == "pkg") {
 		cmd = "pkg autoremove";
-		system(cmd.c_str());
 	}
 
 	else if(packagemanager == "chromebrew") {
@@ -150,7 +131,6 @@ int autoremove(string packagemanager) {
 
 	else if(packagemanager == "nix") {
 		cmd = "nix-collect-garbage -d";
-		system(cmd.c_str());
 	}
 
 	else if(packagemanager == "snap") {
@@ -159,9 +139,10 @@ int autoremove(string packagemanager) {
 	}
 
 	else if(packagemanager == "npm") {
-		cout << "npm does not support this" << endl;
-		exit(1);
+		cmd = "npm prune";
 	}
-	
+
+	system(cmd.c_str());
+
 	return 0;
 }
