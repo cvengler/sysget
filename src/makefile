@@ -26,3 +26,7 @@ clean.o: clean.hpp clean.cpp
 
 install:
 	cp sysget.o /usr/local/bin/sysget 
+
+uninstall:
+	rm /usr/local/bin/sysget
+	rm -rf /usr/local/share/sysget
