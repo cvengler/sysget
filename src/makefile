@@ -23,3 +23,6 @@ update.o: update.hpp update.cpp
 
 clean.o: clean.hpp clean.cpp
 	g++ $(FLAGS) -c clean.hpp clean.cpp
+
+install:
+	cp sysget.o /usr/local/bin/Stack 
