@@ -32,8 +32,8 @@ The syntax is mostly same with apt-get so it should be easy to use. <br>
 * upgrade single package
 
 ### How to install
-Start install.sh if you want to compile it on your own <br>
-or copy the binary to /usr/local/bin/sysget
+```make && sudo make install```
+No dependencies needed
 
 ### Example
 To install a package
