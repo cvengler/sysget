@@ -14,4 +14,4 @@ compiler:
   - gcc
 
 script:
-  - cd src && make 
+  - make 
