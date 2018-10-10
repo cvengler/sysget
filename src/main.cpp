@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
 	pm = read_conf(CONFIG_PATH);
 	//If read_conf detects something invalid, the return will be ERROR
 	if(pm == "ERROR") {
-		cout << "Broken config" << endl;
+		cout << "Broken config please restart to generate a new one" << endl;
 		if(remove(CONFIG_PATH) != 0) {
 			cout << "Error while deleting broken config file, are you root ?" << endl;
 		}
