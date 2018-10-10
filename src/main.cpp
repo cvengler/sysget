@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 #include "utils.hpp"
 #include "search.hpp"
@@ -14,6 +13,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
 	//First check if the config file exists
 	string pm;
+	string command;
 
 	if(!file_exists(CONFIG_PATH)) {
 		cout << "Please choose a package manager: " << endl << endl;
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
 
 		//We need to reduce the input with 1 because arrays start at 0
 		create_conf(CONFIG_PATH, package_manager_list[input_int - 1] + "\n");
-		exit(0);
+		return 0;
 	}
 
 	pm = read_conf(CONFIG_PATH);
@@ -58,12 +58,9 @@ int main(int argc, char *argv[]) {
 		cout << "Broken config" << endl;
 		if(remove(CONFIG_PATH) != 0) {
 			cout << "Error while deleting broken config file, are you root ?" << endl;
-			exit(1);
 		}
-		
-		else {
-			exit(1);
-		}
+
+		exit(1);
 	}
 
 	//If user enters no operation
@@ -71,8 +68,10 @@ int main(int argc, char *argv[]) {
 		cout << "Error, you need an operation" << endl;
 		exit(1);
 	}
+	
+	command = argv[1];
 
-	if(string(argv[1]) == "search") {
+	if(command == "search") {
 		if(argc < 3) {
 			//If users enters no search parameter
 			cout << "Error, no search parameter" << endl;
@@ -82,7 +81,7 @@ int main(int argc, char *argv[]) {
 		search(pm, string(argv[2]));
 	}
 
-	else if(string(argv[1]) == "install") {
+	else if(command == "install") {
 		if(argc < 3) {
 			//If user enters no package to install
 			cout << "Error, no package to install" << endl;
@@ -92,7 +91,7 @@ int main(int argc, char *argv[]) {
 		install(pm, string(argv[2]));
 	}
 
-	else if(string(argv[1]) == "remove") {
+	else if(command == "remove") {
 		if(argc < 3) {
 			//If user enters no package to remove
 			cout << "Error, no package to remove" << endl;
@@ -102,17 +101,17 @@ int main(int argc, char *argv[]) {
 		remove(pm, string(argv[2]));
 	}
 
-	else if(string(argv[1]) == "autoremove") {
+	else if(command == "autoremove") {
 		autoremove(pm);
 	}
 
 	//Update will only refresh the database
-	else if(string(argv[1]) == "update") {
+	else if(command == "update") {
 		update(pm);
 	}
 
 	//Upgrading will not update the database
-	else if(string(argv[1]) == "upgrade") {
+	else if(command == "upgrade") {
 		if(argc < 3) {
 			upgrade(pm);
 		}
@@ -123,12 +122,12 @@ int main(int argc, char *argv[]) {
 	}
 
 	//Clean will clean the download cache
-	else if(string(argv[1]) == "clean") {
+	else if(command == "clean") {
 		clean(pm);
 	}
 
 	//Set will change the package manager
-	else if(string(argv[1]) == "set") {
+	else if(command == "set") {
 		if(argc < 3) {
 			cout << "Error, no package manager provided" << endl;
 			exit(1);
@@ -147,7 +146,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	//Help
-	else if(string(argv[1]) == "help") {
+	else if(command == "help") {
 		cout << "Help of sysget" << endl;
 		cout << "sysget [OPTION] [ARGUMENT]" << endl;
 		cout << endl;

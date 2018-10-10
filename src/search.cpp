@@ -18,6 +18,7 @@ cout << "12. nix (Nix OS)" << endl << endl;
 
 int search(string packagemanager, string query) {
 	string cmd;
+	
 	if(packagemanager == "apt-get") {
 		cmd = "apt-cache search ";
 	}
