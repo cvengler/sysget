@@ -18,6 +18,7 @@ cout << "12. nix (Nix OS)" << endl << endl;
 
 int install(string packagemanager, string package) {
 	string cmd;
+	
 	if(packagemanager == "apt-get") {
 		cmd = "apt-get install ";
 	}

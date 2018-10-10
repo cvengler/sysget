@@ -126,7 +126,6 @@ int autoremove(string packagemanager) {
 
 	else if(packagemanager == "homebrew") {
 		cout << "Homebrew does this automatically" << endl;
-		exit(0);
 	}
 
 	else if(packagemanager == "nix") {
@@ -135,7 +134,6 @@ int autoremove(string packagemanager) {
 
 	else if(packagemanager == "snap") {
 		cout << "A snap doesn't have orphans" << endl;
-		exit(0);
 	}
 
 	else if(packagemanager == "npm") {
