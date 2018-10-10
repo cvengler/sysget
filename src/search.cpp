@@ -1,21 +1,5 @@
 #include "search.hpp"
 
-/* Order
-cout << "Please choose a package manager: " << endl << endl;
-cout << "1. apt-get (Debian)" << endl;
-cout << "2. xbps (Void)" << endl;
-cout << "3. dnf (Fedora)" << endl;
-cout << "4. yum (Legacy fedora)" << endl;
-cout << "5. zypper (OpenSUSE)" << endl;
-cout << "6. eopkg (Solus)" << endl;
-cout << "7. pacman (Arch)" << endl;
-cout << "8. emerge (Gentoo)" << endl;
-cout << "9. pkg (FreeBSD)" << endl;
-cout << "10. chromebrew (ChromeOS)" << endl;
-cout << "11. homebrew (Mac OS)" << endl;
-cout << "12. nix (Nix OS)" << endl << endl;
-*/
-
 int search(string packagemanager, string query) {
 	string cmd;
 	

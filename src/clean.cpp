@@ -1,5 +1,6 @@
 #include "clean.hpp"
 
+//We return an exit code 1 if the package manager does not support this
 int clean(string packagemanager) {
 	string cmd;
 	
