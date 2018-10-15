@@ -1,6 +1,6 @@
 #include "update.hpp"
 
-//Updates the database
+// Updates the database
 int update(string packagemanager) {
 	string cmd;
 	if(packagemanager == "apt-get") {
@@ -98,7 +98,7 @@ int upgrade(string packagemanager) {
 	}
 
 	else if(packagemanager == "emerge") {
-		cmd = "emerge -u world && emerge -uDN world";
+		cmd = "emerge --ask -u world && emerge --ask -uDN world";
 	}
 
 	else if(packagemanager == "pkg") {

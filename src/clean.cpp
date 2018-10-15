@@ -1,8 +1,10 @@
 #include "clean.hpp"
 
-//We return an exit code 1 if the package manager does not support this
+// We return an exit code 1 if the package manager does not support this
 int clean(string packagemanager) {
 	string cmd;
+	
+	// Following if statements check if our package manager is equal to string and if true, set cmd to command
 	
 	if(packagemanager == "apt-get") {
 		cmd = "apt-get autoclean && apt-get clean";
@@ -61,7 +63,7 @@ int clean(string packagemanager) {
 		cmd = "npm cache clean --force";
 	}
 
-	system(cmd.c_str());
+	system(cmd.c_str()); // runs command
 	
 	return 0;
 }

@@ -3,6 +3,8 @@
 int install(string packagemanager, string package) {
 	string cmd;
 	
+	// The following if statements check our package manager and use that as the command
+	
 	if(packagemanager == "apt-get") {
 		cmd = "apt-get install ";
 	}
@@ -32,7 +34,7 @@ int install(string packagemanager, string package) {
 	}
 
 	else if(packagemanager == "emerge") {
-		cmd = "emerge ";
+		cmd = "emerge --ask ";
 	}
 
 	else if(packagemanager == "pkg") {
@@ -59,8 +61,8 @@ int install(string packagemanager, string package) {
 		cmd = "npm install -g ";
 	}
 
-	cmd += package;
-	system(cmd.c_str());
+	cmd += package; // Appends package name to end of string
+	system(cmd.c_str()); // runs string as command
 	
 	return 0;
 }
