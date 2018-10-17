@@ -32,7 +32,7 @@ The syntax is mostly same with apt-get so it should be easy to use. <br>
 * upgrade single package
 
 ### How to install
-```make && sudo make install```
+```make && sudo make install```<br>
 No dependencies needed
 
 ### Example
