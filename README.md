@@ -52,5 +52,17 @@ To upgrade the system
 ```
 sysget upgrade
 ```
+To upgrade a specific package
+```
+sysget upgrade <package name>
+```
+To remove orphans
+```
+sysget autoremove
+```
+To clean the cache of the package manager
+```
+sysget clean
+```
 ###### Credits
 [TermGet](https://github.com/termget/termget)
