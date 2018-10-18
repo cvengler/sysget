@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 
 	// If user enters no operation
 	if(argc < 2) {
-		cout << "Error, you need an operation" << endl;
+		cout << "Error, you need an operation." << endl << "Try sysget help" << endl;
 		exit(1);
 	}
 	
