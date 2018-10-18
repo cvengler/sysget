@@ -147,7 +147,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Help
-	else if(command == "help") {
+	else if(command == "help" || command == "?") {
 		cout << "Help of sysget" << endl;
 		cout << "sysget [OPTION] [ARGUMENT]" << endl;
 		cout << endl;
