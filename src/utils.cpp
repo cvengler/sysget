@@ -5,71 +5,22 @@ bool file_exists(const char *filename) {
 	return (bool)file;
 }
 
-string read_conf(string filename) {
+string get_package_manager(string filename) {
 	string line;
-	string packageManager;
+	string packagemanager;
 	ifstream file(filename);
+
+	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm" };
 
 	if(file.is_open()) {
 		while(getline(file, line)) {
-			if(line == "apt" || line == "apt-get") {
-				packageManager = "apt-get";
-			}
-
-			else if(line == "xbps") {
-				packageManager = "xbps";
-			}
-
-			else if(line == "dnf") {
-				packageManager = "dnf";
-			}
-
-			else if(line == "yum") {
-				packageManager = "yum";
-			}
-
-			else if(line == "zypper") {
-				packageManager = "zypper";
-			}
-
-			else if(line == "eopkg") {
-				packageManager = "eopkg";
-			}
-
-			else if(line == "pacman") {
-				packageManager = "pacman";
-			}
-
-			else if(line == "emerge") {
-				packageManager = "emerge";
-			}
-
-			else if(line == "pkg") {
-				packageManager = "pkg";
-			}
-
-			else if(line == "chromebrew") {
-				packageManager = "chromebrew";
-			}
-
-			else if(line == "homebrew") {
-				packageManager = "homebrew";
-			}
-
-			else if(line == "nix") {
-				packageManager = "nix";
-			}
-
-			else if(line == "snap") {
-				packageManager = "snap";
-			}
-
-			else if(line == "npm") {
-				packageManager = "npm";
+			//If the package manager is valid
+			if(std::find(package_manager_list.begin(), package_manager_list.end(), line) != package_manager_list.end()) {
+				return line;
 			}
 
 			else {
-				packageManager = "ERROR";
+				return "ERROR";
 			}
 		}
 	}
@@ -78,19 +29,28 @@ string read_conf(string filename) {
 		cout << "Unable to open config file" << endl;
 		exit(1);
 	}
-
-	return packageManager;
 }
 
 int create_conf(string filename, string packagemanager) {
-	system("mkdir -p /usr/local/share/sysget");
+	system("mkdir -p /usr/share/sysget");
 	ofstream file(filename);
 	if(file.is_open()) {
 		file << packagemanager;
 	}
+
 	else {
-		cout << "Unable to create config, are you root ?" << endl;
+		cout << "Unable to assign package manager, are you root ?" << endl;
 		exit(1);
 	}
 	return 0;
+}
+
+//Check will check if the string contains an exit message
+int checkcmd(string cmd) {
+	size_t errorfind = cmd.find("exit=");
+	if(errorfind != string::npos) {
+		string errormsg = cmd.substr(5);
+		cout << errormsg << endl;
+		exit(1);
+	}
 }

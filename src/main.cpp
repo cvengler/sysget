@@ -1,20 +1,15 @@
+#include <iostream>
 #include <vector>
+#include <string>
+#include "packagemanager.hpp"
 #include "utils.hpp"
-#include "search.hpp"
-#include "install.hpp"
-#include "remove.hpp"
-#include "update.hpp"
-#include "clean.hpp"
 
-#define CONFIG_PATH "/usr/local/share/sysget/config.txt"
+#define CONFIG_PATH "/usr/share/sysget/config.txt"
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
-	// First check if the config file exists
-	string pm;
-	string command;
-
+int main(int argc, char* argv[]) {
+	//Create a config file if the config file does not exists
 	if(!file_exists(CONFIG_PATH)) {
 		cout << "Please choose a package manager: " << endl << endl;
 		cout << "1. apt-get (Debian)" << endl;
@@ -31,123 +26,138 @@ int main(int argc, char *argv[]) {
 		cout << "12. nix (Nix OS)" << endl;
 		cout << "13. snap (Independent)" << endl;
 		cout << "14. npm (Javascript, Global)" << endl << endl;
-		
-		// Now lets listen for input, returned with enter
+
+		//Now lets listen for the input
 		string input;
 		cin >> input;
 
 		// Create config files
-		vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm" };	//Thanks dwbrite
+		vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm" };
 
-		// Convert the input into an int
+		//Convert the input to an int
 		int input_int = stoi(input);
 
-		// Check if input is valid
+		//Check if the input is valid
 		if(input_int > package_manager_list.size() || input_int <= 0) {
 			cout << "Invalid input" << endl;
 			exit(1);
 		}
 
-		// We need to reduce the input with 1 because arrays start at 0
-		create_conf(CONFIG_PATH, package_manager_list[input_int - 1] + "\n");
+		// We need to reduce the input by 1 because arrays start at 0
+		create_conf(CONFIG_PATH, package_manager_list[input_int -1] + "\n");
 		return 0;
+
 	}
 
-	pm = read_conf(CONFIG_PATH);
-	// If read_conf detects something invalid, the return will be ERROR
-	if(pm == "ERROR") {
-		cout << "Broken config, please restart to generate a new one" << endl;
+	//Get the name of the package manager from the config file
+	string pm_config = get_package_manager(CONFIG_PATH);
+
+	if(pm_config == "ERROR") {
+		cout << "Your config is broken please restart the program to create a new one" << endl;
 		if(remove(CONFIG_PATH) != 0) {
 			cout << "Error while deleting broken config file, are you root?" << endl;
 		}
-
 		exit(1);
 	}
 
-	// If user enters no operation
+	PackageManager pm;
+	pm.init(pm_config);
+
+	//Now parse the args
+	//If the user enters no operation
 	if(argc < 2) {
-		cout << "Error, you need an operation." << endl << "Try sysget help" << endl;
+		cout << "Error you need an operation." << endl << "Try sysget help" << endl;
 		exit(1);
 	}
-	
-	command = argv[1];
 
-	if(command == "search") {
+	//Lets set argv[1] to cmd for a more handy usage
+	string cmd = argv[1];
+
+	if(cmd == "search") {
+		//If the user enters no search query
 		if(argc < 3) {
-			// If users enters no search parameter
-			cout << "Error, no search parameter" << endl;
+			cout << "Error, no search query" << endl;
+			exit(1);
+		}
+		checkcmd(pm.search);
+		system(string(pm.search + argv[2]).c_str());
+	}
+
+	else if(cmd == "install") {
+		//If the user enters no package to install
+		if(argc < 3) {
+			cout << "Error, no package to install provided" << endl;
 			exit(1);
 		}
 
-		search(pm, string(argv[2]));
+		checkcmd(pm.install);
+		system(string(pm.install + argv[2]).c_str());
 	}
 
-	else if(command == "install") {
+	else if(cmd == "remove") {
+		//If the user enters no package to remove
 		if(argc < 3) {
-			// If user enters no package to install
-			cout << "Error, no package to install" << endl;
+			cout << "Error, no package to remove provided" << endl;
 			exit(1);
 		}
 
-		install(pm, string(argv[2]));
+		checkcmd(pm.remove);
+		system(string(pm.remove + argv[2]).c_str());
 	}
 
-	else if(command == "remove") {
+	//FYI: checkcmd will check if your package manager supports this feature
+
+	//Autoremove will remove orpahns
+	else if(cmd == "autoremove") {
+		checkcmd(pm.autoremove);
+		system(pm.autoremove.c_str());
+	}
+
+	//Update will only refresh the database
+	else if(cmd == "update") {
+		checkcmd(pm.update);
+		system(pm.update.c_str());
+	}
+
+	//Upgrading will not update the database
+	else if(cmd == "upgrade") {
 		if(argc < 3) {
-			//If user enters no package to remove
-			cout << "Error, no package to remove" << endl;
-			exit(1);
-		}
-
-		remove(pm, string(argv[2]));
-	}
-
-	else if(command == "autoremove") {
-		autoremove(pm);
-	}
-
-	// Update will only refresh the database
-	else if(command == "update") {
-		update(pm);
-	}
-
-	// Upgrading will not update the database
-	else if(command == "upgrade") {
-		if(argc < 3) {
-			upgrade(pm);
+			checkcmd(pm.upgrade);
+			system(pm.upgrade.c_str());
 		}
 
 		else {
-			upgrade_pkg(pm, string(argv[2]));
+			checkcmd(pm.upgrade_pkg);
+			system(string(pm.upgrade_pkg + argv[2]).c_str());
 		}
 	}
 
-	// Clean will clean the download cache
-	else if(command == "clean") {
-		clean(pm);
+	//Clean will clean the download cache
+	else if(cmd == "clean") {
+		checkcmd(pm.clean);
+		system(pm.clean.c_str());
 	}
 
-	// Set will change the package manager
-	else if(command == "set") {
+	//Set will change the package manager
+	else if(cmd == "set") {
 		if(argc < 3) {
-			cout << "Error, no package manager provided" << endl;
+			cout << "Error, no new package manager provided" << endl;
 			exit(1);
 		}
 
 		if(remove(CONFIG_PATH) != 0) {
-			cout << "Error while deleting the config file, are you root ?" << endl;
+			cout << "Error while deleting config file, are you root ?" << endl;
 			exit(1);
 		}
 
 		else {
 			create_conf(CONFIG_PATH, string(argv[2]) + "\n");
-			cout << "Package manager changed to " << string(argv[2]) << endl;
+			cout << "Package manager changed to " << argv[2] << endl;
 		}
-
 	}
 
-	// Help
-	else if(command == "help") {
+	//Help
+	else if(cmd == "help") {
 		cout << "Help of sysget" << endl;
 		cout << "sysget [OPTION] [ARGUMENT]" << endl;
 		cout << endl;
@@ -160,12 +170,13 @@ int main(int argc, char *argv[]) {
 		cout << "upgrade [package]\tupgrade a specific package" << endl;
 		cout << "clean\t\t\tclean the download cache" << endl;
 		cout << "set [NEW MANAGER]\tset a new package manager" << endl;
-		cout << endl; // IDEA: clean this up a little, convert to one string
+		cout << endl;
 	}
 
 	else {
 		cout << "Unknown operation, try sysget help" << endl;
 		exit(1);
 	}
-	return 0;
+
+
 }
