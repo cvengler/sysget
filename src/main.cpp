@@ -28,16 +28,15 @@ int main(int argc, char* argv[]) {
 		cout << "14. npm (Javascript, Global)" << endl << endl;
 
 		//Now lets listen for the input
+		vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm" };	//We use this to check if the input is valid
 		string input;
 		cin >> input;
-
-		// Create config files
-		vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm" };
-
-		//Convert the input to an int
+		//Convert the input to an int to see if it is valid
 		int input_int = stoi(input);
 
-		//Check if the input is valid
+		// Create config files
+
+		//Finally check if the input is valid
 		if(input_int > package_manager_list.size() || input_int <= 0) {
 			cout << "Invalid input" << endl;
 			exit(1);
