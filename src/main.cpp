@@ -53,6 +53,7 @@ int main(int argc, char* argv[]) {
 
 	PackageManager pm;
 	pm.init(pm_config);
+	string execcmd;
 
 	//Now parse the args
 	//If the user enters no operation
@@ -81,8 +82,12 @@ int main(int argc, char* argv[]) {
 			exit(1);
 		}
 
-		checkcmd(pm.install);
-		system(string(pm.install + argv[2]).c_str());
+		for(int i = 2; i < argc; i++) {
+			checkcmd(pm.install);
+			execcmd = execcmd + argv[i] + " ";
+		}
+
+		system(string(pm.install + execcmd).c_str());
 	}
 
 	else if(cmd == "remove") {
@@ -92,8 +97,12 @@ int main(int argc, char* argv[]) {
 			exit(1);
 		}
 
-		checkcmd(pm.remove);
-		system(string(pm.remove + argv[2]).c_str());
+		for(int i = 2; i < argc; i++) {
+			checkcmd(pm.remove);
+			execcmd = execcmd + argv[i] + " ";
+		}
+
+		system(string(pm.remove + execcmd).c_str());
 	}
 
 	//FYI: checkcmd will check if your package manager supports this feature
@@ -118,8 +127,12 @@ int main(int argc, char* argv[]) {
 		}
 
 		else {
-			checkcmd(pm.upgrade_pkg);
-			system(string(pm.upgrade_pkg + argv[2]).c_str());
+			for(int i = 2; i < argc; i++) {
+				checkcmd(pm.upgrade_pkg);
+				execcmd = execcmd + argv[i] + " ";
+			}
+
+			system(string(pm.upgrade_pkg + execcmd).c_str());
 		}
 	}
 
