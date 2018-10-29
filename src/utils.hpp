@@ -8,5 +8,5 @@ using namespace std;
 
 bool file_exists(const char *filename);
 string get_package_manager(string filename);
-int create_conf(string filename, string packagemanager);
-int checkcmd(string cmd);
+void create_conf(string filename, string packagemanager);
+void checkcmd(string cmd);

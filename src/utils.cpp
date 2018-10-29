@@ -31,7 +31,7 @@ string get_package_manager(string filename) {
 	}
 }
 
-int create_conf(string filename, string packagemanager) {
+void create_conf(string filename, string packagemanager) {
 	system("mkdir -p /usr/share/sysget");
 	ofstream file(filename);
 	if(file.is_open()) {
@@ -42,11 +42,10 @@ int create_conf(string filename, string packagemanager) {
 		cout << "Unable to assign package manager, are you root ?" << endl;
 		exit(1);
 	}
-	return 0;
 }
 
 //Check will check if the string contains an exit message
-int checkcmd(string cmd) {
+void checkcmd(string cmd) {
 	size_t errorfind = cmd.find("exit=");
 	if(errorfind != string::npos) {
 		string errormsg = cmd.substr(5);
