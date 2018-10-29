@@ -176,6 +176,4 @@ int main(int argc, char* argv[]) {
 		cout << "Unknown operation, try sysget help" << endl;
 		exit(1);
 	}
-
-
 }

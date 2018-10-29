@@ -11,3 +11,10 @@ packagemanager.o: packagemanager.hpp packagemanager.cpp
 
 utils.o: utils.hpp utils.cpp
 	g++ $(FLAGS) -c utils.hpp utils.cpp
+
+install:
+	cp sysget.o /usr/bin/sysget
+
+uninstall:
+	rm /usr/bin/sysget
+	rm -rf /usr/share/sysget
