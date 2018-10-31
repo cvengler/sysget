@@ -36,7 +36,6 @@ int main(int argc, char* argv[]) {
 
 		// We need to reduce the input by 1 because arrays start at 0
 		create_conf(CONFIG_PATH, package_manager_list[input_int -1] + "\n");
-		return 0;
 
 	}
 
