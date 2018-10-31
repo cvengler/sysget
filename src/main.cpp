@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
 
 	PackageManager pm;
 	pm.init(pm_config);
-	string execcmd;
+	string execcmd; //We need execcmd as a string where other strings are being appended to handle mutliple packages at once
 
 	//Now parse the args
 	//If the user enters no operation
