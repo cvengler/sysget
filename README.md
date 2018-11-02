@@ -36,6 +36,10 @@ The syntax is mostly same with apt-get so it should be easy to use. <br>
 No dependencies needed
 
 ### Example
+To search for a package
+```
+sysget search <search query>
+```
 To install a package
 ```
 sysget install <package name>
