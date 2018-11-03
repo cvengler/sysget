@@ -171,5 +171,17 @@ void PackageManager::init(string pm) {
 		clean = "npm cache clean --force";
 	}
 
+	else if(pm == "flatpak") {
+		//flatpak (You should checkout the README)
+		search = "flatpak search ";
+		install = "flatpak install sysget ";
+		remove = "flatpak uninstall ";
+		autoremove = "exit=A flatpak does not have orphans";
+		update = "exit=Flatpak does not support this, you may want to upgrade ?";
+		upgrade = "flatpak update";
+		upgrade_pkg = "flatpak update ";
+		clean = "exit=flatpak does not support this";
+	}
+
 
 }

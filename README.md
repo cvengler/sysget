@@ -20,6 +20,7 @@ The syntax is mostly same with apt-get so it should be easy to use. <br>
 * nix
 * snap
 * npm
+* flatpak (See notice)
 
 ### Features
 * search for packages
@@ -68,5 +69,10 @@ To clean the cache of the package manager
 ```
 sysget clean
 ```
+
+### Flatpak notice
+Flatpak works different than other package managers.
+You need to add a flatpak repo with the name 'sysget' to make sysget with flatpak compatible
+
 ###### Credits
 [TermGet](https://github.com/termget/termget)
