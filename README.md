@@ -73,6 +73,7 @@ sysget clean
 ### Flatpak notice
 Flatpak works different than other package managers.<br>
 If you want to install a package you need to provide the remote name or the URL of a .flatpakref<br>
+**For Example:**<br>
 ```
 sysget install flathub org.gimp.GIMP
 ```
