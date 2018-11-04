@@ -174,7 +174,7 @@ void PackageManager::init(string pm) {
 	else if(pm == "flatpak") {
 		//flatpak (You should checkout the README)
 		search = "flatpak search ";
-		install = "flatpak install sysget ";
+		install = "flatpak install ";
 		remove = "flatpak uninstall ";
 		autoremove = "exit=A flatpak does not have orphans";
 		update = "exit=Flatpak does not support this, you may want to upgrade ?";

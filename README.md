@@ -71,8 +71,15 @@ sysget clean
 ```
 
 ### Flatpak notice
-Flatpak works different than other package managers.
-You need to add a flatpak repo with the name 'sysget' to make sysget with flatpak compatible
+Flatpak works different than other package managers.<br>
+If you want to install a package you need to provide the remote name or the URL of a .flatpakref<br>
+```
+sysget install flathub org.gimp.GIMP
+```
+or
+```
+sysget install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
+```
 
 ###### Credits
 [TermGet](https://github.com/termget/termget)
