@@ -4,7 +4,7 @@
 #include "packagemanager.hpp"
 #include "utils.hpp"
 
-const char *CONFIG_PATH "/usr/share/sysget/config.txt";
+const char *CONFIG_PATH = "/usr/share/sysget/config.txt";
 
 using namespace std;
 
