@@ -32,7 +32,7 @@ string get_package_manager(string filename) {
 }
 
 void create_conf(string filename, string packagemanager) {
-        system("mkdir -p /usr/share/sysget");
+	system("mkdir -p /usr/share/sysget");
 	ofstream file(filename);
 	if(file.is_open()) {
 		file << packagemanager;
