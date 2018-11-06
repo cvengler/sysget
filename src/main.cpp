@@ -4,12 +4,15 @@
 #include "packagemanager.hpp"
 #include "utils.hpp"
 
-#define CONFIG_PATH "/usr/share/sysget/config.txt"
+const char *CONFIG_PATH "/usr/share/sysget/config.txt";
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
 	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak" };
+        if(getenv("SYSGET_CONFIG_PATH")) {
+                CONFIG_PATH = getenv("SYSGET_CONFIG_PATH");
+        }
 	//Create a config file if the config file does not exists
 	if(!file_exists(CONFIG_PATH)) {
 		cout << "Please choose a package manager: " << endl;
