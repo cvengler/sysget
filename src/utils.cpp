@@ -36,6 +36,7 @@ void create_conf(string filename, string packagemanager) {
 	ofstream file(filename);
 	if(file.is_open()) {
 		file << packagemanager;
+                file.close();
 	}
 
 	else {
