@@ -13,8 +13,8 @@ utils.o: utils.hpp utils.cpp
 	g++ $(FLAGS) -c utils.hpp utils.cpp
 
 install:
-	cp sysget.o /usr/bin/sysget
+	cp sysget.o /usr/local/bin/sysget
 
 uninstall:
-	rm /usr/bin/sysget
+	rm /usr/local/bin/sysget
 	rm -rf /etc/sysget
