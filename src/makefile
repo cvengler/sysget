@@ -17,4 +17,4 @@ install:
 
 uninstall:
 	rm /usr/bin/sysget
-	rm -rf /usr/share/sysget
+	rm -rf /etc/sysget
