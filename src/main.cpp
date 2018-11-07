@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
 	if(cmd == "search") {
 		//If the user enters no search query
 		if(argc < 3) {
-			cout << "Error, no search query" << endl;
+			cout << "Error, no search query provided" << endl;
 			exit(1);
 		}
 		checkcmd(pm.search);
@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 	else if(cmd == "install") {
 		//If the user enters no package to install
 		if(argc < 3) {
-			cout << "Error, no package to install provided" << endl;
+			cout << "Error, no package for the installation provided" << endl;
 			exit(1);
 		}
 
@@ -97,7 +97,7 @@ int main(int argc, char* argv[]) {
 	else if(cmd == "remove") {
 		//If the user enters no package to remove
 		if(argc < 3) {
-			cout << "Error, no package to remove provided" << endl;
+			cout << "Error, no package for the removal provided" << endl;
 			exit(1);
 		}
 
