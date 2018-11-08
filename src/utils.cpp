@@ -29,6 +29,8 @@ string get_package_manager(string filename) {
 		cout << "Unable to open config file" << endl;
 		exit(1);
 	}
+
+	return "ERROR";
 }
 
 void create_conf(string filename, string packagemanager) {
