@@ -1,18 +1,21 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstring>
 #include "packagemanager.hpp"
 #include "utils.hpp"
 
-const char *CONFIG_PATH = "/etc/sysget";
+char CONFIG_PATH[255] = "/etc/sysget";	//Needs to NOT be const so it can be changed if an enviroment variable set
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
 	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak" };
 
-	if(getenv("SYSGET_CONFIG_PATH")) {
-		CONFIG_PATH = getenv("SYSGET_CONFIG_PATH");
+	char* envpath = getenv("SYSGET_CONFIG_PATH");
+
+	if(envpath != NULL) {
+		strcpy(CONFIG_PATH, envpath);
 	}
 	
 	//Create a config file if the config file does not exists
