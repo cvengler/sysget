@@ -167,17 +167,17 @@ int main(int argc, char* argv[]) {
 	//Help
 	else if(cmd == "help") {
 		cout << "Help of sysget" << endl;
-		cout << "sysget [OPTION] [ARGUMENT]" << endl;
+		cout << "sysget [OPTION] [PACKAGE(S)]" << endl;
 		cout << endl;
-		cout << "search [query]\t\tsearch for a package in the resporitories" << endl;
-		cout << "install [package]\tinstall a package from the repos" << endl;
-		cout << "remove [package]\tremoves a package" << endl;
-		cout << "autoremove\t\tremoves not needed packages (orphans)" << endl;
-		cout << "update\t\t\tupdate the database" << endl;
-		cout << "upgrade\t\t\tdo a system upgrade" << endl;
-		cout << "upgrade [package]\tupgrade a specific package" << endl;
-		cout << "clean\t\t\tclean the download cache" << endl;
-		cout << "set [NEW MANAGER]\tset a new package manager" << endl;
+		cout << "search [QUERY]\t\t\tsearch for a package in the resporitories" << endl;
+		cout << "install [PACKAGE] [PACKAGE]\tinstall a package from the repos" << endl;
+		cout << "remove [PACKAGE] [PACKAGE]\tremoves a package" << endl;
+		cout << "autoremove\t\t\tremoves not needed packages (orphans)" << endl;
+		cout << "update\t\t\t\tupdate the database" << endl;
+		cout << "upgrade\t\t\t\tdo a system upgrade" << endl;
+		cout << "upgrade [PACKAGE] [PACKAGE]\tupgrade a specific package" << endl;
+		cout << "clean\t\t\t\tclean the download cache" << endl;
+		cout << "set [NEW MANAGER]\t\tset a new package manager" << endl;
 		cout << endl;
 	}
 
