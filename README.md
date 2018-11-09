@@ -69,6 +69,11 @@ To clean the cache of the package manager
 ```
 sysget clean
 ```
+Change path of the config file
+*Tempoary*
+```
+SYSGET_CONFIG_PATH=/path/to/your/config
+```
 
 ### Flatpak notice
 Flatpak works different than other package managers.<br>

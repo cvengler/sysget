@@ -12,6 +12,7 @@ using namespace std;
 int main(int argc, char* argv[]) {
 	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak" };
 
+	//Get the path if the user has changed it with an enviroment variable
 	char* envpath = getenv("SYSGET_CONFIG_PATH");
 
 	if(envpath != NULL) {
@@ -59,10 +60,10 @@ int main(int argc, char* argv[]) {
 	}
 
 	PackageManager pm;
-	pm.init(pm_config);
-	string execcmd; //We need execcmd as a string where other strings are being appended to handle mutliple packages at once
+	pm.init(pm_config);	//Initalize the class
+	string execcmd; //We need execcmd as a string where other strings are being appended to handle mutliple packages at once. execmd is executed by system()
 
-	//Now parse the args
+	//Now parse the console arguments
 	//If the user enters no operation
 	if(argc < 2) {
 		cout << "Error you need an operation." << endl << "Try sysget help" << endl;
