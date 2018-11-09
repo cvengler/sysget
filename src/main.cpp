@@ -5,7 +5,7 @@
 #include "packagemanager.hpp"
 #include "utils.hpp"
 
-char CONFIG_PATH[255] = "/etc/sysget";	//Needs to NOT be const so it can be changed if an enviroment variable set
+char CONFIG_PATH[255] = "/etc/sysget";	//Needs to be NOT const so it can be changed if an enviroment variable set
 
 using namespace std;
 
