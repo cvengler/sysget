@@ -29,7 +29,7 @@ string get_package_manager(string filename) {
 		cout << "Unable to open config file" << endl;
 		exit(1);
 	}
-
+	//clang on macOS will return a warning if a non-void function has no return
 	return "ERROR";
 }
 

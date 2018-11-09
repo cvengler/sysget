@@ -176,7 +176,7 @@ void PackageManager::init(string pm) {
 		search = "flatpak search ";
 		install = "flatpak install ";
 		remove = "flatpak uninstall ";
-		autoremove = "exit=A flatpak does not have orphans";
+		autoremove = "flatpak uninstall --unused";
 		update = "exit=Flatpak does not support this, you may want to upgrade ?";
 		upgrade = "flatpak update";
 		upgrade_pkg = "flatpak update ";
