@@ -69,7 +69,7 @@ To clean the cache of the package manager
 ```
 sysget clean
 ```
-Change path of the config file
+Change the path of the config file<br>
 *Tempoary*
 ```
 SYSGET_CONFIG_PATH=/path/to/your/config
