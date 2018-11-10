@@ -72,7 +72,7 @@ sysget clean
 Change the path of the config file<br>
 *Tempoary*
 ```
-SYSGET_CONFIG_PATH=/path/to/your/config
+export SYSGET_CONFIG_PATH=/path/to/your/config
 ```
 
 ### Flatpak notice
