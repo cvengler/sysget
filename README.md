@@ -86,6 +86,7 @@ or
 ```
 sysget install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
 ```
+to install GIMP
 
 ###### Credits
 [TermGet](https://github.com/termget/termget)
