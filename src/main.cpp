@@ -43,6 +43,11 @@ int main(int argc, char* argv[]) {
 			exit(1);
 		}
 
+		//Flatpak notice
+		if(input_int == 15) {
+			cout << "\e[1;33m" << "NOTICE: " << "\e[0m" << "You need to provide a flatpak repository or a '.flatpakref' while installing flatpaks over sysget" << endl;
+		}
+
 		// We need to reduce the input by 1 because arrays start at 0
 		create_conf(CONFIG_PATH, package_manager_list[input_int -1] + "\n");
 
