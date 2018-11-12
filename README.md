@@ -69,11 +69,10 @@ To clean the cache of the package manager
 ```
 sysget clean
 ```
-Change the path of the config file<br>
-*Tempoary*
-```
-export SYSGET_CONFIG_PATH=/path/to/your/config
-```
+### Environment Variables
+| Environment Variable | Function                                             |
+|----------------------|------------------------------------------------------|
+| SYSGET_CONFIG_PATH   | Ability to change the path of the sysget config file |
 
 ### Flatpak notice
 Flatpak works different than other package managers.<br>
