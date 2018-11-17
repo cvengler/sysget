@@ -10,7 +10,7 @@ char CONFIG_PATH[255] = "/etc/sysget";	//Needs to be NOT const so it can be chan
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak" };
+	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get" };
 
 	//Get the path if the user has changed it with an enviroment variable
 	char* envpath = getenv("SYSGET_CONFIG_PATH");

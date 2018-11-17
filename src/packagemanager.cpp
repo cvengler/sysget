@@ -183,5 +183,17 @@ void PackageManager::init(string pm) {
 		clean = "exit=flatpak does not support this";
 	}
 
+	else if(pm == "slapt-get") {
+		//slapt-get (Slackware)
+		search = "slapt-get --search ";
+		install = "slapt-get --install ";
+		remove = "slapt-get --remove ";
+		autoremove = "slapt-get --autoremove";	//Hope it works
+		update = "slapt-get --update";
+		upgrade = "slapt-get --upgrade";
+		upgrade_pkg = "slapt-get --upgrade ";	//Hope it works
+		clean = "slapt-get --clean && slapt-get --autoclean && slapt-get --remove-obsolete && slapt-get --remove";
+	}
+
 
 }
