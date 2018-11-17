@@ -7,7 +7,6 @@ git:
 
 os:
   - linux
-  - osx
   
 compiler:
   - clang
