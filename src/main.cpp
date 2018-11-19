@@ -65,8 +65,17 @@ int main(int argc, char* argv[]) {
 	}
 
 	PackageManager pm;
-	pm.init(pm_config);	//Initalize the class
-	string execcmd; //We need execcmd as a string where other strings are being appended to handle mutliple packages at once. execmd is executed by system()
+	string execcmd;
+
+	//If the user declares his own package manager
+	if(file_exists("/etc/sysget_custom")) {
+		pm.customPM("/etc/sysget_custom");
+	}
+
+	//If sysget_config does not exists use defaults
+	else {
+		pm.init(pm_config);
+	}
 
 	//Now parse the console arguments
 	//If the user enters no operation

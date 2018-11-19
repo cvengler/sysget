@@ -197,3 +197,39 @@ void PackageManager::init(string pm) {
 
 
 }
+
+void PackageManager::customPM(string filename) {
+	ifstream file(filename);
+	string line;
+	vector<string> commands;
+	int number_of_lines = 0;
+	if(file.is_open()) {
+		while(getline(file ,line)) {
+			commands.push_back(line);
+			number_of_lines++;
+		}
+
+		if(number_of_lines != 8) {
+			search = "exit=Invalid sysget_custom file";
+			install = "exit=Invalid sysget_custom file";
+			remove = "exit=Invalid sysget_custom file";
+			autoremove = "exit=Invalid sysget_custom file";
+			update = "exit=Invalid sysget_custom file";
+			upgrade = "exit=Invalid sysget_custom file";
+			upgrade_pkg = "exit=Invalid sysget_custom file";
+			clean = "exit=Invalid sysget_custom file";
+		}
+		
+		else {
+			search = commands[0];
+			install = commands[1];
+			remove = commands[2];
+			autoremove = commands[3];
+			update = commands[4];
+			upgrade = commands[5];
+			upgrade_pkg = commands[6];
+			clean = commands[7];
+		}
+		file.close();
+	}
+}

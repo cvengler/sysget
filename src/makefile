@@ -17,6 +17,7 @@ install:
 	cp ../bash/bash-completion.bash /etc/bash_completion.d/sysget
 
 uninstall:
-	rm /usr/local/bin/sysget
+	rm -rf /usr/local/bin/sysget
 	rm -rf /etc/sysget
-	rm /etc/bash_completion.d/sysget
+	rm -rf /etc/bash_completion.d/sysget
+	rm -rf /etc/sysget_config
