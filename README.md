@@ -70,9 +70,10 @@ To clean the cache of the package manager
 sysget clean
 ```
 ### Environment Variables
-| Environment Variable | Function                                             |
-|----------------------|------------------------------------------------------|
-| SYSGET_CONFIG_PATH   | Ability to change the path of the sysget config file |
+| Environment Variable | Function                                                            |
+|----------------------|---------------------------------------------------------------------|
+| SYSGET_CONFIG_PATH   | Ability to change the path of the sysget config file                |
+| SYSGET_CUSTOM_PATH   | Ability to change the path of the file for a custom package manager |
 
 ### Flatpak notice
 Flatpak works different than other package managers.<br>
