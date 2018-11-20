@@ -6,6 +6,7 @@
 #include "utils.hpp"
 
 char CONFIG_PATH[255] = "/etc/sysget";	//Needs to be NOT const so it can be changed if an enviroment variable set
+char CUSTOM_PATH[255] = "/etc/sysget_custom";
 
 using namespace std;
 
@@ -14,9 +15,15 @@ int main(int argc, char* argv[]) {
 
 	//Get the path if the user has changed it with an enviroment variable
 	char* env_config_path = getenv("SYSGET_CONFIG_PATH");
+	char* env_custom_path = getenv("SYSGET_CUSTOM_PATH");
 
+	//Check if the enviroment variables aren't empty
 	if(env_config_path != NULL) {
 		strcpy(CONFIG_PATH, env_config_path);
+	}
+
+	if(env_custom_path != NULL) {
+		strcpy(CUSTOM_PATH, env_custom_path);
 	}
 	
 	//Create a config file if the config file does not exists
@@ -68,8 +75,8 @@ int main(int argc, char* argv[]) {
 	string execcmd;
 
 	//If the user declares his own package manager
-	if(file_exists("/etc/sysget_custom")) {
-		pm.customPM("/etc/sysget_custom");
+	if(file_exists(CUSTOM_PATH)) {
+		pm.customPM(CUSTOM_PATH);
 	}
 
 	//If sysget_config does not exists use defaults
