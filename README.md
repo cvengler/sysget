@@ -6,7 +6,7 @@ You probably all know the problem when you are on a new distro and don't know an
 The syntax is mostly same with apt-get so it should be easy to use. <br>
 
 ### Warning<br>
-This is a fork, could have bugs or not be updated for a long time.
+This is a fork, could have bugs or not be updated for a long time. <br>
 This fork adds pip support (Python package manager)
 See also >>>> https://github.com/emilengler/sysget
 
