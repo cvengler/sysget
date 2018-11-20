@@ -170,7 +170,19 @@ void PackageManager::init(string pm) {
 		upgrade_pkg = "npm update -g ";
 		clean = "npm cache clean --force";
 	}
-
+	
+	else if(pm == "pip") {
+		// pip (python)
+		search = "pip search ";
+		install = "pip install ";
+		remove = "pip uninstall ";
+		autoremove = "exit=pip does not support this";
+		update = "exit=pip does not support this";
+		upgrade = "pip install --upgrade ";
+		upgrade_pkg = "exit=pip does not support this";
+		clean = "exit=pip does not support this";
+	}
+	
 	else if(pm == "flatpak") {
 		// flatpak (You should checkout the README)
 		search = "flatpak search ";
