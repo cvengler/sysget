@@ -14,7 +14,7 @@ string get_package_manager(string filename) {
 
 	if(file.is_open()) {
 		while(getline(file, line)) {
-			//If the package manager is valid
+			// If the package manager is valid
 			if(std::find(package_manager_list.begin(), package_manager_list.end(), line) != package_manager_list.end()) {
 				return line;
 			}
@@ -29,7 +29,7 @@ string get_package_manager(string filename) {
 		cout << "Unable to open config file" << endl;
 		exit(1);
 	}
-	//clang on macOS will return a warning if a non-void function has no return
+	// clang on macOS will return a warning if a non-void function has no return
 	return "ERROR";
 }
 
@@ -46,7 +46,7 @@ void create_conf(string filename, string packagemanager) {
 	}
 }
 
-//Check will check if the string contains an exit message
+// Check will check if the string contains an exit message
 void checkcmd(string cmd) {
 	size_t errorfind = cmd.find("exit=");
 	if(errorfind != string::npos) {

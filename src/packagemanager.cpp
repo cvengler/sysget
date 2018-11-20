@@ -1,10 +1,10 @@
 #include "packagemanager.hpp"
 
-//This is the constructor
+// This is the constructor
 void PackageManager::init(string pm) {
 	
 	if(pm == "apt-get") {
-		//apt-get
+		// apt-get
 		search = "apt-cache search ";
 		install = "apt-get install ";
 		remove = "apt-get remove ";
@@ -16,7 +16,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "xbps") {
-		//xbps
+		// xbps
 		search = "xbps-query -Rs ";
 		install = "xbps-install ";
 		remove = "xbps-remove ";
@@ -28,7 +28,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "dnf") {
-		//dnf
+		// dnf
 		search = "dnf search ";
 		install = "dnf install ";
 		remove = "dnf erase ";
@@ -40,7 +40,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "yum") {
-		//yum
+		// yum
 		search = "yum search ";
 		install = "yum install ";
 		remove = "yum erase ";
@@ -52,7 +52,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "zypper") {
-		//zypper
+		// zypper
 		search = "zypper search ";
 		install = "zypper install ";
 		remove = "zypper remove ";
@@ -64,7 +64,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "eopkg") {
-		//eopkg
+		// eopkg
 		search = "eopkg search ";
 		install = "eopkg install ";
 		remove = "eopkg remove ";
@@ -76,7 +76,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "pacman") {
-		//pacman
+		// pacman
 		search = "pacman -Ss ";
 		install = "pacman -S ";
 		remove = "pacman -Rs ";
@@ -88,7 +88,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "emerge") {
-		//emerge / portage
+		// emerge / portage
 		search = "emerge -S ";
 		install = "emerge --ask ";
 		remove = "emerge -C ";
@@ -100,7 +100,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "pkg") {
-		//pkg (FreeBSD)
+		// pkg (FreeBSD)
 		search = "pkg search ";
 		install = "pkg install ";
 		remove = "pkg delete ";
@@ -112,7 +112,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "chromebrew") {
-		//chromebrew
+		// chromebrew
 		search = "crew search ";
 		install = "crew install ";
 		remove = "crew remove ";
@@ -124,7 +124,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "homebrew") {
-		//homebrew
+		// homebrew
 		search = "brew search ";
 		install = "brew install ";
 		remove = "brew uninstall ";
@@ -136,7 +136,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "nix") {
-		//nix
+		// nix
 		search = "nix search ";
 		install = "nix-env -i ";
 		remove = "nix-env -e ";
@@ -148,7 +148,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "snap") {
-		//snap(d)
+		// snap(d)
 		search = "snap find ";
 		install = "snap install ";
 		remove = "snap remove ";
@@ -160,7 +160,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "npm") {
-		//npm (Global)
+		// npm (Global)
 		search = "npm search ";
 		install = "npm install -g ";
 		remove = "npm uninstall -g ";
@@ -172,7 +172,7 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "flatpak") {
-		//flatpak (You should checkout the README)
+		// flatpak (You should checkout the README)
 		search = "flatpak search ";
 		install = "flatpak install ";
 		remove = "flatpak uninstall ";
@@ -184,14 +184,14 @@ void PackageManager::init(string pm) {
 	}
 
 	else if(pm == "slapt-get") {
-		//slapt-get (Slackware)
+		// slapt-get (Slackware)
 		search = "slapt-get --search ";
 		install = "slapt-get --install ";
 		remove = "slapt-get --remove ";
-		autoremove = "slapt-get --autoremove";	//Hope it works
+		autoremove = "slapt-get --autoremove";	// Hope it works
 		update = "slapt-get --update";
 		upgrade = "slapt-get --upgrade";
-		upgrade_pkg = "slapt-get --upgrade ";	//Hope it works
+		upgrade_pkg = "slapt-get --upgrade ";	// Hope it works
 		clean = "slapt-get --clean && slapt-get --autoclean && slapt-get --remove-obsolete && slapt-get --remove";
 	}
 

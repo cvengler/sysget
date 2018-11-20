@@ -5,7 +5,7 @@
 #include "packagemanager.hpp"
 #include "utils.hpp"
 
-char CONFIG_PATH[255] = "/etc/sysget";	//Needs to be NOT const so it can be changed if an enviroment variable set
+char CONFIG_PATH[255] = "/etc/sysget";	// Needs to be NOT const so it can be changed if an enviroment variable set
 char CUSTOM_PATH[255] = "/etc/sysget_custom";
 
 using namespace std;
@@ -13,11 +13,11 @@ using namespace std;
 int main(int argc, char* argv[]) {
 	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get" };
 
-	//Get the path if the user has changed it with an enviroment variable
+	// Get the path if the user has changed it with an enviroment variable
 	char* env_config_path = getenv("SYSGET_CONFIG_PATH");
 	char* env_custom_path = getenv("SYSGET_CUSTOM_PATH");
 
-	//Check if the enviroment variables aren't empty
+	// Check if the enviroment variables aren't empty
 	if(env_config_path != NULL) {
 		strcpy(CONFIG_PATH, env_config_path);
 	}
@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 		strcpy(CUSTOM_PATH, env_custom_path);
 	}
 	
-	//Create a config file if the config file does not exists
+	// Create a config file if the config file does not exists
 	if(!file_exists(CONFIG_PATH)) {
 		cout << "Please choose a package manager: " << endl;
 
@@ -36,21 +36,21 @@ int main(int argc, char* argv[]) {
 
 		cout << endl;
 
-		//Now lets listen for the input
+		// Now lets listen for the input
 		string input;
 		cin >> input;
-		//Convert the input to an int to see if it is valid
+		// Convert the input to an int to see if it is valid
 		int input_int = stoi(input);
 
 		// Create config files
 
-		//Finally check if the input is valid
+		// Finally check if the input is valid
 		if(input_int > package_manager_list.size() || input_int <= 0) {
 			cout << "Invalid input" << endl;
 			exit(1);
 		}
 
-		//Flatpak notice
+		// Flatpak notice
 		if(input_int == 15) {
 			cout << "\e[1;33m" << "NOTICE: " << "\e[0m" << "You need to provide a flatpak repository or a '.flatpakref' while installing flatpaks over sysget" << endl;
 		}
@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
 
 	}
 
-	//Get the name of the package manager from the config file
+	// Get the name of the package manager from the config file
 	string pm_config = get_package_manager(CONFIG_PATH);
 
 	if(pm_config == "ERROR") {
@@ -74,28 +74,28 @@ int main(int argc, char* argv[]) {
 	PackageManager pm;
 	string execcmd;
 
-	//If the user declares his own package manager
+	// If the user declares his own package manager
 	if(file_exists(CUSTOM_PATH)) {
 		pm.customPM(CUSTOM_PATH);
 	}
 
-	//If sysget_config does not exists use defaults
+	// If sysget_config does not exists use defaults
 	else {
 		pm.init(pm_config);
 	}
 
-	//Now parse the console arguments
-	//If the user enters no operation
+	// Now parse the console arguments
+	// If the user enters no operation
 	if(argc < 2) {
 		cout << "Error you need an operation." << endl << "Try sysget help" << endl;
 		exit(1);
 	}
 
-	//Lets set argv[1] to cmd for a more handy usage
+	// Lets set argv[1] to cmd for a more handy usage
 	string cmd = argv[1];
 
 	if(cmd == "search") {
-		//If the user enters no search query
+		// If the user enters no search query
 		if(argc < 3) {
 			cout << "Error, no search query provided" << endl;
 			exit(1);
@@ -105,7 +105,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	else if(cmd == "install") {
-		//If the user enters no package to install
+		// If the user enters no package to install
 		if(argc < 3) {
 			cout << "Error, no package for the installation provided" << endl;
 			exit(1);
@@ -120,7 +120,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	else if(cmd == "remove") {
-		//If the user enters no package to remove
+		// If the user enters no package to remove
 		if(argc < 3) {
 			cout << "Error, no package for the removal provided" << endl;
 			exit(1);
@@ -134,21 +134,21 @@ int main(int argc, char* argv[]) {
 		system(string(pm.remove + execcmd).c_str());
 	}
 
-	//FYI: checkcmd will check if your package manager supports this feature
+	// FYI: checkcmd will check if your package manager supports this feature
 
-	//Autoremove will remove orpahns
+	// Autoremove will remove orpahns
 	else if(cmd == "autoremove") {
 		checkcmd(pm.autoremove);
 		system(pm.autoremove.c_str());
 	}
 
-	//Update will only refresh the database
+	// Update will only refresh the database
 	else if(cmd == "update") {
 		checkcmd(pm.update);
 		system(pm.update.c_str());
 	}
 
-	//Upgrading will not update the database
+	// Upgrading will not update the database
 	else if(cmd == "upgrade") {
 		if(argc < 3) {
 			checkcmd(pm.upgrade);
@@ -165,13 +165,13 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	//Clean will clean the download cache
+	// Clean will clean the download cache
 	else if(cmd == "clean") {
 		checkcmd(pm.clean);
 		system(pm.clean.c_str());
 	}
 
-	//Set will change the package manager
+	// Set will change the package manager
 	else if(cmd == "set") {
 		if(argc < 3) {
 			cout << "Error, no new package manager provided" << endl;
@@ -189,7 +189,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	//Help
+	// Help
 	else if(cmd == "help") {
 		cout << "Help of sysget" << endl;
 		cout << "sysget [OPTION] [PACKAGE(S)]" << endl;
