@@ -178,8 +178,8 @@ void PackageManager::init(string pm) {
 		remove = "pip uninstall ";
 		autoremove = "exit=pip does not support this";
 		update = "exit=pip does not support this";
-		upgrade = "pip install --upgrade ";
-		upgrade_pkg = "exit=pip does not support this";
+		upgrade = "exit=pip does not support this";
+		upgrade_pkg = "pip install --upgrade ";
 		clean = "exit=pip does not support this";
 	}
 	
