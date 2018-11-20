@@ -10,7 +10,7 @@ string get_package_manager(string filename) {
 	string packagemanager;
 	ifstream file(filename);
 
-	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get" };
+	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "pip", "flatpak", "slapt-get" };
 
 	if(file.is_open()) {
 		while(getline(file, line)) {
