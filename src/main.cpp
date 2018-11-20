@@ -13,10 +13,10 @@ int main(int argc, char* argv[]) {
 	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get" };
 
 	//Get the path if the user has changed it with an enviroment variable
-	char* envpath = getenv("SYSGET_CONFIG_PATH");
+	char* env_config_path = getenv("SYSGET_CONFIG_PATH");
 
-	if(envpath != NULL) {
-		strcpy(CONFIG_PATH, envpath);
+	if(env_config_path != NULL) {
+		strcpy(CONFIG_PATH, env_config_path);
 	}
 	
 	//Create a config file if the config file does not exists
