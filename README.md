@@ -1,5 +1,6 @@
 # sysget
 
+[![Build Status](https://travis-ci.org/emilengler/sysget.svg?branch=master)](https://travis-ci.org/emilengler/sysget)
 ### A front-end for every package manager<br>
 sysget is a bridge that lets you use one syntax to every package manager on every unix-based operating system.<br>
 You probably all know the problem when you are on a new distro and don't know anything about the package manager. With sysget you just need to remember one syntax for every package manager.<br>
@@ -19,7 +20,7 @@ The syntax is mostly same with apt-get so it should be easy to use. <br>
 * nix
 * snap
 * npm
-* pip
+* pip3
 * flatpak (See notice)
 
 ### Features
@@ -74,7 +75,11 @@ sysget clean
 |----------------------|---------------------------------------------------------------------|
 | SYSGET_CONFIG_PATH   | Ability to change the path of the sysget config file                |
 | SYSGET_CUSTOM_PATH   | Ability to change the path of the file for a custom package manager |
-
+### Add your own package manager
+sysget also has the ability that you can add your own paackage manager.<br>
+Simply create the file /etc/sysget_custom and then write **8** lines into it.<br>
+One line for one command.<br>
+The order is: search, install, remove, autoremove, update, upgrade, upgrade_pkg, clean
 ### Flatpak notice
 Flatpak works different than other package managers.<br>
 If you want to install a package you need to provide the remote name or the URL of a .flatpakref<br>

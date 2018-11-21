@@ -11,7 +11,7 @@ char CUSTOM_PATH[255] = "/etc/sysget_custom";
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "pip", "flatpak", "slapt-get" };
+	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3" };
 
 	// Get the path if the user has changed it with an enviroment variable
 	char* env_config_path = getenv("SYSGET_CONFIG_PATH");
