@@ -74,7 +74,11 @@ sysget clean
 |----------------------|---------------------------------------------------------------------|
 | SYSGET_CONFIG_PATH   | Ability to change the path of the sysget config file                |
 | SYSGET_CUSTOM_PATH   | Ability to change the path of the file for a custom package manager |
-
+### Add your own package manager
+sysget also has the ability that you can add your own paackage manager.<br>
+Simply create the file /etc/sysget_custom and then write **8** lines into it.<br>
+One line for one command.<br>
+The order is: search, install, remove, autoremove, update, upgrade, upgrade_pkg, clean
 ### Flatpak notice
 Flatpak works different than other package managers.<br>
 If you want to install a package you need to provide the remote name or the URL of a .flatpakref<br>
