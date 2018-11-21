@@ -207,7 +207,6 @@ void PackageManager::init(string pm) {
 		clean = "exit=pip3 does not support this";
 	}
 
-
 }
 
 void PackageManager::customPM(string filename) {
