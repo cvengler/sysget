@@ -20,6 +20,7 @@ The syntax is mostly same with apt-get so it should be easy to use. <br>
 * nix
 * snap
 * npm
+* pip3
 * flatpak (See notice)
 
 ### Features

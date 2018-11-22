@@ -170,7 +170,7 @@ void PackageManager::init(string pm) {
 		upgrade_pkg = "npm update -g ";
 		clean = "npm cache clean --force";
 	}
-
+	
 	else if(pm == "flatpak") {
 		// flatpak (You should checkout the README)
 		search = "flatpak search ";
@@ -195,6 +195,17 @@ void PackageManager::init(string pm) {
 		clean = "slapt-get --clean && slapt-get --autoclean && slapt-get --remove-obsolete && slapt-get --remove";
 	}
 
+	else if(pm == "pip3") {
+		// pip3 (python3)
+		search = "pip3 search ";
+		install = "pip3 install ";
+		remove = "pip3 uninstall ";
+		autoremove = "exit=pip3 does not support this";
+		update = "exit=pip3 does not support this";
+		upgrade = "exit=pip3 does not support this";
+		upgrade_pkg = "pip3 install --upgrade ";
+		clean = "exit=pip3 does not support this";
+	}
 
 }
 
