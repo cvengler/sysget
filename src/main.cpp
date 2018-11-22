@@ -14,8 +14,8 @@ int main(int argc, char* argv[]) {
 	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3" };
 
 	// Get the path if the user has changed it with an enviroment variable
-	char* env_config_path = getenv("SYSGET_CONFIG_PATH");
-	char* env_custom_path = getenv("SYSGET_CUSTOM_PATH");
+	char* env_config_path = secure_getenv("SYSGET_CONFIG_PATH");
+	char* env_custom_path = secure_getenv("SYSGET_CUSTOM_PATH");
 
 	// Check if the enviroment variables aren't empty
 	if(env_config_path != NULL) {
