@@ -5,8 +5,26 @@
 #include "packagemanager.hpp"
 #include "utils.hpp"
 
+// Use secure_getenv when compiling for Linux
+#ifdef __linux__
+	#define getenv secure_getenv
+#endif
+
 char CONFIG_PATH[255] = "/etc/sysget";	// Needs to be NOT const so it can be changed if an enviroment variable set
 char CUSTOM_PATH[255] = "/etc/sysget_custom";
+const char *help_msg =
+	"Help of sysget\n"
+	"sysget [OPTION] [PACKAGE(S)]\n"
+	"\n"
+	"search [QUERY]\t\t\tsearch for a package in the resporitories\n"
+	"install [PACKAGE] [PACKAGE]\tinstall a package from the repos\n"
+	"remove [PACKAGE] [PACKAGE]\tremoves a package\n"
+	"autoremove\t\t\tremoves not needed packages (orphans)\n"
+	"update\t\t\t\tupdate the database\n"
+	"upgrade\t\t\t\tdo a system upgrade\n"
+	"upgrade [PACKAGE] [PACKAGE]\tupgrade a specific package\n"
+	"clean\t\t\t\tclean the download cache\n"
+	"set [NEW MANAGER]\t\tset a new package manager\n\n";
 
 using namespace std;
 
@@ -191,19 +209,7 @@ int main(int argc, char* argv[]) {
 
 	// Help
 	else if(cmd == "help") {
-		cout << "Help of sysget" << endl;
-		cout << "sysget [OPTION] [PACKAGE(S)]" << endl;
-		cout << endl;
-		cout << "search [QUERY]\t\t\tsearch for a package in the resporitories" << endl;
-		cout << "install [PACKAGE] [PACKAGE]\tinstall a package from the repos" << endl;
-		cout << "remove [PACKAGE] [PACKAGE]\tremoves a package" << endl;
-		cout << "autoremove\t\t\tremoves not needed packages (orphans)" << endl;
-		cout << "update\t\t\t\tupdate the database" << endl;
-		cout << "upgrade\t\t\t\tdo a system upgrade" << endl;
-		cout << "upgrade [PACKAGE] [PACKAGE]\tupgrade a specific package" << endl;
-		cout << "clean\t\t\t\tclean the download cache" << endl;
-		cout << "set [NEW MANAGER]\t\tset a new package manager" << endl;
-		cout << endl;
+		cout << help_msg;
 	}
 
 	else {
