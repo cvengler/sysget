@@ -9,7 +9,7 @@ NOTE: Spaces are VERY important because we need them to append other strings to 
 */
 
 struct PackageManager {
-	string search, install, remove, autoremove, update, upgrade, upgrade_pkg, clean;
+	string search, install, uninstall, autoremove, update, upgrade, upgrade_pkg, clean;
 	void init(string pm);
 	void customPM(string filename);
 };

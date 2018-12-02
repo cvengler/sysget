@@ -145,11 +145,11 @@ int main(int argc, char* argv[]) {
 		}
 
 		for(int i = 2; i < argc; i++) {
-			checkcmd(pm.remove);
+			checkcmd(pm.uninstall);
 			execcmd = execcmd + argv[i] + " ";
 		}
 
-		system(string(pm.remove + execcmd).c_str());
+		system(string(pm.uninstall + execcmd).c_str());
 	}
 
 	// FYI: checkcmd will check if your package manager supports this feature

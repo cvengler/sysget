@@ -7,7 +7,7 @@ void PackageManager::init(string pm) {
 		// apt-get
 		search = "apt-cache search ";
 		install = "apt-get install ";
-		remove = "apt-get remove ";
+		uninstall = "apt-get remove ";
 		autoremove = "apt-get autoremove";
 		update = "apt-get update";
 		upgrade = "apt-get upgrade";
@@ -19,7 +19,7 @@ void PackageManager::init(string pm) {
 		// xbps
 		search = "xbps-query -Rs ";
 		install = "xbps-install ";
-		remove = "xbps-remove ";
+		uninstall = "xbps-remove ";
 		autoremove = "xbps-remove -o";
 		update = "xbps-install -S";
 		upgrade = "xbps-install -Su";
@@ -31,7 +31,7 @@ void PackageManager::init(string pm) {
 		// dnf
 		search = "dnf search ";
 		install = "dnf install ";
-		remove = "dnf erase ";
+		uninstall = "dnf erase ";
 		autoremove = "dnf autoremove";
 		update = "dnf clean expire-cache && sudo dnf check-update";
 		upgrade = "dnf update";
@@ -43,7 +43,7 @@ void PackageManager::init(string pm) {
 		// yum
 		search = "yum search ";
 		install = "yum install ";
-		remove = "yum erase ";
+		uninstall = "yum erase ";
 		autoremove = "yum autoremove";
 		update = "yum check-update";
 		upgrade = "yum update";
@@ -55,7 +55,7 @@ void PackageManager::init(string pm) {
 		// zypper
 		search = "zypper search ";
 		install = "zypper install ";
-		remove = "zypper remove ";
+		uninstall = "zypper remove ";
 		autoremove = "zypper rm -u";
 		update = "zypper refresh zypper ref";
 		upgrade = "zypper up";
@@ -67,7 +67,7 @@ void PackageManager::init(string pm) {
 		// eopkg
 		search = "eopkg search ";
 		install = "eopkg install ";
-		remove = "eopkg remove ";
+		uninstall = "eopkg remove ";
 		autoremove = "eopkg remove-orphans";
 		update = "eopkg ur";
 		upgrade = "eopkg upgrade";
@@ -79,7 +79,7 @@ void PackageManager::init(string pm) {
 		// pacman
 		search = "pacman -Ss ";
 		install = "pacman -S ";
-		remove = "pacman -Rs ";
+		uninstall = "pacman -Rs ";
 		autoremove = "pacman -Rns $(pacman -Qtdq)";
 		update = "pacman -Syy";
 		upgrade = "pacman -Syu";
@@ -91,7 +91,7 @@ void PackageManager::init(string pm) {
 		// emerge / portage
 		search = "emerge -S ";
 		install = "emerge --ask ";
-		remove = "emerge -C ";
+		uninstall = "emerge -C ";
 		autoremove = "emerge --depclean -a";
 		update = "layman -f";
 		upgrade = "emerge --ask -u world && emerge --ask -uDN world";
@@ -103,7 +103,7 @@ void PackageManager::init(string pm) {
 		// pkg (FreeBSD)
 		search = "pkg search ";
 		install = "pkg install ";
-		remove = "pkg delete ";
+		uninstall = "pkg delete ";
 		autoremove = "pkg autoremove";
 		update = "pkg update";
 		upgrade = "pkg upgrade";
@@ -115,7 +115,7 @@ void PackageManager::init(string pm) {
 		// chromebrew
 		search = "crew search ";
 		install = "crew install ";
-		remove = "crew remove ";
+		uninstall = "crew remove ";
 		autoremove = "exit=Chromebrew does not support this";
 		update = "exit=Chromebrew does not support this";
 		upgrade = "crew upgrade";
@@ -127,7 +127,7 @@ void PackageManager::init(string pm) {
 		// homebrew
 		search = "brew search ";
 		install = "brew install ";
-		remove = "brew uninstall ";
+		uninstall = "brew uninstall ";
 		autoremove = "exit=Homebrew does this automatically";
 		update = "brew update";
 		upgrade = "brew upgrade";
@@ -139,7 +139,7 @@ void PackageManager::init(string pm) {
 		// nix
 		search = "nix search ";
 		install = "nix-env -i ";
-		remove = "nix-env -e ";
+		uninstall = "nix-env -e ";
 		autoremove = "nix-collect-garbage -d";
 		update = "nix-channel --update nixpkgs";
 		upgrade = "nix-env -u '*'";
@@ -151,7 +151,7 @@ void PackageManager::init(string pm) {
 		// snap(d)
 		search = "snap find ";
 		install = "snap install ";
-		remove = "snap remove ";
+		uninstall = "snap remove ";
 		autoremove = "exit=A snap doesn't have orphans";
 		update = "exit=snapd does not support this, you may want to upgrade ?";
 		upgrade = "snap refresh";
@@ -163,7 +163,7 @@ void PackageManager::init(string pm) {
 		// npm (Global)
 		search = "npm search ";
 		install = "npm install -g ";
-		remove = "npm uninstall -g ";
+		uninstall = "npm uninstall -g ";
 		autoremove = "npm prune";
 		update = "exit=npm does not support this, you may want to upgrade ?";
 		upgrade = "npm update -g";
@@ -175,7 +175,7 @@ void PackageManager::init(string pm) {
 		// flatpak (You should checkout the README)
 		search = "flatpak search ";
 		install = "flatpak install ";
-		remove = "flatpak uninstall ";
+		uninstall = "flatpak uninstall ";
 		autoremove = "flatpak uninstall --unused";
 		update = "exit=Flatpak does not support this, you may want to upgrade ?";
 		upgrade = "flatpak update";
@@ -187,7 +187,7 @@ void PackageManager::init(string pm) {
 		// slapt-get (Slackware)
 		search = "slapt-get --search ";
 		install = "slapt-get --install ";
-		remove = "slapt-get --remove ";
+		uninstall = "slapt-get --remove ";
 		autoremove = "slapt-get --autoremove";	// Hope it works
 		update = "slapt-get --update";
 		upgrade = "slapt-get --upgrade";
@@ -199,7 +199,7 @@ void PackageManager::init(string pm) {
 		// pip3 (python3)
 		search = "pip3 search ";
 		install = "pip3 install ";
-		remove = "pip3 uninstall ";
+		uninstall = "pip3 uninstall ";
 		autoremove = "exit=pip3 does not support this";
 		update = "exit=pip3 does not support this";
 		upgrade = "exit=pip3 does not support this";
@@ -223,7 +223,7 @@ void PackageManager::customPM(string filename) {
 		if(number_of_lines != 8) {
 			search = "exit=Invalid sysget_custom file";
 			install = "exit=Invalid sysget_custom file";
-			remove = "exit=Invalid sysget_custom file";
+			uninstall = "exit=Invalid sysget_custom file";
 			autoremove = "exit=Invalid sysget_custom file";
 			update = "exit=Invalid sysget_custom file";
 			upgrade = "exit=Invalid sysget_custom file";
@@ -234,7 +234,7 @@ void PackageManager::customPM(string filename) {
 		else {
 			search = commands[0];
 			install = commands[1];
-			remove = commands[2];
+			uninstall = commands[2];
 			autoremove = commands[3];
 			update = commands[4];
 			upgrade = commands[5];
