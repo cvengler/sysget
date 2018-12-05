@@ -24,7 +24,28 @@ const char *help_msg =
 	"upgrade\t\t\t\tdo a system upgrade\n"
 	"upgrade [PACKAGE] [PACKAGE]\tupgrade a specific package\n"
 	"clean\t\t\t\tclean the download cache\n"
-	"set [NEW MANAGER]\t\tset a new package manager\n\n";
+	"set [NEW MANAGER]\t\tset a new package manager\n"
+	"help\t\t\t\topen this help page\n"
+	"about\t\t\t\tview legal informations\n\n";
+
+const char *about_msg =
+	"About sysget\n"
+	"Copyright (C) 2018 Emil Engler et al.\n"
+	"http://sysget.emilengler.com\n"
+	"\n"
+	"This program is free software: you can redistribute it and/or modify\n"
+	"it under the terms of the GNU General Public License as published by\n"
+	"the Free Software Foundation, either version 3 of the License, or\n"
+	"(at your option) any later version.\n"
+	"\n"
+	"This program is distributed in the hope that it will be useful,\n"
+	"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+	"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+	"GNU General Public License for more details.\n"
+	"\n"
+	"You should have received a copy of the GNU General Public License\n"
+	"along with this program.  If not, see <http://www.gnu.org/licenses/>.\n";
+
 
 using namespace std;
 
@@ -210,6 +231,11 @@ int main(int argc, char* argv[]) {
 	// Help
 	else if(cmd == "help") {
 		cout << help_msg;
+	}
+
+	// About
+	else if(cmd == "about") {
+		cout << about_msg;
 	}
 
 	else {

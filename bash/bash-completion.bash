@@ -4,7 +4,7 @@ _sysget()
 	COMPREPLY=()
 	cur="${COMP_WORDS[COMP_CWORD]}"
 	prev="${COMP_WORDS[COMP_CWORD-1]}"
-	opts="search install remove update upgrade autoremove clean set help"
+	opts="search install remove update upgrade autoremove clean set help about"
 
 	COMPREPLY=( $(compgen -W "${opts}" ${cur}) )
 }
