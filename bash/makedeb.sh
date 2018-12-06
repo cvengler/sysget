@@ -5,6 +5,12 @@ read version
 echo "Enter architecture"
 read arch
 
+echo "Enter your name"
+read name
+
+echo "Enter your email"
+read email
+
 # Create needed dirs
 mkdir -p sysget-$version-$arch
 mkdir -p sysget-$version-$arch/DEBIAN
@@ -17,7 +23,7 @@ mkdir -p sysget-$version-$arch/etc/bash_completion.d/
 echo "Package: sysget
 Version: $version
 Architecture: $arch
-Maintainer: Emil Engler <me@emilengler.com>
+Maintainer: $name <$email>
 Description: One package manager to rule them all
 Homepage: http://sysget.emilengler.com
 Priority: standard
