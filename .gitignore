@@ -33,3 +33,6 @@
 
 # Visual Studio folder
 .vscode
+
+# Debs
+*.deb
