@@ -2,7 +2,7 @@ language: cpp
 group: travis_latest
 
 git:
-  depth: 3
+  depth: false
   quiet: true
 
 os:
