@@ -35,6 +35,7 @@
 .vscode
 
 # CLion folder
+.idea
 
 # Debs
 *.deb
