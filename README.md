@@ -76,6 +76,9 @@ sysget clean
 |----------------------|---------------------------------------------------------------------|
 | SYSGET_CONFIG_PATH   | Ability to change the path of the sysget config file                |
 | SYSGET_CUSTOM_PATH   | Ability to change the path of the file for a custom package manager |
+### Configuration files
+The file where the package manager is stored is located at `/etc/sysget`<br>
+The *optional* file where a custom package manager is stored at `/etc/sysget_custom`<br>
 ### Add your own package manager
 sysget also has the ability that you can add your own paackage manager.<br>
 Simply create the file /etc/sysget_custom and then write **8** lines into it.<br>

@@ -111,7 +111,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	PackageManager pm;
-	string execcmd;
+	string execcmd;	// Will be appended with packages
 
 	// If the user declares his own package manager
 	if(file_exists(CUSTOM_PATH)) {
@@ -194,6 +194,7 @@ int main(int argc, char* argv[]) {
 			system(pm.upgrade.c_str());
 		}
 
+		// Upgrade specifc package
 		else {
 			for(int i = 2; i < argc; i++) {
 				checkcmd(pm.upgrade_pkg);
