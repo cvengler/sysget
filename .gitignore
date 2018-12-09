@@ -34,5 +34,7 @@
 # Visual Studio folder
 .vscode
 
+# CLion folder
+
 # Debs
 *.deb
