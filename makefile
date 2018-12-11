@@ -1,7 +1,7 @@
 FLAGS=-std=c++11
 
 prog: main.o packagemanager.o utils.o
-	g++ $(FLAGS) -o sysget.o main.o packagemanager.o utils.o
+	g++ $(FLAGS) -o sysget main.o packagemanager.o utils.o
 
 main.o: src/main.cpp
 	g++ $(FLAGS) -c src/main.cpp
@@ -13,7 +13,7 @@ utils.o: src/utils.hpp src/utils.cpp
 	g++ $(FLAGS) -c src/utils.hpp src/utils.cpp
 
 install:
-	cp sysget.o /usr/local/bin/sysget
+	cp sysget /usr/local/bin/sysget
 	cp bash/bash-completion.bash /etc/bash_completion.d/sysget
 
 uninstall:
@@ -24,3 +24,4 @@ uninstall:
 
 clean:
 	rm -rf *.o src/*.gch
+	rm -rf sysget

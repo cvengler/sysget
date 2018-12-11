@@ -34,7 +34,7 @@ echo "apt-get" > sysget-$version-$arch/etc/sysget
 
 # Compile
 make -C ../
-cp ../sysget.o sysget-$version-$arch/usr/local/bin/sysget
+cp ../sysget sysget-$version-$arch/usr/local/bin/sysget
 make -C ../ clean
 # Copy the autocompletion
 cp bash-completion.bash sysget-$version-$arch/etc/bash_completion.d/sysget
