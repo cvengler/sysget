@@ -50,7 +50,7 @@ const char *about_msg =
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3" };
+	vector<string> package_manager_list = get_package_manager_list();
 
 	// Get the path if the user has changed it with an enviroment variable
 	char* env_config_path = getenv("SYSGET_CONFIG_PATH");

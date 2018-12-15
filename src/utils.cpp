@@ -5,12 +5,17 @@ bool file_exists(const char *filename) {
 	return (bool)file;
 }
 
+vector<string> get_package_manager_list() {
+	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3" };
+	return package_manager_list;
+}
+
 string get_package_manager(string filename) {
 	string line;
 	string packagemanager;
 	ifstream file(filename);
 
-	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3" };
+	vector<string> package_manager_list = get_package_manager_list();
 
 	if(file.is_open()) {
 		while(getline(file, line)) {
