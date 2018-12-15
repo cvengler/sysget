@@ -21,6 +21,8 @@ uninstall:
 	rm -rf /etc/sysget
 	rm -rf /etc/bash_completion.d/sysget
 	rm -rf /etc/sysget_config
+	rm -rf /etc/sysget_custom
+	rm -rf /etc/sysget_args
 
 clean:
 	rm -rf *.o src/*.gch

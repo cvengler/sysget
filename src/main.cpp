@@ -12,6 +12,7 @@
 
 char CONFIG_PATH[255] = "/etc/sysget";	// Needs to be NOT const so it can be changed if an enviroment variable set
 char CUSTOM_PATH[255] = "/etc/sysget_custom";
+char CUSTOM_ARGS_PATH[255] = "/etc/sysget_args";
 const char *help_msg =
 	"Help of sysget\n"
 	"sysget [OPTION] [PACKAGE(S)]\n"
@@ -55,6 +56,7 @@ int main(int argc, char* argv[]) {
 	// Get the path if the user has changed it with an enviroment variable
 	char* env_config_path = getenv("SYSGET_CONFIG_PATH");
 	char* env_custom_path = getenv("SYSGET_CUSTOM_PATH");
+	char* env_cmd_path = getenv("SYSGET_ARGS_PATH");
 
 	// Check if the enviroment variables aren't empty
 	if(env_config_path != NULL) {
@@ -63,6 +65,10 @@ int main(int argc, char* argv[]) {
 
 	if(env_custom_path != NULL) {
 		strcpy(CUSTOM_PATH, env_custom_path);
+	}
+
+	if(env_cmd_path != NULL) {
+		strcpy(CUSTOM_ARGS_PATH, env_cmd_path);
 	}
 	
 	// Create a config file if the config file does not exists
@@ -112,6 +118,7 @@ int main(int argc, char* argv[]) {
 
 	PackageManager pm;
 	string execcmd;	// Will be appended with packages
+	vector<string> c_args;	// If the user changes the layout of sysget
 
 	// If the user declares his own package manager
 	if(file_exists(CUSTOM_PATH)) {
@@ -121,6 +128,18 @@ int main(int argc, char* argv[]) {
 	// If sysget_config does not exists use defaults
 	else {
 		pm.init(pm_config);
+	}
+
+	// If the user declares his own input commands
+	if(file_exists(CUSTOM_ARGS_PATH)) {
+		c_args = CustomArgs(CUSTOM_ARGS_PATH);
+		CheckCustomArgs(c_args);
+	}
+
+	// If the user doesn't set them to the defaults
+	else {
+		// Set them to the default args to avoid memory errors
+		c_args = DefaultArgs();
 	}
 
 	// Now parse the console arguments
@@ -133,7 +152,7 @@ int main(int argc, char* argv[]) {
 	// Lets set argv[1] to cmd for a more handy usage
 	string cmd = argv[1];
 
-	if(cmd == "search") {
+	if(cmd == "search" || cmd == c_args[0]) {
 		// If the user enters no search query
 		if(argc < 3) {
 			cout << "Error, no search query provided" << endl;
@@ -143,7 +162,7 @@ int main(int argc, char* argv[]) {
 		system(string(pm.search + argv[2]).c_str());
 	}
 
-	else if(cmd == "install") {
+	else if(cmd == "install" || cmd == c_args[1]) {
 		// If the user enters no package to install
 		if(argc < 3) {
 			cout << "Error, no package for the installation provided" << endl;
@@ -158,7 +177,7 @@ int main(int argc, char* argv[]) {
 		system(string(pm.install + execcmd).c_str());
 	}
 
-	else if(cmd == "remove") {
+	else if(cmd == "remove" || cmd == c_args[2]) {
 		// If the user enters no package to remove
 		if(argc < 3) {
 			cout << "Error, no package for the removal provided" << endl;
@@ -176,19 +195,19 @@ int main(int argc, char* argv[]) {
 	// FYI: checkcmd will check if your package manager supports this feature
 
 	// Autoremove will remove orpahns
-	else if(cmd == "autoremove") {
+	else if(cmd == "autoremove" || cmd == c_args[3]) {
 		checkcmd(pm.autoremove);
 		system(pm.autoremove.c_str());
 	}
 
 	// Update will only refresh the database
-	else if(cmd == "update") {
+	else if(cmd == "update" || cmd == c_args[4]) {
 		checkcmd(pm.update);
 		system(pm.update.c_str());
 	}
 
 	// Upgrading will not update the database
-	else if(cmd == "upgrade") {
+	else if(cmd == "upgrade" || cmd == c_args[5]) {
 		if(argc < 3) {
 			checkcmd(pm.upgrade);
 			system(pm.upgrade.c_str());
@@ -206,13 +225,13 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Clean will clean the download cache
-	else if(cmd == "clean") {
+	else if(cmd == "clean" || cmd == c_args[6]) {
 		checkcmd(pm.clean);
 		system(pm.clean.c_str());
 	}
 
 	// Set will change the package manager
-	else if(cmd == "set") {
+	else if(cmd == "set" || cmd == c_args[7]) {
 		if(argc < 3) {
 			cout << "Error, no new package manager provided" << endl;
 			exit(1);
@@ -230,12 +249,12 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Help
-	else if(cmd == "help") {
+	else if(cmd == "help" || cmd == c_args[8]) {
 		cout << help_msg;
 	}
 
 	// About
-	else if(cmd == "about") {
+	else if(cmd == "about" || cmd == c_args[9]) {
 		cout << about_msg;
 	}
 
