@@ -89,7 +89,7 @@ The order is: search, install, remove, autoremove, update, upgrade, upgrade_pkg,
 ### Change the sysget syntax
 Similar to adding your own package manager you can also modify the syntax of sysget. For example you can give sysget the pacman syntax<br>
 Simply create the file `/etc/sysget_args` and add 10 lines to it.
-The order is: search, install, remove, autoremove, update, upgrade, clean, set, help, about
+The order is: search, install, remove, autoremove, update, upgrade, clean, set, help, about<br>
 However there are some rules:<br>
 * The file needs to have 10 lines
 * The same item twice is forbidden
