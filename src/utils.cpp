@@ -5,22 +5,22 @@ bool file_exists(const char *filename) {
 	return (bool)file;
 }
 
-vector<string> get_package_manager_list() {
-	vector<string> package_manager_list = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3" };
-	return package_manager_list;
+vector<string> GetPackageManagerList() {
+	vector<string> PackageManagerList = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3" };
+	return PackageManagerList;
 }
 
-string get_package_manager(string filename) {
+string GetPackageManager(string filename) {
 	string line;
 	string packagemanager;
 	ifstream file(filename);
 
-	vector<string> package_manager_list = get_package_manager_list();
+	vector<string> PackageManagerList = GetPackageManagerList();
 
 	if(file.is_open()) {
 		while(getline(file, line)) {
 			// If the package manager is valid
-			if(std::find(package_manager_list.begin(), package_manager_list.end(), line) != package_manager_list.end()) {
+			if(std::find(PackageManagerList.begin(), PackageManagerList.end(), line) != PackageManagerList.end()) {
 				return line;
 			}
 
@@ -38,7 +38,7 @@ string get_package_manager(string filename) {
 	return "ERROR";
 }
 
-void create_conf(string filename, string packagemanager) {
+void CreateConf(string filename, string packagemanager) {
 	ofstream file(filename);
 	if(file.is_open()) {
 		file << packagemanager;

@@ -10,10 +10,10 @@
 	#define getenv secure_getenv
 #endif
 
-char CONFIG_PATH[255] = "/etc/sysget";	// Needs to be NOT const so it can be changed if an enviroment variable set
-char CUSTOM_PATH[255] = "/etc/sysget_custom";
-char CUSTOM_ARGS_PATH[255] = "/etc/sysget_args";
-const char *help_msg =
+char ConfigPath[255] = "/etc/sysget";	// Needs to be NOT const so it can be changed if an enviroment variable set
+char CustomPath[255] = "/etc/sysget_custom";
+char ArgsPath[255] = "/etc/sysget_args";
+const char *HelpMsg =
 	"Help of sysget\n"
 	"sysget [OPTION] [PACKAGE(S)]\n"
 	"\n"
@@ -29,7 +29,7 @@ const char *help_msg =
 	"help\t\t\t\topen this help page\n"
 	"about\t\t\t\tview legal informations\n\n";
 
-const char *about_msg =
+const char *AboutMsg =
 	"About sysget\n"
 	"Copyright (C) 2018 Emil Engler et al.\n"
 	"http://sysget.emilengler.com\n"
@@ -51,32 +51,32 @@ const char *about_msg =
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	vector<string> package_manager_list = get_package_manager_list();
+	vector<string> PackageManagerList = GetPackageManagerList();
 
 	// Get the path if the user has changed it with an enviroment variable
-	char* env_config_path = getenv("SYSGET_CONFIG_PATH");
-	char* env_custom_path = getenv("SYSGET_CUSTOM_PATH");
-	char* env_cmd_path = getenv("SYSGET_ARGS_PATH");
+	char* EnvConfigPath = getenv("SYSGET_CONFIG_PATH");
+	char* EnvCustomPath = getenv("SYSGET_CUSTOM_PATH");
+	char* EnvArgsPath = getenv("SYSGET_ARGS_PATH");
 
 	// Check if the enviroment variables aren't empty
-	if(env_config_path != NULL) {
-		strcpy(CONFIG_PATH, env_config_path);
+	if(EnvConfigPath != NULL) {
+		strcpy(ConfigPath, EnvConfigPath);
 	}
 
-	if(env_custom_path != NULL) {
-		strcpy(CUSTOM_PATH, env_custom_path);
+	if(EnvCustomPath != NULL) {
+		strcpy(CustomPath, EnvCustomPath);
 	}
 
-	if(env_cmd_path != NULL) {
-		strcpy(CUSTOM_ARGS_PATH, env_cmd_path);
+	if(EnvArgsPath != NULL) {
+		strcpy(ArgsPath, EnvCustomPath);
 	}
 	
 	// Create a config file if the config file does not exists
-	if(!file_exists(CONFIG_PATH)) {
+	if(!file_exists(ConfigPath)) {
 		cout << "Please choose a package manager: " << endl;
 
-		for(int i = 0; i < package_manager_list.size(); i++) {
-			cout << (i+1) << ". " << package_manager_list[i] << endl;
+		for(int i = 0; i < PackageManagerList.size(); i++) {
+			cout << (i+1) << ". " << PackageManagerList[i] << endl;
 		}
 
 		cout << endl;
@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
 		// Create config files
 
 		// Finally check if the input is valid
-		if(input_int > package_manager_list.size() || input_int <= 0) {
+		if(input_int > PackageManagerList.size() || input_int <= 0) {
 			cout << "Invalid input" << endl;
 			exit(1);
 		}
@@ -101,16 +101,16 @@ int main(int argc, char* argv[]) {
 		}
 
 		// We need to reduce the input by 1 because arrays start at 0
-		create_conf(CONFIG_PATH, package_manager_list[input_int -1] + "\n");
+		CreateConf(ConfigPath, PackageManagerList[input_int -1] + "\n");
 
 	}
 
 	// Get the name of the package manager from the config file
-	string pm_config = get_package_manager(CONFIG_PATH);
+	string pm_config = GetPackageManager(ConfigPath);
 
 	if(pm_config == "ERROR") {
 		cout << "Your config is broken please restart the program to create a new one" << endl;
-		if(remove(CONFIG_PATH) != 0) {
+		if(remove(ConfigPath) != 0) {
 			cout << "Error while deleting broken config file, are you root?" << endl;
 		}
 		exit(1);
@@ -121,8 +121,8 @@ int main(int argc, char* argv[]) {
 	vector<string> c_args;	// If the user changes the layout of sysget
 
 	// If the user declares his own package manager
-	if(file_exists(CUSTOM_PATH)) {
-		pm.customPM(CUSTOM_PATH);
+	if(file_exists(CustomPath)) {
+		pm.customPM(CustomPath);
 	}
 
 	// If sysget_config does not exists use defaults
@@ -131,8 +131,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	// If the user declares his own input commands
-	if(file_exists(CUSTOM_ARGS_PATH)) {
-		c_args = CustomArgs(CUSTOM_ARGS_PATH);
+	if(file_exists(ArgsPath)) {
+		c_args = CustomArgs(ArgsPath);
 		CheckCustomArgs(c_args);
 	}
 
@@ -237,25 +237,25 @@ int main(int argc, char* argv[]) {
 			exit(1);
 		}
 
-		if(remove(CONFIG_PATH) != 0) {
+		if(remove(ConfigPath) != 0) {
 			cout << "Error while deleting config file, are you root ?" << endl;
 			exit(1);
 		}
 
 		else {
-			create_conf(CONFIG_PATH, string(argv[2]) + "\n");
+			CreateConf(ConfigPath, string(argv[2]) + "\n");
 			cout << "Package manager changed to " << argv[2] << endl;
 		}
 	}
 
 	// Help
 	else if(cmd == "help" || cmd == c_args[8]) {
-		cout << help_msg;
+		cout << HelpMsg;
 	}
 
 	// About
 	else if(cmd == "about" || cmd == c_args[9]) {
-		cout << about_msg;
+		cout << AboutMsg;
 	}
 
 	else {
