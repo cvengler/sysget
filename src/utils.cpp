@@ -128,3 +128,26 @@ vector<string> DefaultArgs() {
 	defaultargs.push_back("about");
 	return defaultargs;
 }
+
+// Check if an item exists in a vector
+// Could be useful in future
+bool VectorContains(string s, vector<string> v) {
+	if(std::find(v.begin(), v.end(), s) != v.end()) {
+		return true;
+	}
+
+	else {
+		return false;
+	}
+
+	// If the vector is empty
+	if(!v.empty) {
+		return true;
+	}
+
+	else {
+		return false;
+	}
+
+	return false;
+}
