@@ -85,23 +85,23 @@ int main(int argc, char* argv[]) {
 		string input;
 		cin >> input;
 		// Convert the input to an int to see if it is valid
-		int input_int = stoi(input);
+		int InputInt = stoi(input);
 
 		// Create config files
 
 		// Finally check if the input is valid
-		if(input_int > PackageManagerList.size() || input_int <= 0) {
+		if(InputInt > PackageManagerList.size() || InputInt <= 0) {
 			cout << "Invalid input" << endl;
 			exit(1);
 		}
 
 		// Flatpak notice
-		if(input_int == 15) {
+		if(InputInt == 15) {
 			cout << "\e[1;33m" << "NOTICE: " << "\e[0m" << "You need to provide a flatpak repository or a '.flatpakref' while installing flatpaks over sysget" << endl;
 		}
 
 		// We need to reduce the input by 1 because arrays start at 0
-		CreateConf(ConfigPath, PackageManagerList[input_int -1] + "\n");
+		CreateConf(ConfigPath, PackageManagerList[InputInt -1] + "\n");
 
 	}
 
