@@ -141,7 +141,7 @@ bool VectorContains(string s, vector<string> v) {
 	}
 
 	// If the vector is empty
-	if(!v.empty) {
+	if(!v.empty()) {
 		return true;
 	}
 
