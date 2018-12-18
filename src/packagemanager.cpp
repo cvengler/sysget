@@ -71,7 +71,7 @@ void PackageManager::init(string pm) {
 		autoremove = "eopkg remove-orphans";
 		update = "eopkg ur";
 		upgrade = "eopkg upgrade";
-		upgrade_pkg = "zypper in ";
+		upgrade_pkg = "eopkg upgrade ";
 		clean = "eopkg delete-cache";
 	}
 

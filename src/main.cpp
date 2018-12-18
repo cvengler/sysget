@@ -48,6 +48,18 @@ const char *AboutMsg =
 	"along with this program.  If not, see <http://www.gnu.org/licenses/>.\n";
 
 
+// Default syntax operations
+vector<string> SearchCmds = {"search", "--search"};
+vector<string> InstallCmds = {"install", "--install"};
+vector<string> RemoveCmds = {"remove", "--remove"};
+vector<string> AutoremoveCmds = {"autoremove", "--autoremove"};
+vector<string> UpdateCmds = {"update", "--update"};
+vector<string> UpgradeCmds = {"upgrade", "--upgrade"};
+vector<string> CleanCmds = {"clean", "--clean"};
+vector<string> SetCmds = {"set", "--set"};
+vector<string> HelpCmds = {"help", "--help"};
+vector<string> AboutCmds = {"about", "--about"};
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -118,7 +130,6 @@ int main(int argc, char* argv[]) {
 
 	PackageManager pm;
 	string execcmd;	// Will be appended with packages
-	vector<string> c_args;	// If the user changes the layout of sysget
 
 	// If the user declares his own package manager
 	if(file_exists(CustomPath)) {
@@ -132,14 +143,18 @@ int main(int argc, char* argv[]) {
 
 	// If the user declares his own input commands
 	if(file_exists(ArgsPath)) {
+		vector<string> c_args;	// If the user changes the layout of sysget
 		c_args = CustomArgs(ArgsPath);
-		CheckCustomArgs(c_args);
-	}
-
-	// If the user doesn't set them to the defaults
-	else {
-		// Set them to the default args to avoid memory errors
-		c_args = DefaultArgs();
+		SearchCmds.push_back(c_args[0]);
+		InstallCmds.push_back(c_args[1]);
+		RemoveCmds.push_back(c_args[2]);
+		AutoremoveCmds.push_back(c_args[3]);
+		UpdateCmds.push_back(c_args[4]);
+		UpgradeCmds.push_back(c_args[5]);
+		CleanCmds.push_back(c_args[6]);
+		SetCmds.push_back(c_args[7]);
+		HelpCmds.push_back(c_args[8]);
+		AboutCmds.push_back(c_args[9]);
 	}
 
 	// Now parse the console arguments
@@ -152,7 +167,7 @@ int main(int argc, char* argv[]) {
 	// Lets set argv[1] to cmd for a more handy usage
 	string cmd = argv[1];
 
-	if(cmd == "search" || cmd == c_args[0]) {
+	if(VectorContains(cmd, SearchCmds)) {
 		// If the user enters no search query
 		if(argc < 3) {
 			cout << "Error, no search query provided" << endl;
@@ -162,7 +177,7 @@ int main(int argc, char* argv[]) {
 		system(string(pm.search + argv[2]).c_str());
 	}
 
-	else if(cmd == "install" || cmd == c_args[1]) {
+	else if(VectorContains(cmd, InstallCmds)) {
 		// If the user enters no package to install
 		if(argc < 3) {
 			cout << "Error, no package for the installation provided" << endl;
@@ -177,7 +192,7 @@ int main(int argc, char* argv[]) {
 		system(string(pm.install + execcmd).c_str());
 	}
 
-	else if(cmd == "remove" || cmd == c_args[2]) {
+	else if(VectorContains(cmd, RemoveCmds)) {
 		// If the user enters no package to remove
 		if(argc < 3) {
 			cout << "Error, no package for the removal provided" << endl;
@@ -195,19 +210,19 @@ int main(int argc, char* argv[]) {
 	// FYI: checkcmd will check if your package manager supports this feature
 
 	// Autoremove will remove orpahns
-	else if(cmd == "autoremove" || cmd == c_args[3]) {
+	else if(VectorContains(cmd, AutoremoveCmds)) {
 		checkcmd(pm.autoremove);
 		system(pm.autoremove.c_str());
 	}
 
 	// Update will only refresh the database
-	else if(cmd == "update" || cmd == c_args[4]) {
+	else if(VectorContains(cmd, UpdateCmds)) {
 		checkcmd(pm.update);
 		system(pm.update.c_str());
 	}
 
 	// Upgrading will not update the database
-	else if(cmd == "upgrade" || cmd == c_args[5]) {
+	else if(VectorContains(cmd, UpgradeCmds)) {
 		if(argc < 3) {
 			checkcmd(pm.upgrade);
 			system(pm.upgrade.c_str());
@@ -225,13 +240,13 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Clean will clean the download cache
-	else if(cmd == "clean" || cmd == c_args[6]) {
+	else if(VectorContains(cmd, CleanCmds)) {
 		checkcmd(pm.clean);
 		system(pm.clean.c_str());
 	}
 
 	// Set will change the package manager
-	else if(cmd == "set" || cmd == c_args[7]) {
+	else if(VectorContains(cmd, SetCmds)) {
 		if(argc < 3) {
 			cout << "Error, no new package manager provided" << endl;
 			exit(1);
@@ -249,12 +264,12 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Help
-	else if(cmd == "help" || cmd == c_args[8]) {
+	else if(VectorContains(cmd, HelpCmds)) {
 		cout << HelpMsg;
 	}
 
 	// About
-	else if(cmd == "about" || cmd == c_args[9]) {
+	else if(VectorContains(cmd, AboutCmds)) {
 		cout << AboutMsg;
 	}
 

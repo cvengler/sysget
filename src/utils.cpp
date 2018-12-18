@@ -87,48 +87,6 @@ vector<string> CustomArgs(string path) {
 	}
 }
 
-// Check if an item exists twice in the file
-void CheckCustomArgs(vector<string> args) {
-	vector<string> already_known;
-	for(int i = 0; i < args.size(); i++) {
-		already_known.push_back(args[i]);
-	}
-
-	for(int i = 0; i < already_known.size(); i++) {
-		if(std::find(already_known.begin(), already_known.end(), args[i]) != already_known.end()) {
-			cout << "The same item in the sysget_args file twice is forbidden" << endl;
-			exit(1);
-		}
-		else {
-			// Valid if the index is the same
-			if(args[i] == already_known[i]) {
-				continue;
-			}
-
-			else {
-				cout << "The same item in the sysget_args file is twice is forbidden" << endl;
-				exit(1);
-			}
-		}
-	}
-}
-
-// Set the vector to the default commands
-vector<string> DefaultArgs() {
-	vector<string> defaultargs;
-	defaultargs.push_back("search");
-	defaultargs.push_back("install");
-	defaultargs.push_back("remove");
-	defaultargs.push_back("autoremove");
-	defaultargs.push_back("update");
-	defaultargs.push_back("upgrade");
-	defaultargs.push_back("clean");
-	defaultargs.push_back("set");
-	defaultargs.push_back("help");
-	defaultargs.push_back("about");
-	return defaultargs;
-}
-
 // Check if an item exists in a vector
 // Could be useful in future
 bool VectorContains(string s, vector<string> v) {
@@ -141,11 +99,7 @@ bool VectorContains(string s, vector<string> v) {
 	}
 
 	// If the vector is empty
-	if(!v.empty()) {
-		return true;
-	}
-
-	else {
+	if(v.empty()) {
 		return false;
 	}
 
