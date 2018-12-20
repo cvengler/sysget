@@ -10,6 +10,7 @@
 	#define getenv secure_getenv
 #endif
 
+// Default path for config files
 char ConfigPath[255] = "/etc/sysget";	// Needs to be NOT const so it can be changed if an enviroment variable set
 char CustomPath[255] = "/etc/sysget_custom";
 char ArgsPath[255] = "/etc/sysget_args";
