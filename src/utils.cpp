@@ -85,6 +85,7 @@ vector<string> CustomArgs(string path) {
 		}
 
 	}
+	return args;
 }
 
 // Check if an item exists in a vector
