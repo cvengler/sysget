@@ -8,4 +8,4 @@ _sysget()
 
 	COMPREPLY=( $(compgen -W "${opts}" ${cur}) )
 }
-complete -F _sysget sysget
+complete -F _sysget sysget _syg syg
