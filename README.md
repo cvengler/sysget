@@ -23,6 +23,7 @@ The syntax is mostly same with apt-get so it should be easy to use. <br>
 * flatpak (See notice)
 * slapt-get
 * pip3
+* GNU guix
 * Your own package manager (See Add your own package manager)
 
 ### Features

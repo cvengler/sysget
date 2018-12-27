@@ -6,7 +6,7 @@ bool file_exists(const char *filename) {
 }
 
 vector<string> GetPackageManagerList() {
-	vector<string> PackageManagerList = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3" };
+	vector<string> PackageManagerList = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3", "guix" };
 	return PackageManagerList;
 }
 

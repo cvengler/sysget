@@ -207,6 +207,18 @@ void PackageManager::init(string pm) {
 		clean = "exit=pip3 does not support this";
 	}
 
+	else if(pm == "guix") {
+		// guix
+		search = "guix package -s ";
+		install = "guix package -i ";
+		uninstall = "guix package -r ";
+		autoremove = "exit=guix does not support this";
+		update = "exit=guix does not support this, you may want to upgrade ?";
+		upgrade = "guix package -u";
+		upgrade_pkg = "guix package -u ";
+		clean = "guix gc";
+	}
+
 }
 
 void PackageManager::customPM(string filename) {
