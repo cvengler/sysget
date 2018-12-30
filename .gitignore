@@ -31,7 +31,6 @@
 *.out
 *.app
 sysget
-syg/syg
 
 # Visual Studio folder
 .vscode
