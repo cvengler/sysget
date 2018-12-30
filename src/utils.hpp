@@ -1,3 +1,5 @@
+#ifndef UTILS_H
+#define UTILS_H
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -13,3 +15,4 @@ void CreateConf(string filename, string packagemanager);
 void checkcmd(string cmd);
 vector<string> CustomArgs(string path);
 bool VectorContains(string s, vector<string> v);
+#endif

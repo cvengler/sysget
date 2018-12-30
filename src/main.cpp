@@ -32,7 +32,7 @@ const char *HelpMsg =
 
 const char *AboutMsg =
 	"About sysget\n"
-	"Copyright (C) 2018 Emil Engler et al.\n"
+	"Copyright (C) 2018-2019 Emil Engler et al.\n"
 	"http://sysget.emilengler.com\n"
 	"\n"
 	"This program is free software: you can redistribute it and/or modify\n"

@@ -1,3 +1,5 @@
+#ifndef PACKAGEMANAGER_H
+#define PACKAGEMANAGER_H
 #include <string>
 #include <vector>
 #include <fstream>
@@ -13,3 +15,4 @@ struct PackageManager {
 	void init(string pm);
 	void customPM(string filename);
 };
+#endif

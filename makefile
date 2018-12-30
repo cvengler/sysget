@@ -14,7 +14,7 @@ utils.o: src/utils.hpp src/utils.cpp
 
 install:
 	cp sysget /usr/local/bin/sysget
-	cp bash/bash-completion.bash /etc/bash_completion.d/sysget
+	cp contrib/sysget.bash-completion /etc/bash_completion.d/sysget
 
 uninstall:
 	rm -rf /usr/local/bin/sysget
