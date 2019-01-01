@@ -14,13 +14,11 @@ utils.o: src/utils.hpp src/utils.cpp
 
 install:
 	cp sysget /usr/local/bin/sysget
-	cp contrib/man/sysget.1 /usr/local/man/man8/sysget.1
-	gzip /usr/local/man/man8/sysget.1
+	mkdir -p /usr/local/man/man8
+	cp contrib/man/sysget.8 /usr/local/man/man8/sysget.8
+	gzip /usr/local/man/man8/sysget.8
 	cp contrib/sysget.bash-completion /etc/bash_completion.d/sysget
-	
-maninstall:
-	cp contrib/man/sysget.1 /usr/local/man/man8/sysget.1
-	gzip /usr/local/man/man8/sysget.1
+	mandb
 
 uninstall:
 	rm -rf /usr/local/bin/sysget
@@ -29,6 +27,8 @@ uninstall:
 	rm -rf /etc/sysget_config
 	rm -rf /etc/sysget_custom
 	rm -rf /etc/sysget_args
+	rm -rf /usr/local/man/man8/sysget.8.gz
+	mandb
 
 clean:
 	rm -rf *.o src/*.gch

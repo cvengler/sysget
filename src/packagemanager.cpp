@@ -222,6 +222,18 @@ void PackageManager::init(string pm) {
 		clean = "guix gc";
 	}
 
+	else if(pm == "gem") {
+		// RubyGems
+		search = "gem search ^";
+		install = "gem install ";
+		uninstall = "gem uninstall ";
+		autoremove = "exit=RubyGems does not support this";
+		update = "exit=RubyGems does not support this, you may want to upgrade";
+		upgrade = "gem update";
+		upgrade_pkg = "gem update ";
+		clean = "exit=RubyGems does not support this";
+	}
+
 }
 
 void PackageManager::customPM(string filename) {

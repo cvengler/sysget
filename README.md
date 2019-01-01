@@ -24,6 +24,7 @@ The syntax is mostly same with apt-get so it should be easy to use. <br>
 * slapt-get
 * pip3
 * GNU guix
+* Ruby gems
 * Your own package manager (See Add your own package manager)
 
 ### Features
