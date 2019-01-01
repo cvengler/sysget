@@ -18,7 +18,6 @@ install:
 	cp contrib/man/sysget.8 /usr/local/man/man8/sysget.8
 	gzip /usr/local/man/man8/sysget.8
 	cp contrib/sysget.bash-completion /etc/bash_completion.d/sysget
-	mandb
 
 uninstall:
 	rm -rf /usr/local/bin/sysget
@@ -28,7 +27,6 @@ uninstall:
 	rm -rf /etc/sysget_custom
 	rm -rf /etc/sysget_args
 	rm -rf /usr/local/man/man8/sysget.8.gz
-	mandb
 
 clean:
 	rm -rf *.o src/*.gch
