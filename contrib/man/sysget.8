@@ -1,0 +1,34 @@
+.TH sysget 8 "01 Jan 2019" "2.1" "sysget man page"
+.SH NAME
+sysget \- A front-end for every package manager
+.SH SYNOPSIS
+sysget [OPTION] [PACKAGE]
+
+sysget search [QUERY]
+
+sysget install [PACKAGE]
+
+sysget remove [PACKAGE] \- Removes a package
+
+sysget autoremove \- Removes unnecessary
+
+sysget update \- Update the database
+
+sysget upgrade (PACKAGES) \- Upgrades system or set of packages
+
+sysget clean \- Cleans the cache
+
+sysget set [Package manager] \- Select a package manager
+
+sysget help \- Shows a help page
+
+sysget about \- View package/license information
+.SH DESCRIPTION
+Sysget is a front-end for every package manager. You can use common arguments and sysget will interpret those arguments for your package manager. This means, you could run the same command to install a package with sysget on multiple systems and it would run just fine.
+
+.SH USAGE
+Sysget was made for the command line, it does not work as a GUI application. If you would like to make a application using sysget as a backend, feel free to do so, just follow the license procedure.
+.SH BUGS
+Report bugs here at https://github.com/emilengler/sysget/issues. You will need a github account to do so. If you do not, please email me@emilengler.com
+.SH AUTHOR
+Emil Engler (me@emilengler.com)

@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Emil Engler et al.
+// Copyright (c) 2018-2019 Emil Engler et al.
 // Distributed under the GNU GENERAL PUBLIC LICENSE Version 3, see the accompanying
 // file LICENSE.txt or <https://www.gnu.org/licenses/gpl-3.0.html>.
 #include "utils.hpp"
@@ -9,7 +9,7 @@ bool file_exists(const char *filename) {
 }
 
 vector<string> GetPackageManagerList() {
-	vector<string> PackageManagerList = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3", "guix" };
+	vector<string> PackageManagerList = { "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3", "guix", "gem" };
 	return PackageManagerList;
 }
 

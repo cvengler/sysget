@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Emil Engler et al.
+// Copyright (c) 2018-2019 Emil Engler et al.
 // Distributed under the GNU GENERAL PUBLIC LICENSE Version 3, see the accompanying
 // file LICENSE.txt or <https://www.gnu.org/licenses/gpl-3.0.html>.
 #include "packagemanager.hpp"
@@ -220,6 +220,18 @@ void PackageManager::init(string pm) {
 		upgrade = "guix package -u";
 		upgrade_pkg = "guix package -u ";
 		clean = "guix gc";
+	}
+
+	else if(pm == "gem") {
+		// RubyGems
+		search = "gem search ^";
+		install = "gem install ";
+		uninstall = "gem uninstall ";
+		autoremove = "exit=RubyGems does not support this";
+		update = "exit=RubyGems does not support this, you may want to upgrade";
+		upgrade = "gem update";
+		upgrade_pkg = "gem update ";
+		clean = "exit=RubyGems does not support this";
 	}
 
 }
