@@ -1,5 +1,5 @@
 FLAGS=-std=c++11
-INSTALLDEST=/usr/local/bin/
+INSTALLDEST=/usr/local/bin/sysget
 
 prog: main.o packagemanager.o utils.o
 	g++ $(FLAGS) -o sysget main.o packagemanager.o utils.o
@@ -15,7 +15,6 @@ utils.o: src/utils.hpp src/utils.cpp
 
 install:
 	cp sysget $(INSTALLDEST)
-	cp sysget /usr/local/bin/sysget
 	mkdir -p /usr/local/man/man8
 	cp contrib/man/sysget.8 /usr/local/man/man8/sysget.8
 	gzip /usr/local/man/man8/sysget.8
