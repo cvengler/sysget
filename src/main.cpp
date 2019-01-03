@@ -101,7 +101,14 @@ int main(int argc, char* argv[]) {
 		string input;
 		cin >> input;
 		// Convert the input to an int to see if it is valid
-		int InputInt = stoi(input);
+		int InputInt;
+		try {
+			InputInt = stoi(input);
+		}
+		catch(exception ex) {
+			cout << "You need to enter a number" << endl;
+			exit(1);
+		}
 
 		// Create config files
 
