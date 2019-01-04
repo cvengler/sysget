@@ -114,7 +114,7 @@ int main(int argc, char* argv[]) {
 
 		// Finally check if the input is valid
 		if(InputInt > PackageManagerList.size() || InputInt <= 0) {
-			cout << "Invalid input" << endl;
+			cout << "Input is out of range" << endl;
 			exit(1);
 		}
 
