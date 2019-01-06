@@ -38,6 +38,8 @@ The syntax is mostly same with apt-get so it should be easy to use. <br>
 * upgrade single package
 
 ### How to install
+Please take a look at the docs/ folder.<br>
+In a nutshell:<br>
 ```make && sudo make install```<br>
 No dependencies needed
 
