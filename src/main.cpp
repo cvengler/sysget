@@ -14,9 +14,18 @@
 #endif
 
 // Default path for config files
-char ConfigPath[255] = "/etc/sysget";	// Needs to be NOT const so it can be changed if an enviroment variable set
-char CustomPath[255] = "/etc/sysget_custom";
-char ArgsPath[255] = "/etc/sysget_args";
+char ConfigPath[255];	// Needs to be NOT const so it can be changed if an enviroment variable set
+char CustomPath[255];
+char ArgsPath[255];
+
+void setPath() {
+	#ifdef __unix__
+		strcpy(ConfigPath, "/etc/sysget");
+		strcpy(CustomPath, "/etc/sysget_custom");
+		strcpy(ArgsPath, "/etc/sysget_args");
+	#endif
+}
+
 const char *HelpMsg =
 	"Help of sysget\n"
 	"sysget [OPTION] [PACKAGE(S)]\n"
@@ -67,6 +76,7 @@ vector<string> AboutCmds = {"about", "--about"};
 using namespace std;
 
 int main(int argc, char* argv[]) {
+	setPath();
 	vector<string> PackageManagerList = GetPackageManagerList();
 
 	// Get the path if the user has changed it with an enviroment variable
