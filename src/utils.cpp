@@ -3,8 +3,8 @@
 // file LICENSE.txt or <https://www.gnu.org/licenses/gpl-3.0.html>.
 #include "utils.hpp"
 
-bool file_exists(string filename) {
-	ifstream file(filename.c_str());
+bool file_exists(const char *filename) {
+	ifstream file(filename);
 	return (bool)file;
 }
 
