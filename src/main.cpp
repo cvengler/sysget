@@ -14,17 +14,9 @@
 #endif
 
 // Default path for config files
-char ConfigPath[255];	// Needs to be NOT const so it can be changed if an enviroment variable set
-char CustomPath[255];
-char ArgsPath[255];
-
-void setPath() {
-	#ifdef __unix__
-		strcpy(ConfigPath, "/etc/sysget");
-		strcpy(CustomPath, "/etc/sysget_custom");
-		strcpy(ArgsPath, "/etc/sysget_args");
-	#endif
-}
+string ConfigPath = "/etc/sysget";
+string CustomPath = "/etc/sysget_custom";
+string ArgsPath = "/etc/sysget_args";
 
 const char *HelpMsg =
 	"Help of sysget\n"
@@ -76,7 +68,6 @@ vector<string> AboutCmds = {"about", "--about"};
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	setPath();
 	vector<string> PackageManagerList = GetPackageManagerList();
 
 	// Get the path if the user has changed it with an enviroment variable
@@ -86,19 +77,19 @@ int main(int argc, char* argv[]) {
 
 	// Check if the enviroment variables aren't empty
 	if(EnvConfigPath != NULL) {
-		strcpy(ConfigPath, EnvConfigPath);
+		ConfigPath = string(EnvConfigPath);
 	}
 
 	if(EnvCustomPath != NULL) {
-		strcpy(CustomPath, EnvCustomPath);
+		CustomPath = string(EnvCustomPath);
 	}
 
 	if(EnvArgsPath != NULL) {
-		strcpy(ArgsPath, EnvCustomPath);
+		ArgsPath = string(EnvArgsPath);
 	}
 	
 	// Create a config file if the config file does not exists
-	if(!file_exists(ConfigPath)) {
+	if(!file_exists(ConfigPath.c_str())) {
 		cout << "Please choose a package manager: " << endl;
 
 		for(int i = 0; i < PackageManagerList.size(); i++) {
@@ -143,7 +134,7 @@ int main(int argc, char* argv[]) {
 
 	if(pm_config == "ERROR") {
 		cout << "Your config is broken please restart the program to create a new one" << endl;
-		if(remove(ConfigPath) != 0) {
+		if(remove(ConfigPath.c_str()) != 0) {
 			cout << "Error while deleting broken config file, are you root?" << endl;
 		}
 		exit(1);
@@ -153,7 +144,7 @@ int main(int argc, char* argv[]) {
 	string execcmd;	// Will be appended with packages
 
 	// If the user declares his own package manager
-	if(file_exists(CustomPath)) {
+	if(file_exists(CustomPath.c_str())) {
 		pm.customPM(CustomPath);
 	}
 
@@ -163,7 +154,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	// If the user declares his own input commands
-	if(file_exists(ArgsPath)) {
+	if(file_exists(ArgsPath.c_str())) {
 		vector<string> c_args;	// If the user changes the layout of sysget
 		c_args = CustomArgs(ArgsPath);
 		SearchCmds.push_back(c_args[0]);
@@ -273,7 +264,7 @@ int main(int argc, char* argv[]) {
 			exit(1);
 		}
 
-		if(remove(ConfigPath) != 0) {
+		if(remove(ConfigPath.c_str()) != 0) {
 			cout << "Error while deleting config file, are you root ?" << endl;
 			exit(1);
 		}

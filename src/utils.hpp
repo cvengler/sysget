@@ -11,7 +11,7 @@
 
 using namespace std;
 
-bool file_exists(const char *filename);
+bool file_exists(string filename);
 vector<string> GetPackageManagerList();
 string GetPackageManager(string filename);
 void CreateConf(string filename, string packagemanager);
