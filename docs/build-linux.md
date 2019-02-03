@@ -15,4 +15,5 @@ If you want to build a specifc release do:<br>
 make
 sudo make install
 ```
-That's it. Compiling takes around 2-5 seconds.
+That's it. Compiling takes around 2-5 seconds.<br>
+If you are having issues, please open up an issue
