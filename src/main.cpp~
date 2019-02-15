@@ -119,13 +119,10 @@ int main(int argc, char* argv[]) {
 			exit(1);
 		}
 
-		/*
-		Seems to be outdated nowadays
 		// Flatpak notice
 		if(InputInt == 15) {
 			cout << "\e[1;33m" << "NOTICE: " << "\e[0m" << "You need to provide a flatpak repository or a '.flatpakref' while installing flatpaks over sysget" << endl;
 		}
-		*/
 
 		// We need to reduce the input by 1 because arrays start at 0
 		CreateConf(ConfigPath, PackageManagerList[InputInt -1] + "\n");
