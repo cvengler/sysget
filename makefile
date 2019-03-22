@@ -1,17 +1,18 @@
 FLAGS=-std=c++11
 INSTALLDEST=/usr/local/bin/sysget
+CCP=g++
 
 prog: main.o packagemanager.o utils.o
-	g++ $(FLAGS) -o sysget main.o packagemanager.o utils.o
+	$(CCP) $(FLAGS) -o sysget main.o packagemanager.o utils.o
 
 main.o: src/main.cpp
-	g++ $(FLAGS) -c src/main.cpp
+	$(CCP) $(FLAGS) -c src/main.cpp
 
 packagemanager.o: src/packagemanager.hpp src/packagemanager.cpp
-	g++ $(FLAGS) -c src/packagemanager.hpp src/packagemanager.cpp
+	$(CCP) $(FLAGS) -c src/packagemanager.hpp src/packagemanager.cpp
 
 utils.o: src/utils.hpp src/utils.cpp
-	g++ $(FLAGS) -c src/utils.hpp src/utils.cpp
+	$(CCP) $(FLAGS) -c src/utils.hpp src/utils.cpp
 
 install:
 	cp sysget $(INSTALLDEST)
