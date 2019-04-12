@@ -234,6 +234,18 @@ void PackageManager::init(string pm) {
 		clean = "exit=RubyGems does not support this";
 	}
 
+	else if(pm == "port") {
+		// MacPorts
+		search = "port search ";
+		install = "port install ";
+		uninstall = "port uninstall ";
+		autoremove = "port reclaim";
+		update = "port sync";
+		upgrade = "port upgrade outdated";
+		upgrade_pkg = "port upgrade ";
+		clean = "exit=MacPorts only supports this per-package";
+	}
+
 }
 
 void PackageManager::customPM(string filename) {
