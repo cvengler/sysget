@@ -46,7 +46,6 @@ void CreateConf(string filename, string packagemanager) {
 	ofstream file(filename);
 	if(file.is_open()) {
 		file << packagemanager;
-		file.close();
 	}
 
 	else {
@@ -78,13 +77,11 @@ vector<string> CustomArgs(string path) {
 		}
 
 		if(number_of_lines != 10) {
-			file.close();
 			cerr << "Invalid sysget_args file" << endl;
 			exit(1);
 		}
 
 		else {
-			file.close();
 			return args;
 		}
 
@@ -93,7 +90,6 @@ vector<string> CustomArgs(string path) {
 }
 
 // Check if an item exists in a vector
-// Could be useful in future
 bool VectorContains(string s, vector<string> v) {
 	return std::find(v.begin(), v.end(), s) != v.end();
 }

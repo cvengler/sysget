@@ -280,6 +280,5 @@ void PackageManager::customPM(string filename) {
 			upgrade_pkg = commands[6];
 			clean = commands[7];
 		}
-		file.close();
 	}
 }
