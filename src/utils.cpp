@@ -42,6 +42,7 @@ string GetPackageManager(string filename) {
 }
 
 void CreateConf(string filename, string packagemanager) {
+	system("mkdir -p /etc/sysget");
 	ofstream file(filename);
 	if(file.is_open()) {
 		file << packagemanager;
@@ -59,7 +60,7 @@ void checkcmd(string cmd) {
 	size_t errorfind = cmd.find("exit=");
 	if(errorfind != string::npos) {
 		string errormsg = cmd.substr(5);
-		cout << errormsg << endl;
+		cerr << errormsg << endl;
 		exit(1);
 	}
 }
@@ -78,7 +79,7 @@ vector<string> CustomArgs(string path) {
 
 		if(number_of_lines != 10) {
 			file.close();
-			cout << "Invalid sysget_args file" << endl;
+			cerr << "Invalid sysget_args file" << endl;
 			exit(1);
 		}
 
@@ -94,18 +95,5 @@ vector<string> CustomArgs(string path) {
 // Check if an item exists in a vector
 // Could be useful in future
 bool VectorContains(string s, vector<string> v) {
-	if(std::find(v.begin(), v.end(), s) != v.end()) {
-		return true;
-	}
-
-	else {
-		return false;
-	}
-
-	// If the vector is empty
-	if(v.empty()) {
-		return false;
-	}
-
-	return false;
+	return std::find(v.begin(), v.end(), s) != v.end();
 }

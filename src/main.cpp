@@ -14,9 +14,9 @@
 #endif
 
 // Default path for config files
-string ConfigPath = "/etc/sysget";
-string CustomPath = "/etc/sysget_custom";
-string ArgsPath = "/etc/sysget_args";
+string ConfigPath = "/etc/sysget/sysget";
+string CustomPath = "/etc/sysget/custom";
+string ArgsPath = "/etc/sysget/args";
 
 const char *HelpMsg =
 	"Help of sysget\n"
@@ -92,7 +92,7 @@ int main(int argc, char* argv[]) {
 	if(!file_exists(ConfigPath.c_str())) {
 		cout << "Please choose a package manager: " << endl;
 
-		for(int i = 0; i < PackageManagerList.size(); i++) {
+		for(unsigned int i = 0; i < PackageManagerList.size(); i++) {
 			cout << (i+1) << ". " << PackageManagerList[i] << endl;
 		}
 
@@ -102,12 +102,12 @@ int main(int argc, char* argv[]) {
 		string input;
 		cin >> input;
 		// Convert the input to an int to see if it is valid
-		int InputInt;
+		unsigned int InputInt;
 		try {
 			InputInt = stoi(input);
 		}
 		catch(exception ex) {
-			cout << "You need to enter a number" << endl;
+			cerr << "You need to enter a number" << endl;
 			exit(1);
 		}
 
@@ -115,7 +115,7 @@ int main(int argc, char* argv[]) {
 
 		// Finally check if the input is valid
 		if(InputInt > PackageManagerList.size() || InputInt <= 0) {
-			cout << "Input is out of range" << endl;
+			cerr << "Input is out of range" << endl;
 			exit(1);
 		}
 
@@ -136,9 +136,9 @@ int main(int argc, char* argv[]) {
 	string pm_config = GetPackageManager(ConfigPath);
 
 	if(pm_config == "ERROR") {
-		cout << "Your config is broken please restart the program to create a new one" << endl;
+		cerr << "Your config is broken please restart the program to create a new one" << endl;
 		if(remove(ConfigPath.c_str()) != 0) {
-			cout << "Error while deleting broken config file, are you root?" << endl;
+			cerr << "Error while deleting broken config file, are you root?" << endl;
 		}
 		exit(1);
 	}
@@ -175,7 +175,7 @@ int main(int argc, char* argv[]) {
 	// Now parse the console arguments
 	// If the user enters no operation
 	if(argc < 2) {
-		cout << "Error you need an operation." << endl << "Try sysget help" << endl;
+		cerr << "Error you need an operation." << endl << "Try sysget help" << endl;
 		exit(1);
 	}
 
@@ -185,7 +185,7 @@ int main(int argc, char* argv[]) {
 	if(VectorContains(cmd, SearchCmds)) {
 		// If the user enters no search query
 		if(argc < 3) {
-			cout << "Error, no search query provided" << endl;
+			cerr << "Error, no search query provided" << endl;
 			exit(1);
 		}
 		checkcmd(pm.search);
@@ -195,7 +195,7 @@ int main(int argc, char* argv[]) {
 	else if(VectorContains(cmd, InstallCmds)) {
 		// If the user enters no package to install
 		if(argc < 3) {
-			cout << "Error, no package for the installation provided" << endl;
+			cerr << "Error, no package for the installation provided" << endl;
 			exit(1);
 		}
 
@@ -210,7 +210,7 @@ int main(int argc, char* argv[]) {
 	else if(VectorContains(cmd, RemoveCmds)) {
 		// If the user enters no package to remove
 		if(argc < 3) {
-			cout << "Error, no package for the removal provided" << endl;
+			cerr << "Error, no package for the removal provided" << endl;
 			exit(1);
 		}
 
@@ -263,12 +263,12 @@ int main(int argc, char* argv[]) {
 	// Set will change the package manager
 	else if(VectorContains(cmd, SetCmds)) {
 		if(argc < 3) {
-			cout << "Error, no new package manager provided" << endl;
+			cerr << "Error, no new package manager provided" << endl;
 			exit(1);
 		}
 
 		if(remove(ConfigPath.c_str()) != 0) {
-			cout << "Error while deleting config file, are you root ?" << endl;
+			cerr << "Error while deleting config file, are you root ?" << endl;
 			exit(1);
 		}
 
@@ -289,7 +289,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	else {
-		cout << "Unknown operation '" << cmd << "'. Try sysget help" << endl;
+		cerr << "Unknown operation '" << cmd << "'. Try sysget help" << endl;
 		exit(1);
 	}
 }

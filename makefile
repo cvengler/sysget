@@ -1,4 +1,4 @@
-FLAGS=-std=c++11
+FLAGS=-std=c++11 -Wall -Wextra -Wpedantic
 INSTALLDEST=/usr/local/bin/sysget
 CCP=g++
 
@@ -23,11 +23,8 @@ install:
 
 uninstall:
 	rm -rf /usr/local/bin/sysget
-	rm -rf /etc/sysget
+	rm -rf /etc/sysget/
 	rm -rf /etc/bash_completion.d/sysget
-	rm -rf /etc/sysget_config
-	rm -rf /etc/sysget_custom
-	rm -rf /etc/sysget_args
 	rm -rf /usr/local/man/man8/sysget.8.gz
 
 clean:

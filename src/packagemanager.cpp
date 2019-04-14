@@ -260,14 +260,14 @@ void PackageManager::customPM(string filename) {
 		}
 
 		if(number_of_lines != 8) {
-			search = "exit=Invalid sysget_custom file";
-			install = "exit=Invalid sysget_custom file";
-			uninstall = "exit=Invalid sysget_custom file";
-			autoremove = "exit=Invalid sysget_custom file";
-			update = "exit=Invalid sysget_custom file";
-			upgrade = "exit=Invalid sysget_custom file";
-			upgrade_pkg = "exit=Invalid sysget_custom file";
-			clean = "exit=Invalid sysget_custom file";
+			search = "exit=Invalid custom file";
+			install = "exit=Invalid custom file";
+			uninstall = "exit=Invalid custom file";
+			autoremove = "exit=Invalid custom file";
+			update = "exit=Invalid custom file";
+			upgrade = "exit=Invalid custom file";
+			upgrade_pkg = "exit=Invalid custom file";
+			clean = "exit=Invalid custom file";
 		}
 		
 		else {

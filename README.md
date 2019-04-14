@@ -84,8 +84,8 @@ sysget clean
 | SYSGET_CUSTOM_PATH   | Ability to change the path of the file for a custom package manager |
 | SYSGET_ARGS_PATH     | Ability to change the path of the for custom arguments              |
 ### Configuration files
-The file where the package manager is stored is located at `/etc/sysget`<br>
-The *optional* file where a custom package manager is stored at `/etc/sysget_custom`<br>
+The file where the package manager is stored is located at `/etc/sysget/sysget`<br>
+The *optional* file where a custom package manager is stored at `/etc/sysget/custom`<br>
 ### Add your own package manager
 sysget also has the ability that you can add your own paackage manager.<br>
 Simply create the file /etc/sysget_custom and then write **8** lines into it.<br>
@@ -93,7 +93,7 @@ One line for one command.<br>
 The order is: search, install, remove, autoremove, update, upgrade, upgrade_pkg, clean
 ### Change the sysget syntax
 Similar to adding your own package manager you can also modify the syntax of sysget. For example you can give sysget the pacman syntax<br>
-Simply create the file `/etc/sysget_args` and add 10 lines to it.
+Simply create the file `/etc/sysget/args` and add 10 lines to it.
 The order is: search, install, remove, autoremove, update, upgrade, clean, set, help, about<br>
 However there are some rules:<br>
 * The file needs to have 10 lines
