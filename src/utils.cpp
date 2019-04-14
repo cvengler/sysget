@@ -90,7 +90,6 @@ vector<string> CustomArgs(string path) {
 }
 
 // Check if an item exists in a vector
-// Could be useful in future
 bool VectorContains(string s, vector<string> v) {
 	return std::find(v.begin(), v.end(), s) != v.end();
 }
