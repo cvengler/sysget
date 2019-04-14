@@ -104,7 +104,7 @@ int main(int argc, char* argv[]) {
 		try {
 			InputInt = stoi(input);
 		}
-		catch(exception ex) {
+		catch(exception&) {
 			cerr << "You need to enter a number" << endl;
 			exit(1);
 		}
