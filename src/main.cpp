@@ -65,8 +65,6 @@ vector<string> SetCmds = {"set", "--set"};
 vector<string> HelpCmds = {"help", "--help"};
 vector<string> AboutCmds = {"about", "--about"};
 
-using namespace std;
-
 int main(int argc, char* argv[]) {
 	vector<string> PackageManagerList = GetPackageManagerList();
 
