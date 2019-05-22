@@ -15,6 +15,7 @@ The syntax is mostly same with apt-get so it should be easy to use.<br>
 * pacman
 * emerge
 * pkg
+* pkg_mgr
 * chromebrew
 * homebrew
 * nix

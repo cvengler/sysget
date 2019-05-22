@@ -113,6 +113,17 @@ void PackageManager::init(string pm) {
 		upgrade_pkg = "pkg -f install ";
 		clean = "pkg clean";
 	}
+	else if(pm == "pkg_mgr") {
+		// pkg_mgr (OpenBSD)
+		search = "";
+		install = "pkg_add ";
+		uninstall = "pkg_delete ";
+		autoremove = "pkg_delete -a";
+		update = "exit=pkg_mgr does not support this, you may want to upgrade ?";
+		upgrade = "pkg_add -u";
+		upgrade_pkg = "pkg_add -u ";
+		clean = "pkg_delete -a";
+	}
 
 	else if(pm == "chromebrew") {
 		// chromebrew
