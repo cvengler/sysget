@@ -5,8 +5,20 @@
 
 // This is the constructor
 void PackageManager::init(string pm) {
+
+	if(pm == "apt") {
+		// apt
+		search = "apt search ";
+		install = "apt install ";
+		uninstall = "apt remove ";
+		autoremove = "apt autoremove";
+		update = "apt update";
+		upgrade = "apt upgrade";
+		upgrade_pkg = "apt upgrade ";
+		clean = "apt autoclean && apt clean";
+	}
 	
-	if(pm == "apt-get") {
+	else if(pm == "apt-get") {
 		// apt-get
 		search = "apt-cache search ";
 		install = "apt-get install ";
