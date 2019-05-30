@@ -10,8 +10,8 @@ void PackageManager::init(string pm) {
 		// apt
 		search = "apt search ";
 		install = "apt install ";
-		uninstall = "apt remove ";
-		autoremove = "apt autoremove";
+		uninstall = "apt purge ";
+		autoremove = "apt purge --autoremove";
 		update = "apt update";
 		upgrade = "apt upgrade";
 		upgrade_pkg = "apt upgrade ";
@@ -22,8 +22,8 @@ void PackageManager::init(string pm) {
 		// apt-get
 		search = "apt-cache search ";
 		install = "apt-get install ";
-		uninstall = "apt-get remove ";
-		autoremove = "apt-get autoremove";
+		uninstall = "apt-get purge ";
+		autoremove = "apt-get purge --autoremove";
 		update = "apt-get update";
 		upgrade = "apt-get upgrade";
 		upgrade_pkg = "apt-get upgrade ";
