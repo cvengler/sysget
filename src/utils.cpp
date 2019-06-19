@@ -4,21 +4,21 @@
 #include "utils.hpp"
 
 bool file_exists(const char *filename) {
-	ifstream file(filename);
+	std::ifstream file(filename);
 	return (bool)file;
 }
 
-vector<string> GetPackageManagerList() {
-	vector<string> PackageManagerList = { "apt", "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "pkg_mgr", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3", "guix", "gem", "port" };
+std::vector<std::string> GetPackageManagerList() {
+	std::vector<std::string> PackageManagerList = { "apt", "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "pkg_mgr", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3", "guix", "gem", "port" };
 	return PackageManagerList;
 }
 
-string GetPackageManager(string filename) {
-	string line;
-	string packagemanager;
-	ifstream file(filename);
+std::string GetPackageManager(std::string filename) {
+	std::string line;
+	std::string packagemanager;
+	std::ifstream file(filename);
 
-	vector<string> PackageManagerList = GetPackageManagerList();
+	std::vector<std::string> PackageManagerList = GetPackageManagerList();
 
 	if(file.is_open()) {
 		while(getline(file, line)) {
@@ -34,41 +34,41 @@ string GetPackageManager(string filename) {
 	}
 
 	else {
-		cout << "Unable to open config file" << endl;
+		std::cout << "Unable to open config file" << std::endl;
 		exit(1);
 	}
 	// clang on macOS will return a warning if a non-void function has no return
 	return "ERROR";
 }
 
-void CreateConf(string filename, string packagemanager) {
+void CreateConf(std::string filename, std::string packagemanager) {
 	system("mkdir -p /etc/sysget");
-	ofstream file(filename);
+	std::ofstream file(filename);
 	if(file.is_open()) {
 		file << packagemanager;
 	}
 
 	else {
-		cout << "Unable to assign package manager, are you root ?" << endl;
+		std::cout << "Unable to assign package manager, are you root ?" << std::endl;
 		exit(1);
 	}
 }
 
 // Check will check if the string contains an exit message
-void checkcmd(string cmd) {
+void checkcmd(std::string cmd) {
 	size_t errorfind = cmd.find("exit=");
-	if(errorfind != string::npos) {
-		string errormsg = cmd.substr(5);
-		cerr << errormsg << endl;
+	if(errorfind != std::string::npos) {
+		std::string errormsg = cmd.substr(5);
+		std::cerr << errormsg << std::endl;
 		exit(1);
 	}
 }
 
 // Allows user to change the syntax of sysget
-vector<string> CustomArgs(string path) {
-	ifstream file(path);
-	string line;
-	vector<string> args;
+std::vector<std::string> CustomArgs(std::string path) {
+	std::ifstream file(path);
+	std::string line;
+	std::vector<std::string> args;
 	int number_of_lines = 0;
 	if(file.is_open()) {
 		while(getline(file, line)) {
@@ -77,7 +77,7 @@ vector<string> CustomArgs(string path) {
 		}
 
 		if(number_of_lines != 10) {
-			cerr << "Invalid sysget_args file" << endl;
+			std::cerr << "Invalid sysget_args file" << std::endl;
 			exit(1);
 		}
 
@@ -90,6 +90,6 @@ vector<string> CustomArgs(string path) {
 }
 
 // Check if an item exists in a vector
-bool VectorContains(string s, vector<string> v) {
+bool VectorContains(std::string s, std::vector<std::string> v) {
 	return std::find(v.begin(), v.end(), s) != v.end();
 }

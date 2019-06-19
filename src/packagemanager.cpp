@@ -4,7 +4,7 @@
 #include "packagemanager.hpp"
 
 // This is the constructor
-void PackageManager::init(string pm) {
+void PackageManager::init(std::string pm) {
 
 	if(pm == "apt") {
 		// apt
@@ -271,10 +271,10 @@ void PackageManager::init(string pm) {
 
 }
 
-void PackageManager::customPM(string filename) {
-	ifstream file(filename);
-	string line;
-	vector<string> commands;
+void PackageManager::customPM(std::string filename) {
+	std::ifstream file(filename);
+	std::string line;
+	std::vector<std::string> commands;
 	int number_of_lines = 0;
 	if(file.is_open()) {
 		while(getline(file ,line)) {

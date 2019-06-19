@@ -14,9 +14,9 @@
 #endif
 
 // Default path for config files
-string ConfigPath = "/etc/sysget/sysget";
-string CustomPath = "/etc/sysget/custom";
-string ArgsPath = "/etc/sysget/args";
+std::string ConfigPath = "/etc/sysget/sysget";
+std::string CustomPath = "/etc/sysget/custom";
+std::string ArgsPath = "/etc/sysget/args";
 
 const char *HelpMsg =
 	"Help of sysget\n"
@@ -54,19 +54,19 @@ const char *AboutMsg =
 
 
 // Default syntax operations
-vector<string> SearchCmds = {"search", "--search"};
-vector<string> InstallCmds = {"install", "--install"};
-vector<string> RemoveCmds = {"remove", "--remove"};
-vector<string> AutoremoveCmds = {"autoremove", "--autoremove"};
-vector<string> UpdateCmds = {"update", "--update"};
-vector<string> UpgradeCmds = {"upgrade", "--upgrade"};
-vector<string> CleanCmds = {"clean", "--clean"};
-vector<string> SetCmds = {"set", "--set"};
-vector<string> HelpCmds = {"help", "--help"};
-vector<string> AboutCmds = {"about", "--about"};
+std::vector<std::string> SearchCmds = {"search", "--search"};
+std::vector<std::string> InstallCmds = {"install", "--install"};
+std::vector<std::string> RemoveCmds = {"remove", "--remove"};
+std::vector<std::string> AutoremoveCmds = {"autoremove", "--autoremove"};
+std::vector<std::string> UpdateCmds = {"update", "--update"};
+std::vector<std::string> UpgradeCmds = {"upgrade", "--upgrade"};
+std::vector<std::string> CleanCmds = {"clean", "--clean"};
+std::vector<std::string> SetCmds = {"set", "--set"};
+std::vector<std::string> HelpCmds = {"help", "--help"};
+std::vector<std::string> AboutCmds = {"about", "--about"};
 
 int main(int argc, char* argv[]) {
-	vector<string> PackageManagerList = GetPackageManagerList();
+	std::vector<std::string> PackageManagerList = GetPackageManagerList();
 
 	// Get the path if the user has changed it with an enviroment variable
 	char* EnvConfigPath = getenv("SYSGET_CONFIG_PATH");
@@ -75,37 +75,37 @@ int main(int argc, char* argv[]) {
 
 	// Check if the enviroment variables aren't empty
 	if(EnvConfigPath != NULL) {
-		ConfigPath = string(EnvConfigPath);
+		ConfigPath = std::string(EnvConfigPath);
 	}
 
 	if(EnvCustomPath != NULL) {
-		CustomPath = string(EnvCustomPath);
+		CustomPath = std::string(EnvCustomPath);
 	}
 
 	if(EnvArgsPath != NULL) {
-		ArgsPath = string(EnvArgsPath);
+		ArgsPath = std::string(EnvArgsPath);
 	}
 	
 	// Create a config file if the config file does not exists
 	if(!file_exists(ConfigPath.c_str())) {
-		cout << "Please choose a package manager: " << endl;
+		std::cout << "Please choose a package manager: " << std::endl;
 
 		for(unsigned int i = 0; i < PackageManagerList.size(); i++) {
-			cout << (i+1) << ". " << PackageManagerList[i] << endl;
+			std::cout << (i+1) << ". " << PackageManagerList[i] << std::endl;
 		}
 
-		cout << endl;
+		std::cout << std::endl;
 
 		// Now lets listen for the input
-		string input;
-		cin >> input;
+		std::string input;
+		std::cin >> input;
 		// Convert the input to an int to see if it is valid
 		unsigned int InputInt;
 		try {
 			InputInt = stoi(input);
 		}
-		catch(exception&) {
-			cerr << "You need to enter a number" << endl;
+		catch(std::exception&) {
+			std::cerr << "You need to enter a number" << std::endl;
 			exit(1);
 		}
 
@@ -113,7 +113,7 @@ int main(int argc, char* argv[]) {
 
 		// Finally check if the input is valid
 		if(InputInt > PackageManagerList.size() || InputInt <= 0) {
-			cerr << "Input is out of range" << endl;
+			std::cerr << "Input is out of range" << std::endl;
 			exit(1);
 		}
 
@@ -123,18 +123,18 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Get the name of the package manager from the config file
-	string pm_config = GetPackageManager(ConfigPath);
+	std::string pm_config = GetPackageManager(ConfigPath);
 
 	if(pm_config == "ERROR") {
-		cerr << "Your config is broken please restart the program to create a new one" << endl;
+		std::cerr << "Your config is broken please restart the program to create a new one" << std::endl;
 		if(remove(ConfigPath.c_str()) != 0) {
-			cerr << "Error while deleting broken config file, are you root?" << endl;
+			std::cerr << "Error while deleting broken config file, are you root?" << std::endl;
 		}
 		exit(1);
 	}
 
 	PackageManager pm;
-	string execcmd;	// Will be appended with packages
+	std::string execcmd;	// Will be appended with packages
 
 	// If the user declares his own package manager
 	if(file_exists(CustomPath.c_str())) {
@@ -148,7 +148,7 @@ int main(int argc, char* argv[]) {
 
 	// If the user declares his own input commands
 	if(file_exists(ArgsPath.c_str())) {
-		vector<string> c_args;	// If the user changes the layout of sysget
+		std::vector<std::string> c_args;	// If the user changes the layout of sysget
 		c_args = CustomArgs(ArgsPath);
 		SearchCmds.push_back(c_args[0]);
 		InstallCmds.push_back(c_args[1]);
@@ -165,27 +165,27 @@ int main(int argc, char* argv[]) {
 	// Now parse the console arguments
 	// If the user enters no operation
 	if(argc < 2) {
-		cerr << "Error you need an operation." << endl << "Try sysget help" << endl;
+		std::cerr << "Error you need an operation." << std::endl << "Try sysget help" << std::endl;
 		exit(1);
 	}
 
 	// Lets set argv[1] to cmd for a more handy usage
-	string cmd = argv[1];
+	std::string cmd = argv[1];
 
 	if(VectorContains(cmd, SearchCmds)) {
 		// If the user enters no search query
 		if(argc < 3) {
-			cerr << "Error, no search query provided" << endl;
+			std::cerr << "Error, no search query provided" << std::endl;
 			exit(1);
 		}
 		checkcmd(pm.search);
-		system(string(pm.search + argv[2]).c_str());
+		system(std::string(pm.search + argv[2]).c_str());
 	}
 
 	else if(VectorContains(cmd, InstallCmds)) {
 		// If the user enters no package to install
 		if(argc < 3) {
-			cerr << "Error, no package for the installation provided" << endl;
+			std::cerr << "Error, no package for the installation provided" << std::endl;
 			exit(1);
 		}
 
@@ -194,13 +194,13 @@ int main(int argc, char* argv[]) {
 			execcmd = execcmd + argv[i] + " ";
 		}
 
-		system(string(pm.install + execcmd).c_str());
+		system(std::string(pm.install + execcmd).c_str());
 	}
 
 	else if(VectorContains(cmd, RemoveCmds)) {
 		// If the user enters no package to remove
 		if(argc < 3) {
-			cerr << "Error, no package for the removal provided" << endl;
+			std::cerr << "Error, no package for the removal provided" << std::endl;
 			exit(1);
 		}
 
@@ -209,7 +209,7 @@ int main(int argc, char* argv[]) {
 			execcmd = execcmd + argv[i] + " ";
 		}
 
-		system(string(pm.uninstall + execcmd).c_str());
+		system(std::string(pm.uninstall + execcmd).c_str());
 	}
 
 	// FYI: checkcmd will check if your package manager supports this feature
@@ -240,7 +240,7 @@ int main(int argc, char* argv[]) {
 				execcmd = execcmd + argv[i] + " ";
 			}
 
-			system(string(pm.upgrade_pkg + execcmd).c_str());
+			system(std::string(pm.upgrade_pkg + execcmd).c_str());
 		}
 	}
 
@@ -253,33 +253,33 @@ int main(int argc, char* argv[]) {
 	// Set will change the package manager
 	else if(VectorContains(cmd, SetCmds)) {
 		if(argc < 3) {
-			cerr << "Error, no new package manager provided" << endl;
+			std::cerr << "Error, no new package manager provided" << std::endl;
 			exit(1);
 		}
 
 		if(remove(ConfigPath.c_str()) != 0) {
-			cerr << "Error while deleting config file, are you root ?" << endl;
+			std::cerr << "Error while deleting config file, are you root ?" << std::endl;
 			exit(1);
 		}
 
 		else {
-			CreateConf(ConfigPath, string(argv[2]) + "\n");
-			cout << "Package manager changed to " << argv[2] << endl;
+			CreateConf(ConfigPath, std::string(argv[2]) + "\n");
+			std::cout << "Package manager changed to " << argv[2] << std::endl;
 		}
 	}
 
 	// Help
 	else if(VectorContains(cmd, HelpCmds)) {
-		cout << HelpMsg;
+		std::cout << HelpMsg;
 	}
 
 	// About
 	else if(VectorContains(cmd, AboutCmds)) {
-		cout << AboutMsg;
+		std::cout << AboutMsg;
 	}
 
 	else {
-		cerr << "Unknown operation '" << cmd << "'. Try sysget help" << endl;
+		std::cerr << "Unknown operation '" << cmd << "'. Try sysget help" << std::endl;
 		exit(1);
 	}
 }

@@ -9,13 +9,11 @@
 #include <string>
 #include <algorithm>
 
-using namespace std;
-
 bool file_exists(const char *filename);
-vector<string> GetPackageManagerList();
-string GetPackageManager(string filename);
-void CreateConf(string filename, string packagemanager);
-void checkcmd(string cmd);
-vector<string> CustomArgs(string path);
-bool VectorContains(string s, vector<string> v);
+std::vector<std::string> GetPackageManagerList();
+std::string GetPackageManager(std::string filename);
+void CreateConf(std::string filename, std::string packagemanager);
+void checkcmd(std::string cmd);
+std::vector<std::string> CustomArgs(std::string path);
+bool VectorContains(std::string s, std::vector<std::string> v);
 #endif
