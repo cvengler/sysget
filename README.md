@@ -4,10 +4,9 @@
 ### A front-end for every package manager<br>
 sysget is a bridge that lets you use one syntax to every package manager on every unix-based operating system.<br>
 You probably all know the problem when you are on a new distro and don't know anything about the package manager. With sysget you just need to remember one syntax for every package manager.<br>
-The syntax is mostly same with apt-get so it should be easy to use.<br>
+The syntax is mostly same with apt so it should be easy to use.<br>
 ### Supported package managers:
 * apt
-* apt-get (Legacy)
 * xbps
 * dnf
 * yum

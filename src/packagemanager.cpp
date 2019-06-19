@@ -17,18 +17,6 @@ void PackageManager::init(std::string pm) {
 		upgrade_pkg = "apt upgrade ";
 		clean = "apt autoclean && apt clean";
 	}
-	
-	else if(pm == "apt-get") {
-		// apt-get
-		search = "apt-cache search ";
-		install = "apt-get install ";
-		uninstall = "apt-get purge ";
-		autoremove = "apt-get purge --autoremove";
-		update = "apt-get update";
-		upgrade = "apt-get upgrade";
-		upgrade_pkg = "apt-get upgrade ";
-		clean = "apt-get autoclean && apt-get clean";
-	}
 
 	else if(pm == "xbps") {
 		// xbps

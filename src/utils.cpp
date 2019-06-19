@@ -9,7 +9,7 @@ bool file_exists(const char *filename) {
 }
 
 std::vector<std::string> GetPackageManagerList() {
-	std::vector<std::string> PackageManagerList = { "apt", "apt-get", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "pkg_mgr", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3", "guix", "gem", "port" };
+	std::vector<std::string> PackageManagerList = { "apt", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "pkg_mgr", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3", "guix", "gem", "port" };
 	return PackageManagerList;
 }
 
