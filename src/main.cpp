@@ -18,8 +18,10 @@ std::string ConfigPath = "/etc/sysget/sysget";
 std::string CustomPath = "/etc/sysget/custom";
 std::string ArgsPath = "/etc/sysget/args";
 
+std::string version = "2.2";
+
 const char *HelpMsg =
-	"Help of sysget\n"
+	"Help of sysget" + version + "\n"
 	"sysget [OPTION] [PACKAGE(S)]\n"
 	"\n"
 	"search [QUERY]\t\t\tsearch for a package in the resporitories\n"
@@ -35,7 +37,7 @@ const char *HelpMsg =
 	"about\t\t\t\tview legal informations\n\n";
 
 const char *AboutMsg =
-	"About sysget\n"
+	"About sysget " + version  + "\n"
 	"Copyright (C) 2018-2019 Emil Engler et al.\n"
 	"http://sysget.emilengler.com\n"
 	"\n"
@@ -64,6 +66,7 @@ std::vector<std::string> CleanCmds = {"clean", "--clean"};
 std::vector<std::string> SetCmds = {"set", "--set"};
 std::vector<std::string> HelpCmds = {"help", "--help"};
 std::vector<std::string> AboutCmds = {"about", "--about"};
+std::vector<std::string> VersionCmds = {"version", "--version"};
 
 int main(int argc, char* argv[]) {
 	std::vector<std::string> PackageManagerList = GetPackageManagerList();
@@ -276,6 +279,10 @@ int main(int argc, char* argv[]) {
 	// About
 	else if(VectorContains(cmd, AboutCmds)) {
 		std::cout << AboutMsg;
+	}
+
+	else if(VectorContains(cmd, VersionCmds) {
+		std::cout << version << std::endl;
 	}
 
 	else {
