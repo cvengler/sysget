@@ -20,7 +20,7 @@ std::string ArgsPath = "/etc/sysget/args";
 
 std::string version = "2.2";
 
-const char *HelpMsg =
+std::string HelpMsg =
 	"Help of sysget" + version + "\n"
 	"sysget [OPTION] [PACKAGE(S)]\n"
 	"\n"
@@ -36,7 +36,7 @@ const char *HelpMsg =
 	"help\t\t\t\topen this help page\n"
 	"about\t\t\t\tview legal informations\n\n";
 
-const char *AboutMsg =
+std::string AboutMsg =
 	"About sysget " + version  + "\n"
 	"Copyright (C) 2018-2019 Emil Engler et al.\n"
 	"http://sysget.emilengler.com\n"
@@ -281,7 +281,7 @@ int main(int argc, char* argv[]) {
 		std::cout << AboutMsg;
 	}
 
-	else if(VectorContains(cmd, VersionCmds) {
+	else if(VectorContains(cmd, VersionCmds)) {
 		std::cout << version << std::endl;
 	}
 
