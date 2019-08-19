@@ -9,7 +9,7 @@
 #include "utils.hpp"
 
 // Use secure_getenv when compiling for Linux
-#ifdef __GNUC__
+#ifdef __GNUG__
 	#define getenv secure_getenv
 #endif
 
