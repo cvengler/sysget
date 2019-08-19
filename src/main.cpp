@@ -18,7 +18,7 @@ std::string ConfigPath = "/etc/sysget/sysget";
 std::string CustomPath = "/etc/sysget/custom";
 std::string ArgsPath = "/etc/sysget/args";
 
-std::string version = "2.2";
+std::string version = "2.3";
 
 std::string HelpMsg =
 	"Help of sysget" + version + "\n"
