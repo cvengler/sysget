@@ -101,3 +101,4 @@ However there are some rules:<br>
 * The same item twice is forbidden
 ###### Credits
 [TermGet](https://github.com/termget/termget)
+[cJSON](https://github.com/DaveGamble/cJSON)

@@ -52,7 +52,10 @@ std::string AboutMsg =
 	"GNU General Public License for more details.\n"
 	"\n"
 	"You should have received a copy of the GNU General Public License\n"
-	"along with this program.  If not, see <http://www.gnu.org/licenses/>.\n";
+	"along with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
+	"\n"
+	"Libraries used:\n"
+	"cJSON: Copyright (c) 2009-2017 Dave Gamble and cJSON contributors\n";
 
 
 // Default syntax operations
