@@ -1,18 +1,9 @@
 // Copyright (c) 2018-2019 Emil Engler et al.
 // Distributed under the GNU GENERAL PUBLIC LICENSE Version 3, see the accompanying
 // file LICENSE.txt or <https://www.gnu.org/licenses/gpl-3.0.html>.
-#include <iostream>
-#include <vector>
-#include <string>
-#include <cstring>
-#include "packagemanager.hpp"
-#include "utils.hpp"
+#include "main.hpp"
 
-// Use secure_getenv when compiling for Linux
-#ifdef __linux__
-	#define getenv secure_getenv
-#endif
-
+json lang;
 // Default path for config files
 std::string ConfigPath = "/etc/sysget/sysget";
 std::string CustomPath = "/etc/sysget/custom";
@@ -55,7 +46,7 @@ std::string AboutMsg =
 	"along with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 	"\n"
 	"Libraries used:\n"
-	"cJSON: Copyright (c) 2009-2017 Dave Gamble and cJSON contributors\n";
+	"JSON: Copyright (c) 2013-2019 Niels Lohmann\n";
 
 
 // Default syntax operations
@@ -72,6 +63,8 @@ std::vector<std::string> AboutCmds = {"about", "--about"};
 std::vector<std::string> VersionCmds = {"version", "--version"};
 
 int main(int argc, char* argv[]) {
+	lang = language("de");
+	// Drop all extra backslashes in the translation so they become "real"
 	std::vector<std::string> PackageManagerList = GetPackageManagerList();
 
 	// Get the path if the user has changed it with an enviroment variable
@@ -94,7 +87,7 @@ int main(int argc, char* argv[]) {
 	
 	// Create a config file if the config file does not exists
 	if(!file_exists(ConfigPath.c_str())) {
-		std::cout << "Please choose a package manager: " << std::endl;
+		std::cout << std::string(lang["choose"]) << std::endl;
 
 		for(unsigned int i = 0; i < PackageManagerList.size(); i++) {
 			std::cout << (i+1) << ". " << PackageManagerList[i] << std::endl;
@@ -111,7 +104,7 @@ int main(int argc, char* argv[]) {
 			InputInt = stoi(input);
 		}
 		catch(std::exception&) {
-			std::cerr << "You need to enter a number" << std::endl;
+			std::cerr << std::string(lang["nonum"]) << std::endl;
 			exit(1);
 		}
 
@@ -119,7 +112,7 @@ int main(int argc, char* argv[]) {
 
 		// Finally check if the input is valid
 		if(InputInt > PackageManagerList.size() || InputInt <= 0) {
-			std::cerr << "Input is out of range" << std::endl;
+			std::cerr << std::string(lang["invalidinputrange"]) << std::endl;
 			exit(1);
 		}
 
@@ -132,9 +125,9 @@ int main(int argc, char* argv[]) {
 	std::string pm_config = GetPackageManager(ConfigPath);
 
 	if(pm_config == "ERROR") {
-		std::cerr << "Your config is broken please restart the program to create a new one" << std::endl;
+		std::cerr << std::string(lang["brokenconf"]) << std::endl;
 		if(remove(ConfigPath.c_str()) != 0) {
-			std::cerr << "Error while deleting broken config file, are you root?" << std::endl;
+			std::cerr << std::string(lang["errordelconf"]) << std::endl;
 		}
 		exit(1);
 	}
@@ -171,7 +164,7 @@ int main(int argc, char* argv[]) {
 	// Now parse the console arguments
 	// If the user enters no operation
 	if(argc < 2) {
-		std::cerr << "Error you need an operation." << std::endl << "Try sysget help" << std::endl;
+		std::cerr << std::string(lang["nooperation"]) << std::endl;
 		exit(1);
 	}
 
@@ -181,7 +174,7 @@ int main(int argc, char* argv[]) {
 	if(VectorContains(cmd, SearchCmds)) {
 		// If the user enters no search query
 		if(argc < 3) {
-			std::cerr << "Error, no search query provided" << std::endl;
+			std::cerr << std::string(lang["noquery"]) << std::endl;
 			exit(1);
 		}
 		checkcmd(pm.search);
@@ -191,7 +184,7 @@ int main(int argc, char* argv[]) {
 	else if(VectorContains(cmd, InstallCmds)) {
 		// If the user enters no package to install
 		if(argc < 3) {
-			std::cerr << "Error, no package for the installation provided" << std::endl;
+			std::cerr << std::string(lang["noinstallpkg"]) << std::endl;
 			exit(1);
 		}
 
@@ -206,7 +199,7 @@ int main(int argc, char* argv[]) {
 	else if(VectorContains(cmd, RemoveCmds)) {
 		// If the user enters no package to remove
 		if(argc < 3) {
-			std::cerr << "Error, no package for the removal provided" << std::endl;
+			std::cerr << std::string(lang["noremovepkg"]) << std::endl;
 			exit(1);
 		}
 
@@ -259,18 +252,18 @@ int main(int argc, char* argv[]) {
 	// Set will change the package manager
 	else if(VectorContains(cmd, SetCmds)) {
 		if(argc < 3) {
-			std::cerr << "Error, no new package manager provided" << std::endl;
+			std::cerr << std::string(lang["nonewpkgmanager"]) << std::endl;
 			exit(1);
 		}
 
 		if(remove(ConfigPath.c_str()) != 0) {
-			std::cerr << "Error while deleting config file, are you root ?" << std::endl;
+			std::cerr << std::string(lang["errordelconf"]) << std::endl;
 			exit(1);
 		}
 
 		else {
 			CreateConf(ConfigPath, std::string(argv[2]) + "\n");
-			std::cout << "Package manager changed to " << argv[2] << std::endl;
+			std::cout << std::string(lang["changepkgmanager"]) << argv[2] << std::endl;
 		}
 	}
 
@@ -289,7 +282,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	else {
-		std::cerr << "Unknown operation '" << cmd << "'. Try sysget help" << std::endl;
+		std::cerr << std::string(lang["unknownop"]) << std::endl;
 		exit(1);
 	}
 }

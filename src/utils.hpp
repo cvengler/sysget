@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include "main.hpp"
 
 bool file_exists(const char *filename);
 std::vector<std::string> GetPackageManagerList();
