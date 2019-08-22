@@ -63,8 +63,8 @@ std::vector<std::string> AboutCmds = {"about", "--about"};
 std::vector<std::string> VersionCmds = {"version", "--version"};
 
 int main(int argc, char* argv[]) {
-	lang = language("de");
-	// Drop all extra backslashes in the translation so they become "real"
+	std::string LangEnv = std::string(getenv("LANG"));
+	lang = language(LangEnv);
 	std::vector<std::string> PackageManagerList = GetPackageManagerList();
 
 	// Get the path if the user has changed it with an enviroment variable
@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
 	if(!file_exists(ConfigPath.c_str())) {
 		std::cout << std::string(lang["choose"]) << std::endl;
 
-		for(unsigned int i = 0; i < PackageManagerList.size(); i++) {
+		for(unsigned int i = 0; i < PackageManagerList.size();i++) {
 			std::cout << (i+1) << ". " << PackageManagerList[i] << std::endl;
 		}
 
