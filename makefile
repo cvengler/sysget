@@ -32,4 +32,5 @@ uninstall:
 
 clean:
 	rm -rf *.o src/*.gch
+	rm -rf *.o src/libs/*.gch
 	rm -rf sysget
