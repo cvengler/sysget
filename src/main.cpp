@@ -104,7 +104,7 @@ int main(int argc, char* argv[]) {
 			InputInt = stoi(input);
 		}
 		catch(std::exception&) {
-			std::cerr << std::string(lang["nonum"]) << std::endl;
+			std::cerr << JsonSTR(lang["nonum"]) << std::endl;
 			exit(1);
 		}
 
@@ -112,7 +112,7 @@ int main(int argc, char* argv[]) {
 
 		// Finally check if the input is valid
 		if(InputInt > PackageManagerList.size() || InputInt <= 0) {
-			std::cerr << std::string(lang["invalidinputrange"]) << std::endl;
+			std::cerr << JsonSTR(lang["invalidinputrange"]) << std::endl;
 			exit(1);
 		}
 
@@ -125,9 +125,9 @@ int main(int argc, char* argv[]) {
 	std::string pm_config = GetPackageManager(ConfigPath);
 
 	if(pm_config == "ERROR") {
-		std::cerr << std::string(lang["brokenconf"]) << std::endl;
+		std::cerr << JsonSTR(lang["brokenconf"]) << std::endl;
 		if(remove(ConfigPath.c_str()) != 0) {
-			std::cerr << std::string(lang["errordelconf"]) << std::endl;
+			std::cerr << JsonSTR(lang["errordelconf"]) << std::endl;
 		}
 		exit(1);
 	}
@@ -164,7 +164,7 @@ int main(int argc, char* argv[]) {
 	// Now parse the console arguments
 	// If the user enters no operation
 	if(argc < 2) {
-		std::cerr << std::string(lang["nooperation"]) << std::endl;
+		std::cerr << JsonSTR(lang["nooperation"]) << std::endl;
 		exit(1);
 	}
 
@@ -174,7 +174,7 @@ int main(int argc, char* argv[]) {
 	if(VectorContains(cmd, SearchCmds)) {
 		// If the user enters no search query
 		if(argc < 3) {
-			std::cerr << std::string(lang["noquery"]) << std::endl;
+			std::cerr << JsonSTR(lang["noquery"]) << std::endl;
 			exit(1);
 		}
 		checkcmd(pm.search);
@@ -184,7 +184,7 @@ int main(int argc, char* argv[]) {
 	else if(VectorContains(cmd, InstallCmds)) {
 		// If the user enters no package to install
 		if(argc < 3) {
-			std::cerr << std::string(lang["noinstallpkg"]) << std::endl;
+			std::cerr << JsonSTR(lang["noinstallpkg"]) << std::endl;
 			exit(1);
 		}
 
@@ -199,7 +199,7 @@ int main(int argc, char* argv[]) {
 	else if(VectorContains(cmd, RemoveCmds)) {
 		// If the user enters no package to remove
 		if(argc < 3) {
-			std::cerr << std::string(lang["noremovepkg"]) << std::endl;
+			std::cerr << JsonSTR(lang["noremovepkg"]) << std::endl;
 			exit(1);
 		}
 
@@ -252,18 +252,18 @@ int main(int argc, char* argv[]) {
 	// Set will change the package manager
 	else if(VectorContains(cmd, SetCmds)) {
 		if(argc < 3) {
-			std::cerr << std::string(lang["nonewpkgmanager"]) << std::endl;
+			std::cerr << JsonSTR(lang["nonewpkgmanager"]) << std::endl;
 			exit(1);
 		}
 
 		if(remove(ConfigPath.c_str()) != 0) {
-			std::cerr << std::string(lang["errordelconf"]) << std::endl;
+			std::cerr << JsonSTR(lang["errordelconf"]) << std::endl;
 			exit(1);
 		}
 
 		else {
 			CreateConf(ConfigPath, std::string(argv[2]) + "\n");
-			std::cout << std::string(lang["changepkgmanager"]) << argv[2] << std::endl;
+			std::cout << JsonSTR(lang["changepkgmanager"]) << argv[2] << std::endl;
 		}
 	}
 
@@ -282,7 +282,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	else {
-		std::cerr << std::string(lang["unknownop"]) << std::endl;
+		std::cerr << JsonSTR(lang["unknownop"]) << std::endl;
 		exit(1);
 	}
 }

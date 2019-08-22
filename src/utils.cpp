@@ -34,7 +34,7 @@ std::string GetPackageManager(std::string filename) {
 	}
 
 	else {
-		std::cout << std::string(lang["openconferr"]) << std::endl;
+		std::cout << JsonSTR(lang["openconferr"]) << std::endl;
 		exit(1);
 	}
 	// clang on macOS will return a warning if a non-void function has no return
@@ -49,7 +49,7 @@ void CreateConf(std::string filename, std::string packagemanager) {
 	}
 
 	else {
-		std::cout << std::string(lang["assignpkgmanager"]) << std::endl;
+		std::cout << JsonSTR(lang["assignpkgmanager"]) << std::endl;
 		exit(1);
 	}
 }
@@ -77,7 +77,7 @@ std::vector<std::string> CustomArgs(std::string path) {
 		}
 
 		if(number_of_lines != 10) {
-			std::cerr << std::string(lang["invalidsysget_args"]) << std::endl;
+			std::cerr << JsonSTR(lang["invalidsysget_args"]) << std::endl;
 			exit(1);
 		}
 
