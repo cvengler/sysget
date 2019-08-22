@@ -3,6 +3,11 @@
 // file LICENSE.txt or <https://www.gnu.org/licenses/gpl-3.0.html>.
 #include "translation.hpp"
 
+std::string JsonSTR(json j)
+{
+    return j.get<std::string>();
+}
+
 json language(std::string lang)
 {
     // Get country code of the $LANG envrionment variable

@@ -8,4 +8,5 @@
 
 using json = nlohmann::json;
 
+std::string JsonSTR(json j);
 json language(std::string lang);

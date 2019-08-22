@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
 	
 	// Create a config file if the config file does not exists
 	if(!file_exists(ConfigPath.c_str())) {
-		std::cout << std::string(lang["choose"]) << std::endl;
+		std::cout << JsonSTR(lang["choose"]) << std::endl;
 
 		for(unsigned int i = 0; i < PackageManagerList.size();i++) {
 			std::cout << (i+1) << ". " << PackageManagerList[i] << std::endl;
