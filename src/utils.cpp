@@ -3,22 +3,22 @@
 // file LICENSE.txt or <https://www.gnu.org/licenses/gpl-3.0.html>.
 #include "utils.hpp"
 
-bool file_exists(const char *filename) {
+bool sysget::file_exists(const char *filename) {
 	std::ifstream file(filename);
 	return (bool)file;
 }
 
-std::vector<std::string> GetPackageManagerList() {
+std::vector<std::string> sysget::GetPackageManagerList() {
 	std::vector<std::string> PackageManagerList = { "apt", "xbps", "dnf", "yum", "zypper", "eopkg", "pacman", "emerge", "pkg", "pkg_mgr", "chromebrew", "homebrew", "nix", "snap", "npm", "flatpak", "slapt-get", "pip3", "guix", "gem", "port" };
 	return PackageManagerList;
 }
 
-std::string GetPackageManager(std::string filename) {
+std::string sysget::GetPackageManager(std::string filename) {
 	std::string line;
 	std::string packagemanager;
 	std::ifstream file(filename);
 
-	std::vector<std::string> PackageManagerList = GetPackageManagerList();
+	std::vector<std::string> PackageManagerList = sysget::GetPackageManagerList();
 
 	if(file.is_open()) {
 		while(getline(file, line)) {
@@ -34,14 +34,14 @@ std::string GetPackageManager(std::string filename) {
 	}
 
 	else {
-		std::cout << JsonSTR(lang["openconferr"]) << std::endl;
+		std::cout << sysget::JsonSTR(lang["openconferr"]) << std::endl;
 		exit(1);
 	}
 	// clang on macOS will return a warning if a non-void function has no return
 	return "ERROR";
 }
 
-void CreateConf(std::string filename, std::string packagemanager) {
+void sysget::CreateConf(std::string filename, std::string packagemanager) {
 	system("mkdir -p /etc/sysget");
 	std::ofstream file(filename);
 	if(file.is_open()) {
@@ -49,13 +49,13 @@ void CreateConf(std::string filename, std::string packagemanager) {
 	}
 
 	else {
-		std::cout << JsonSTR(lang["assignpkgmanager"]) << std::endl;
+		std::cout << sysget::JsonSTR(lang["assignpkgmanager"]) << std::endl;
 		exit(1);
 	}
 }
 
 // Check will check if the string contains an exit message
-void checkcmd(std::string cmd) {
+void sysget::checkcmd(std::string cmd) {
 	size_t errorfind = cmd.find("exit=");
 	if(errorfind != std::string::npos) {
 		std::string errormsg = cmd.substr(5);
@@ -65,7 +65,7 @@ void checkcmd(std::string cmd) {
 }
 
 // Allows user to change the syntax of sysget
-std::vector<std::string> CustomArgs(std::string path) {
+std::vector<std::string> sysget::CustomArgs(std::string path) {
 	std::ifstream file(path);
 	std::string line;
 	std::vector<std::string> args;
@@ -77,7 +77,7 @@ std::vector<std::string> CustomArgs(std::string path) {
 		}
 
 		if(number_of_lines != 10) {
-			std::cerr << JsonSTR(lang["invalidsysget_args"]) << std::endl;
+			std::cerr << sysget::JsonSTR(lang["invalidsysget_args"]) << std::endl;
 			exit(1);
 		}
 
@@ -90,6 +90,6 @@ std::vector<std::string> CustomArgs(std::string path) {
 }
 
 // Check if an item exists in a vector
-bool VectorContains(std::string s, std::vector<std::string> v) {
+bool sysget::VectorContains(std::string s, std::vector<std::string> v) {
 	return std::find(v.begin(), v.end(), s) != v.end();
 }

@@ -3,7 +3,7 @@
 // file LICENSE.txt or <https://www.gnu.org/licenses/gpl-3.0.html>.
 #include "main.hpp"
 
-json lang;
+nlohmann::json lang;
 // Default path for config files
 std::string ConfigPath = "/etc/sysget/sysget";
 std::string CustomPath = "/etc/sysget/custom";
@@ -64,8 +64,8 @@ std::vector<std::string> VersionCmds = {"version", "--version"};
 
 int main(int argc, char* argv[]) {
 	std::string LangEnv = std::string(getenv("LANG"));
-	lang = language(LangEnv);
-	std::vector<std::string> PackageManagerList = GetPackageManagerList();
+	lang = sysget::language(LangEnv);
+	std::vector<std::string> PackageManagerList = sysget::GetPackageManagerList();
 
 	// Get the path if the user has changed it with an enviroment variable
 	char* EnvConfigPath = getenv("SYSGET_CONFIG_PATH");
@@ -86,8 +86,8 @@ int main(int argc, char* argv[]) {
 	}
 	
 	// Create a config file if the config file does not exists
-	if(!file_exists(ConfigPath.c_str())) {
-		std::cout << JsonSTR(lang["choose"]) << std::endl;
+	if(!sysget::file_exists(ConfigPath.c_str())) {
+		std::cout << sysget::JsonSTR(lang["choose"]) << std::endl;
 
 		for(unsigned int i = 0; i < PackageManagerList.size();i++) {
 			std::cout << (i+1) << ". " << PackageManagerList[i] << std::endl;
@@ -104,7 +104,7 @@ int main(int argc, char* argv[]) {
 			InputInt = stoi(input);
 		}
 		catch(std::exception&) {
-			std::cerr << JsonSTR(lang["nonum"]) << std::endl;
+			std::cerr << sysget::JsonSTR(lang["nonum"]) << std::endl;
 			exit(1);
 		}
 
@@ -112,22 +112,22 @@ int main(int argc, char* argv[]) {
 
 		// Finally check if the input is valid
 		if(InputInt > PackageManagerList.size() || InputInt <= 0) {
-			std::cerr << JsonSTR(lang["invalidinputrange"]) << std::endl;
+			std::cerr << sysget::JsonSTR(lang["invalidinputrange"]) << std::endl;
 			exit(1);
 		}
 
 		// We need to reduce the input by 1 because arrays start at 0
-		CreateConf(ConfigPath, PackageManagerList[InputInt -1] + "\n");
+		sysget::CreateConf(ConfigPath, PackageManagerList[InputInt -1] + "\n");
 
 	}
 
 	// Get the name of the package manager from the config file
-	std::string pm_config = GetPackageManager(ConfigPath);
+	std::string pm_config = sysget::GetPackageManager(ConfigPath);
 
 	if(pm_config == "ERROR") {
-		std::cerr << JsonSTR(lang["brokenconf"]) << std::endl;
+		std::cerr << sysget::JsonSTR(lang["brokenconf"]) << std::endl;
 		if(remove(ConfigPath.c_str()) != 0) {
-			std::cerr << JsonSTR(lang["errordelconf"]) << std::endl;
+			std::cerr << sysget::JsonSTR(lang["errordelconf"]) << std::endl;
 		}
 		exit(1);
 	}
@@ -136,7 +136,7 @@ int main(int argc, char* argv[]) {
 	std::string execcmd;	// Will be appended with packages
 
 	// If the user declares his own package manager
-	if(file_exists(CustomPath.c_str())) {
+	if(sysget::file_exists(CustomPath.c_str())) {
 		pm.customPM(CustomPath);
 	}
 
@@ -146,9 +146,9 @@ int main(int argc, char* argv[]) {
 	}
 
 	// If the user declares his own input commands
-	if(file_exists(ArgsPath.c_str())) {
+	if(sysget::file_exists(ArgsPath.c_str())) {
 		std::vector<std::string> c_args;	// If the user changes the layout of sysget
-		c_args = CustomArgs(ArgsPath);
+		c_args = sysget::CustomArgs(ArgsPath);
 		SearchCmds.push_back(c_args[0]);
 		InstallCmds.push_back(c_args[1]);
 		RemoveCmds.push_back(c_args[2]);
@@ -164,47 +164,47 @@ int main(int argc, char* argv[]) {
 	// Now parse the console arguments
 	// If the user enters no operation
 	if(argc < 2) {
-		std::cerr << JsonSTR(lang["nooperation"]) << std::endl;
+		std::cerr << sysget::JsonSTR(lang["nooperation"]) << std::endl;
 		exit(1);
 	}
 
 	// Lets set argv[1] to cmd for a more handy usage
 	std::string cmd = argv[1];
 
-	if(VectorContains(cmd, SearchCmds)) {
+	if(sysget::VectorContains(cmd, SearchCmds)) {
 		// If the user enters no search query
 		if(argc < 3) {
-			std::cerr << JsonSTR(lang["noquery"]) << std::endl;
+			std::cerr << sysget::JsonSTR(lang["noquery"]) << std::endl;
 			exit(1);
 		}
-		checkcmd(pm.search);
+		sysget::checkcmd(pm.search);
 		system(std::string(pm.search + argv[2]).c_str());
 	}
 
-	else if(VectorContains(cmd, InstallCmds)) {
+	else if(sysget::VectorContains(cmd, InstallCmds)) {
 		// If the user enters no package to install
 		if(argc < 3) {
-			std::cerr << JsonSTR(lang["noinstallpkg"]) << std::endl;
+			std::cerr << sysget::JsonSTR(lang["noinstallpkg"]) << std::endl;
 			exit(1);
 		}
 
 		for(int i = 2; i < argc; i++) {
-			checkcmd(pm.install);
+			sysget::checkcmd(pm.install);
 			execcmd = execcmd + argv[i] + " ";
 		}
 
 		system(std::string(pm.install + execcmd).c_str());
 	}
 
-	else if(VectorContains(cmd, RemoveCmds)) {
+	else if(sysget::VectorContains(cmd, RemoveCmds)) {
 		// If the user enters no package to remove
 		if(argc < 3) {
-			std::cerr << JsonSTR(lang["noremovepkg"]) << std::endl;
+			std::cerr << sysget::JsonSTR(lang["noremovepkg"]) << std::endl;
 			exit(1);
 		}
 
 		for(int i = 2; i < argc; i++) {
-			checkcmd(pm.uninstall);
+			sysget::checkcmd(pm.uninstall);
 			execcmd = execcmd + argv[i] + " ";
 		}
 
@@ -214,28 +214,28 @@ int main(int argc, char* argv[]) {
 	// FYI: checkcmd will check if your package manager supports this feature
 
 	// Autoremove will remove orpahns
-	else if(VectorContains(cmd, AutoremoveCmds)) {
-		checkcmd(pm.autoremove);
+	else if(sysget::VectorContains(cmd, AutoremoveCmds)) {
+		sysget::checkcmd(pm.autoremove);
 		system(pm.autoremove.c_str());
 	}
 
 	// Update will only refresh the database
-	else if(VectorContains(cmd, UpdateCmds)) {
-		checkcmd(pm.update);
+	else if(sysget::VectorContains(cmd, UpdateCmds)) {
+		sysget::checkcmd(pm.update);
 		system(pm.update.c_str());
 	}
 
 	// Upgrading will not update the database
-	else if(VectorContains(cmd, UpgradeCmds)) {
+	else if(sysget::VectorContains(cmd, UpgradeCmds)) {
 		if(argc < 3) {
-			checkcmd(pm.upgrade);
+			sysget::checkcmd(pm.upgrade);
 			system(pm.upgrade.c_str());
 		}
 
 		// Upgrade specifc package
 		else {
 			for(int i = 2; i < argc; i++) {
-				checkcmd(pm.upgrade_pkg);
+				sysget::checkcmd(pm.upgrade_pkg);
 				execcmd = execcmd + argv[i] + " ";
 			}
 
@@ -244,45 +244,45 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Clean will clean the download cache
-	else if(VectorContains(cmd, CleanCmds)) {
-		checkcmd(pm.clean);
+	else if(sysget::VectorContains(cmd, CleanCmds)) {
+		sysget::checkcmd(pm.clean);
 		system(pm.clean.c_str());
 	}
 
 	// Set will change the package manager
-	else if(VectorContains(cmd, SetCmds)) {
+	else if(sysget::VectorContains(cmd, SetCmds)) {
 		if(argc < 3) {
-			std::cerr << JsonSTR(lang["nonewpkgmanager"]) << std::endl;
+			std::cerr << sysget::JsonSTR(lang["nonewpkgmanager"]) << std::endl;
 			exit(1);
 		}
 
 		if(remove(ConfigPath.c_str()) != 0) {
-			std::cerr << JsonSTR(lang["errordelconf"]) << std::endl;
+			std::cerr << sysget::JsonSTR(lang["errordelconf"]) << std::endl;
 			exit(1);
 		}
 
 		else {
-			CreateConf(ConfigPath, std::string(argv[2]) + "\n");
-			std::cout << JsonSTR(lang["changepkgmanager"]) << argv[2] << std::endl;
+			sysget::CreateConf(ConfigPath, std::string(argv[2]) + "\n");
+			std::cout << sysget::JsonSTR(lang["changepkgmanager"]) << argv[2] << std::endl;
 		}
 	}
 
 	// Help
-	else if(VectorContains(cmd, HelpCmds)) {
+	else if(sysget::VectorContains(cmd, HelpCmds)) {
 		std::cout << HelpMsg;
 	}
 
 	// About
-	else if(VectorContains(cmd, AboutCmds)) {
+	else if(sysget::VectorContains(cmd, AboutCmds)) {
 		std::cout << AboutMsg;
 	}
 
-	else if(VectorContains(cmd, VersionCmds)) {
+	else if(sysget::VectorContains(cmd, VersionCmds)) {
 		std::cout << version << std::endl;
 	}
 
 	else {
-		std::cerr << JsonSTR(lang["unknownop"]) << std::endl;
+		std::cerr << sysget::JsonSTR(lang["unknownop"]) << std::endl;
 		exit(1);
 	}
 }

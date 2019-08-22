@@ -16,5 +16,5 @@
 	#define getenv secure_getenv
 #endif
 
-extern json lang;
+extern nlohmann::json lang;
 #endif

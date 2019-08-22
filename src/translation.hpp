@@ -6,7 +6,8 @@
 #include <iostream>
 #include "libs/json.hpp"
 
-using json = nlohmann::json;
-
-std::string JsonSTR(json j);
-json language(std::string lang);
+namespace sysget
+{
+    std::string JsonSTR(nlohmann::json j);
+    nlohmann::json language(std::string lang);
+}
