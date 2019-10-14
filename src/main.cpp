@@ -12,7 +12,7 @@ std::string ArgsPath = "/etc/sysget/args";
 std::string version = "2.3";
 
 std::string HelpMsg =
-	"Help of sysget" + version + "\n"
+	"Help of sysget " + version + "\n"
 	"sysget [OPTION] [PACKAGE(S)]\n"
 	"\n"
 	"search [QUERY]\t\t\tsearch for a package in the resporitories\n"
