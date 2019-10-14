@@ -99,6 +99,11 @@ The order is: search, install, remove, autoremove, update, upgrade, clean, set, 
 However there are some rules:<br>
 * The file needs to have 10 lines
 * The same item twice is forbidden
+### Languages
+We support the following languages:
+* English
+* German
+The data is get using $LANG, english is the fallback option
 ###### Credits
 [TermGet](https://github.com/termget/termget)
 [JSON](https://github.com/nlohmann/json)
