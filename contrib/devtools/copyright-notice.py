@@ -18,7 +18,7 @@ else:
 NOTICE = NOTICE.split("\n")
 
 for ext in FILES:
-    for filename in glob.iglob("../../src/" + ext, recursive=True):
+    for filename in glob.iglob("src/" + ext, recursive=True):
         file = open(filename, "r")
         file_str = file.readlines()
         file.close()
