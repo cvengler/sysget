@@ -11,8 +11,8 @@
 #include "utils.hpp"
 #include "translation.hpp"
 
-// Use secure_getenv when compiling for Linux
-#ifdef __linux__
+// Use secure_getenv when compiling for linux-gnu, linux-musl doesn't support secure_getenv
+#ifdef __GLIBC__
 	#define getenv secure_getenv
 #endif
 
