@@ -54,16 +54,6 @@ void sysget::CreateConf(std::string filename, std::string packagemanager) {
 	}
 }
 
-// Check will check if the string contains an exit message
-void sysget::checkcmd(std::string cmd) {
-	size_t errorfind = cmd.find("exit=");
-	if(errorfind != std::string::npos) {
-		std::string errormsg = cmd.substr(5);
-		std::cerr << errormsg << std::endl;
-		exit(1);
-	}
-}
-
 // Allows user to change the syntax of sysget
 std::vector<std::string> sysget::CustomArgs(std::string path) {
 	std::ifstream file(path);

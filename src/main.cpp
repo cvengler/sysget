@@ -132,17 +132,38 @@ int main(int argc, char* argv[]) {
 		exit(1);
 	}
 
-	PackageManager pm;
-	std::string execcmd;	// Will be appended with packages
+    AptPackageManager apt_manager;
+    XbpsPackageManager xbps_manager;
+    DnfPackageManager dnf_manager;
+    YumPackageManager yum_manager;
+    ZypperPackageManager zypper_manager;
+    EopkgManager eopkg_manager;
 
+    std::vector<PackageManager*> package_managers = {
+        &apt_manager,
+        &xbps_manager,
+        &dnf_manager,
+        &yum_manager,
+    };
+
+	PackageManager* pm;
 	// If the user declares his own package manager
 	if(sysget::file_exists(CustomPath.c_str())) {
-		pm.customPM(CustomPath);
+		pm = PackageManager::customPM(CustomPath);
 	}
 
 	// If sysget_config does not exists use defaults
 	else {
-		pm.init(pm_config);
+        for (int i = 0; i < package_managers.size(); i++) {
+            if (package_managers[i]->name() == pm_config) {
+                pm = package_managers[i];
+                break;
+            }
+        }
+        if (pm == nullptr) {
+            fprintf(stderr, "Could not find package manager %s\n", pm_config.c_str());
+            std::abort();
+        }
 	}
 
 	// If the user declares his own input commands
@@ -171,14 +192,15 @@ int main(int argc, char* argv[]) {
 	// Lets set argv[1] to cmd for a more handy usage
 	std::string cmd = argv[1];
 
+	std::string execcmd;	// Will be appended with packages
 	if(sysget::VectorContains(cmd, SearchCmds)) {
 		// If the user enters no search query
 		if(argc < 3) {
 			std::cerr << sysget::JsonSTR(lang["noquery"]) << std::endl;
 			exit(1);
 		}
-		sysget::checkcmd(pm.search);
-		system(std::string(pm.search + argv[2]).c_str());
+        std::string cmd = pm->search(argv[2]);
+		system(cmd.c_str());
 	}
 
 	else if(sysget::VectorContains(cmd, InstallCmds)) {
@@ -189,11 +211,11 @@ int main(int argc, char* argv[]) {
 		}
 
 		for(int i = 2; i < argc; i++) {
-			sysget::checkcmd(pm.install);
 			execcmd = execcmd + argv[i] + " ";
 		}
 
-		system(std::string(pm.install + execcmd).c_str());
+        std::string cmd = pm->install(execcmd);
+		system(cmd.c_str());
 	}
 
 	else if(sysget::VectorContains(cmd, RemoveCmds)) {
@@ -204,49 +226,47 @@ int main(int argc, char* argv[]) {
 		}
 
 		for(int i = 2; i < argc; i++) {
-			sysget::checkcmd(pm.uninstall);
 			execcmd = execcmd + argv[i] + " ";
 		}
 
-		system(std::string(pm.uninstall + execcmd).c_str());
+        std::string cmd = pm->uninstall(execcmd);
+		system(cmd.c_str());
 	}
-
-	// FYI: checkcmd will check if your package manager supports this feature
 
 	// Autoremove will remove orpahns
 	else if(sysget::VectorContains(cmd, AutoremoveCmds)) {
-		sysget::checkcmd(pm.autoremove);
-		system(pm.autoremove.c_str());
+        std::string cmd = pm->autoremove();
+		system(cmd.c_str());
 	}
 
 	// Update will only refresh the database
 	else if(sysget::VectorContains(cmd, UpdateCmds)) {
-		sysget::checkcmd(pm.update);
-		system(pm.update.c_str());
+        std::string cmd = pm->update();
+		system(cmd.c_str());
 	}
 
 	// Upgrading will not update the database
 	else if(sysget::VectorContains(cmd, UpgradeCmds)) {
+        std::string cmd;
 		if(argc < 3) {
-			sysget::checkcmd(pm.upgrade);
-			system(pm.upgrade.c_str());
+            cmd = pm->upgrade();
 		}
 
 		// Upgrade specifc package
 		else {
 			for(int i = 2; i < argc; i++) {
-				sysget::checkcmd(pm.upgrade_pkg);
 				execcmd = execcmd + argv[i] + " ";
 			}
 
-			system(std::string(pm.upgrade_pkg + execcmd).c_str());
+            cmd = pm->upgradePkg(execcmd);
 		}
+        system(cmd.c_str());
 	}
 
 	// Clean will clean the download cache
 	else if(sysget::VectorContains(cmd, CleanCmds)) {
-		sysget::checkcmd(pm.clean);
-		system(pm.clean.c_str());
+        std::string cmd = pm->clean();
+		system(cmd.c_str());
 	}
 
 	// Set will change the package manager
