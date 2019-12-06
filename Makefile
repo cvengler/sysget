@@ -22,6 +22,7 @@ install:
 	mkdir -p /usr/local/man/man8
 	cp contrib/man/sysget.8 /usr/local/man/man8/sysget.8
 	gzip /usr/local/man/man8/sysget.8
+	mkdir -p /etc/bash_completion.d
 	cp contrib/sysget.bash-completion /etc/bash_completion.d/sysget
 
 uninstall:
