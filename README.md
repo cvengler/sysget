@@ -88,7 +88,7 @@ sysget clean
 The file where the package manager is stored is located at `/etc/sysget/sysget`<br>
 The *optional* file where a custom package manager is stored at `/etc/sysget/custom`<br>
 ### Add your own package manager
-sysget also has the ability that you can add your own paackage manager.<br>
+sysget also has the ability that you can add your own package manager.<br>
 Simply create the file /etc/sysget_custom and then write **8** lines into it.<br>
 One line for one command.<br>
 The order is: search, install, remove, autoremove, update, upgrade, upgrade_pkg, clean
