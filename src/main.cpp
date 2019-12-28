@@ -63,8 +63,12 @@ std::vector<std::string> AboutCmds = {"about", "--about"};
 std::vector<std::string> VersionCmds = {"version", "--version"};
 
 int main(int argc, char* argv[]) {
-	std::string LangEnv = std::string(getenv("LANG"));
-	lang = sysget::language(LangEnv);
+	char* LangEnv = getenv("LANG");
+	
+	if (LangEnv == NULL) {
+		LangEnv = (char*)"en";
+	}
+	lang = sysget::language(std::string(LangEnv));
 	std::vector<std::string> PackageManagerList = sysget::GetPackageManagerList();
 
 	// Get the path if the user has changed it with an enviroment variable
