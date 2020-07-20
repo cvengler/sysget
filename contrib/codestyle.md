@@ -1,18 +1,17 @@
 # Codestyle
 ### Variable names
-We use camel case.<br>
-Please use `FooBar` instead of `foo_bar`
+Please use `foo_bar` instead of `FooBar`
 ### Functions / Statements
 We use this style:
 ```
-if(true) {
+if(true)
+{
 ...
 }
 ```
 Please don't do:
 ```
-if(true)
-{
+if(true) {
 ...
 }
 ```

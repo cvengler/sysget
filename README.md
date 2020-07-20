@@ -1,7 +1,7 @@
 # sysget
 
 [![Build Status](https://travis-ci.org/emilengler/sysget.svg?branch=master)](https://travis-ci.org/emilengler/sysget)
-### A front-end for every package manager<br>
+### A front-end for every package manager written in ANSI C<br>
 sysget is a bridge that lets you use one syntax to every package manager on every unix-based operating system.<br>
 You probably all know the problem when you are on a new distro and don't know anything about the package manager. With sysget you just need to remember one syntax for every package manager.<br>
 The syntax is mostly same with apt so it should be easy to use.<br>
@@ -99,11 +99,5 @@ The order is: search, install, remove, autoremove, update, upgrade, clean, set, 
 However there are some rules:<br>
 * The file needs to have 10 lines
 * The same item twice is forbidden
-### Languages
-We support the following languages:
-* English
-* German
-The data is get using $LANG, english is the fallback option
 ###### Credits
 [TermGet](https://github.com/termget/termget)
-[JSON](https://github.com/nlohmann/json)

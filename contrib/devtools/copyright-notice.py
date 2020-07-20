@@ -1,10 +1,12 @@
 import sys, os, glob, time, datetime
 
-NOTICE = """// Copyright (c) <YEAR> Emil Engler et al.
-// Distributed under the GNU GENERAL PUBLIC LICENSE Version 3, see the accompanying
-// file LICENSE.txt or <https://www.gnu.org/licenses/gpl-3.0.html>."""
+NOTICE = """/*
+* Copyright (c) <YEAR> Emil Engler et al.
+* Distributed under the GNU GENERAL PUBLIC LICENSE Version 3, see the accompanying
+* file LICENSE.txt or <https://www.gnu.org/licenses/gpl-3.0.html>.
+*/"""
 
-FILES = ["*.hpp", "*.cpp"]
+FILES = ["*.h", "*.c"]
 
 now = datetime.datetime.now()
 
@@ -27,6 +29,9 @@ for ext in FILES:
             file_str.insert(0, NOTICE[0] + "\n")
             file_str.insert(1, NOTICE[1] + "\n")
             file_str.insert(2, NOTICE[2] + "\n")
+            file_str.insert(3, NOTICE[3] + "\n")
+            file_str.insert(4, NOTICE[4] + "\n")
+            file_str.insert(5, "\n")
             file = open(filename, "w")
             for x in file_str:
                 file.write(x)

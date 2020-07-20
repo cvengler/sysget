@@ -1,4 +1,4 @@
-language: cpp
+language: c
 group: travis_latest
 
 git:
@@ -14,4 +14,4 @@ compiler:
   - gcc
 
 script:
-  - make 
+  - make -C ./src/
