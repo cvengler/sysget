@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Get the package manager name */
 char* get_pm();
 
 #endif
