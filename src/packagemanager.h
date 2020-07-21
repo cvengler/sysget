@@ -10,16 +10,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* We cannot use a const because of the custom package manager */
 typedef struct
 {
-    const char* search;
-    const char* install;
-    const char* uninstall;
-    const char* autoremove;
-    const char* update;
-    const char* upgrade;
-    const char* upgrade_pkg;
-    const char* clean;
+    char* search;
+    char* install;
+    char* uninstall;
+    char* autoremove;
+    char* update;
+    char* upgrade;
+    char* upgrade_pkg;
+    char* clean;
 } packagemanager_t;
 
 /* Returns the required packagemanager_t. search is NULL on error */
