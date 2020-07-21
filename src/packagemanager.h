@@ -25,5 +25,7 @@ typedef struct
 
 /* Returns the required packagemanager_t. search is NULL on error */
 packagemanager_t pm_init(const char* pm);
+/* Frees a packagemanager_t. Wrong use can have fatal damage */
+void pm_free(packagemanager_t* pm);
 
 #endif

@@ -234,3 +234,16 @@ packagemanager_t pm_init(const char* pm)
     }
     return ret;
 }
+
+void pm_free(packagemanager_t* pm)
+{
+    const unsigned int max = 8;
+    unsigned int i;
+    char** cur = &pm->search;
+    for(i = 0; i < max; ++i)
+    {
+        free(*cur);
+        *cur = NULL;
+        ++cur;
+    }
+}
