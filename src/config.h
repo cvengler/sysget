@@ -10,7 +10,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "packagemanager.h"
+
 /* Get the package manager name */
 char* get_pm();
+/* Get a custom config */
+packagemanager_t get_custom();
 
 #endif
