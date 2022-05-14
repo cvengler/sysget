@@ -96,7 +96,8 @@ void PackageManager::init(std::string pm) {
 		install = "emerge --ask ";
 		uninstall = "emerge -C ";
 		autoremove = "emerge --depclean -a";
-		update = "layman -f";
+		update = "emaint sync --all";
+		layman = "layman -f";
 		upgrade = "emerge --ask -u world && emerge --ask -uDN world";
 		upgrade_pkg = "emerge -avDuN";
 		clean = "eclean distfiles";
