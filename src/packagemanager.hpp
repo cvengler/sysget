@@ -12,7 +12,7 @@ NOTE: Spaces are VERY important because we need them to append other strings to 
 */
 
 struct PackageManager {
-	std::string search, install, uninstall, autoremove, update, upgrade, upgrade_pkg, clean, layman;
+	std::string search, install, uninstall, autoremove, update, upgrade, upgrade_pkg, clean;
 	void init(std::string pm);
 	void customPM(std::string filename);
 };
