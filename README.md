@@ -103,6 +103,7 @@ However there are some rules:<br>
 We support the following languages:
 * English
 * German
+* Romanian
 The data is get using $LANG, english is the fallback option
 ###### Credits
 [TermGet](https://github.com/termget/termget)
