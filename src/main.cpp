@@ -15,7 +15,7 @@ std::string HelpMsg =
 	"Help of sysget " + version + "\n"
 	"sysget [OPTION] [PACKAGE(S)]\n"
 	"\n"
-	"search [QUERY]\t\t\tsearch for a package in the resporitories\n"
+	"search [QUERY]\t\t\tsearch for a package in the repositories\n"
 	"install [PACKAGE] [PACKAGE]\tinstall a package from the repos\n"
 	"remove [PACKAGE] [PACKAGE]\tremoves a package\n"
 	"autoremove\t\t\tremoves not needed packages (orphans)\n"
@@ -71,12 +71,12 @@ int main(int argc, char* argv[]) {
 	lang = sysget::language(std::string(LangEnv));
 	std::vector<std::string> PackageManagerList = sysget::GetPackageManagerList();
 
-	// Get the path if the user has changed it with an enviroment variable
+	// Get the path if the user has changed it with an environment variable
 	char* EnvConfigPath = getenv("SYSGET_CONFIG_PATH");
 	char* EnvCustomPath = getenv("SYSGET_CUSTOM_PATH");
 	char* EnvArgsPath = getenv("SYSGET_ARGS_PATH");
 
-	// Check if the enviroment variables aren't empty
+	// Check if the environment variables aren't empty
 	if(EnvConfigPath != NULL) {
 		ConfigPath = std::string(EnvConfigPath);
 	}
@@ -217,7 +217,7 @@ int main(int argc, char* argv[]) {
 
 	// FYI: checkcmd will check if your package manager supports this feature
 
-	// Autoremove will remove orpahns
+	// Autoremove will remove orphans
 	else if(sysget::VectorContains(cmd, AutoremoveCmds)) {
 		sysget::checkcmd(pm.autoremove);
 		system(pm.autoremove.c_str());
@@ -236,7 +236,7 @@ int main(int argc, char* argv[]) {
 			system(pm.upgrade.c_str());
 		}
 
-		// Upgrade specifc package
+		// Upgrade specific package
 		else {
 			for(int i = 2; i < argc; i++) {
 				sysget::checkcmd(pm.upgrade_pkg);
