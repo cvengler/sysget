@@ -1,5 +1,5 @@
 {
-    "help": "Help of sysget\nsysget [OPTION] [PACKAGE(S)]\n\nsearch [QUERY]\t\t\tsearch for a package in the resporitories\ninstall [PACKAGE] [PACKAGE]\tinstall a package from the repos\nremove [PACKAGE] [PACKAGE]\tremoves a package\nautoremove\t\t\tremoves not needed packages (orphans)\nupdate\t\t\t\tupdate the database\nupgrade\t\t\t\tdo a system upgrade\nupgrade [PACKAGE] [PACKAGE]\tupgrade a specific package\nclean\t\t\t\tclean the download cache\nset [NEW MANAGER]\t\tset a new package manager\nhelp\t\t\t\topen this help page\nabout\t\t\t\tview legal informations",
+    "help": "Help of sysget\nsysget [OPTION] [PACKAGE(S)]\n\nsearch [QUERY]\t\t\tsearch for a package in the repositories\ninstall [PACKAGE] [PACKAGE]\tinstall a package from the repos\nremove [PACKAGE] [PACKAGE]\tremoves a package\nautoremove\t\t\tremoves not needed packages (orphans)\nupdate\t\t\t\tupdate the database\nupgrade\t\t\t\tdo a system upgrade\nupgrade [PACKAGE] [PACKAGE]\tupgrade a specific package\nclean\t\t\t\tclean the download cache\nset [NEW MANAGER]\t\tset a new package manager\nhelp\t\t\t\topen this help page\nabout\t\t\t\tview legal informations",
     "choose": "Please choose a package manager: ",
     "nonum": "You need to enter a number",
     "invalidinputrange": "Input is out of range",
